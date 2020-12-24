@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>爱看电竞</title>
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<!-- Material Kit CSS -->
+<link href="/public/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link href="/public/assets/textilate/animate.css" rel="stylesheet">
+<!-- layui -->
+<link rel="stylesheet" href="/public/layui/css/layui.css" media="all">
+<link rel="stylesheet" href="/public/layui/css/layui.mobile.css" media="all">
+<link href="/public/assets/textilate/style.css" rel="stylesheet">
+
+<body>
+    <div class="decal"></div>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="glow in tlt">爱看电竞</h1>
+            <p class="tlt" data-in-effect="bounceInDown">
+                Let's watch game together.
+            </p>
+        </div>
+    </div>
+    <div class="decal"></div>
+    <div class="container fade in text-center">
+        <div class="card  wow fadeIn" style="background-color: #eceef1;" data-wow-duration="3s" data-wow-delay="2s">
+            <div class="card-body">
+                <form role="form" style="width:80%; margin: 0 auto;">
+                    <div class="form-group">
+                        <label for="account" style="font-size: 1.6em;">邮箱</label>
+                        <input type="text" class="form-control" id="account" autocomplete="off" placeholder="邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" style="font-size: 1.6em;">密码</label>
+                        <input type="password" class="form-control" id="password" placeholder="密码">
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" >
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                            记住密码
+                        </label>
+                    </div>
+                    <div class="form-group">
+                       <!--暂时关闭微信登录-->
+                      <!-- <a href="/" class="a-i"><i class="fa fa-wechat fa-3x"></i></a>-->
+                       <a href="/wxlogin" class="a-i"><i class="fa fa-wechat fa-3x"></i></a>
+                    </div>
+                    
+                    <div class="form-group">
+                        <p><a class="a-else" href="/passwd">忘记密码？</a></p>
+                        <p><a class="a-else" href="/register">没有账号？创建一个！</a></p>
+                    </div>
+                    <button type="submit" class="btn" id="button">登录</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/public/node_modules/jquery/dist/jquery.js"></script>
+    <!-- <script src="http://cdn.staticfile.org/jquery/1.9.0/jquery.min.js"></script> -->
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="/public/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/public/node_modules/popper.js/dist/umd/popper.js"></script>
+    <script src="/public/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="/public/node_modules/wowjs/dist/wow.js"></script>
+    <script src="/public/assets/textilate/jquery.fittext.js"></script>
+    <script src="/public/assets/textilate/jquery.lettering.js"></script>
+    <script src="/public/assets/textilate/highlight.min.js"></script>
+    <script src="/public/assets/textilate/jquery.textillate.js"></script>
+    <script>
+    $(function() {
+        $('code').each(function() {
+            var $this = $(this);
+            $this.text($this.html());
+        })
+        $('.jumbotron h1')
+            .fitText(0.6)
+            .textillate({ in: { effect: 'flipInY' } });
+
+        $('.jumbotron p')
+            .fitText(3.2, { maxFontSize: 18 })
+            .textillate({ initialDelay: 1000, in: { delay: 3, shuffle: true } });
+
+        setTimeout(function() {
+            $('.fade').addClass('in');
+        }, 250);
+
+        setTimeout(function() {
+            $('h1.glow').removeClass('in');
+        }, 2000);
+
+        var $tlt = $viewport.find('.tlt')
+            .on('start.tlt', log('start.tlt triggered.'))
+            .on('inAnimationBegin.tlt', log('inAnimationBegin.tlt triggered.'))
+            .on('inAnimationEnd.tlt', log('inAnimationEnd.tlt triggered.'))
+            .on('outAnimationBegin.tlt', log('outAnimationBegin.tlt triggered.'))
+            .on('outAnimationEnd.tlt', log('outAnimationEnd.tlt triggered.'))
+            .on('end.tlt', log('end.tlt'));
+
+        $form.on('change', function() {
+            var obj = getFormData();
+            $tlt.textillate(obj);
+        }).trigger('change');
+
+    });
+    </script>
+    <script type="text/javascript">
+    var wow = new WOW({
+        boxClass: 'wow', // animated element css class (default is wow)
+        animateClass: 'animated', // animation css class (default is animated)
+        offset: 0, // distance to the element when triggering the animation (default is 0)
+        mobile: true, // trigger animations on mobile devices (default is true)
+        live: true, // act on asynchronously loaded content (default is true)
+        callback: function(box) {
+            // the callback is fired every time an animation is started
+            // the argument that is passed in is the DOM node being animated
+        },
+        scrollContainer: null // optional scroll container selector, otherwise use window
+    });
+    wow.init();
+    layui.use(['util', 'laydate', 'layer'], function() {
+        var util = layui.util,
+            laydate = layui.laydate,
+            layer = layui.layer;
+        //固定块
+        util.fixbar({
+            bar1: '&#xe68e;',
+            bar2: '&#xe65c;',
+            css: { right: 50, bottom: 100 },
+            bgcolor: '#393D49',
+            click: function(type) {
+                if (type === 'bar1') {
+                    window.location.href = "/";
+                } else if (type === 'bar2') {
+                    window.history.back(-1);
+                }
+            }
+        });
+    })
+    var formData = {}
+    $('#button').on('click', function (e) {
+        e.preventDefault()
+        formData.username = $('#account').val()
+        formData.password = $('#password').val()
+        $.ajax({
+        url: '/signin',
+        type: 'post',
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+            var err_code = data.err_code
+            if (err_code === 0) {
+             window.location.href = '/'
+            } else if (err_code === 1) {
+            window.alert('用户名或者密码错误')
+            } else if (err_code === 500) {
+            window.alert('服务器繁忙')
+            } else if (err_code === 2) {
+            window.location.href = '/userinfo'
+            }
+        }
+        })
+    })
+    </script>
+</body>
+
+</html>

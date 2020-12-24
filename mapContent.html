@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html style="width: 100%;height: 100%;">
+
+<head>
+    <title>轨迹分析</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/public/css/mapContent.css">
+    <style>
+        #blue_1{
+            background: url(/public/img/lolhero/{{t1hero1}}.png) no-repeat;
+        }
+        #blue_2{
+            background: url(/public/img/lolhero/{{t1hero2}}.png) no-repeat;
+        }
+        #blue_3{
+            background: url(/public/img/lolhero/{{t1hero3}}.png) no-repeat;
+        }
+        #blue_4{
+            background: url(/public/img/lolhero/{{t1hero4}}.png) no-repeat;
+        }
+        #blue_5{
+            background: url(/public/img/lolhero/{{t1hero5}}.png) no-repeat;
+        }
+        #red_1{
+            background: url(/public/img/lolhero/{{t2hero1}}.png) no-repeat;
+        }
+        #red_2{
+            background: url(/public/img/lolhero/{{t2hero2}}.png) no-repeat;
+        }
+        #red_3{
+            background: url(/public/img/lolhero/{{t2hero3}}.png) no-repeat;
+        }
+        #red_4{
+            background: url(/public/img/lolhero/{{t2hero4}}.png) no-repeat;
+        }
+        #red_5{
+            background: url(/public/img/lolhero/{{t2hero5}}.png) no-repeat;
+        }
+        .box_before {
+            /*角色打勾状态*/
+            height: 25px;
+            width: 25px;
+            position: absolute;
+            background: url(/public/img/gou.png);
+            background-size: 100% 100%;
+            cursor: pointer;
+        }
+        .sum_box_before {
+            /*总的打勾状态*/
+            height: 30px;
+            width: 30px;
+            position: absolute;
+            background: url(/public/img/gou.png);
+            background-size: 100% 100%;
+            cursor: pointer;
+        }
+        .box_after {
+            /*角色不打勾状态*/
+            height: 25px;
+            width: 25px;
+            position: absolute;
+            background-size: 100% 100%;
+            cursor: pointer;
+
+        }
+        .sum_box_after {
+            /*总的不打勾状态*/
+            height: 30px;
+            width: 30px;
+            position: absolute;
+            background-size: 100% 100%;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+
+<body style="width: 100%;height: 100%;margin: 0;padding: 0;background-color: #232325;">
+    <div class="container row">
+        <div id="blue_team" class="team">
+            <div id="blue_1" class="member">
+                <div id="b_tip1" class="tips blue_tips">
+                </div>
+                <div id="b_box1" class="box b_box">
+                </div>
+            </div>
+            <div id="blue_2" class="member">
+                <div id="b_tip2" class="tips blue_tips">
+                </div>
+                <div id="b_box2" class="box b_box">
+                </div>
+            </div>
+            <div id="blue_3" class="member">
+                <div id="b_tip3" class="tips blue_tips">
+                </div>
+                <div id="b_box3" class="box b_box">
+                </div>
+            </div>
+            <div id="blue_4" class="member">
+                <div id="b_tip4" class="tips blue_tips">
+                </div>
+                <div id="b_box4" class="box b_box">
+                </div>
+            </div>
+            <div id="blue_5" class="member">
+                <div id="b_tip5" class="tips blue_tips">
+                </div>
+                <div id="b_box5" class="box b_box">
+                </div>
+            </div>
+        </div>
+        <div class="map_con">
+            <div id="canvas_size" class="text-center img-responsive" style="position:relative;background: url(/public/img/map.jpg) no-repeat;background-size:cover;margin:0 auto;padding:0;width: 300px;height: 300px;">
+                <canvas id="canvas" width="300" height="300" style="position: absolute; left: 0px; top: 0px;"></canvas>
+            </div>
+            <div class="heatmap text-center img-responsive" id="heat_size" style="background: url(/public/img/map.jpg) no-repeat;background-size:cover;margin:0 auto;width: 300px;height: 300px;">
+            </div>
+        </div>
+        <div id="red_team" class="team">
+            <div id="red_1" class="member">
+                <div id="r_tip1" class="tips red_tips">
+                </div>
+                <div id="r_box1" class="box r_box">
+                </div>
+            </div>
+            <div id="red_2" class="member">
+                <div id="r_tip2" class="tips red_tips">
+                </div>
+                <div id="r_box2" class="box r_box">
+                </div>
+            </div>
+            <div id="red_3" class="member">
+                <div id="r_tip3" class="tips red_tips">
+                </div>
+                <div id="r_box3" class="box r_box">
+                </div>
+            </div>
+            <div id="red_4" class="member">
+                <div id="r_tip4" class="tips red_tips">
+                </div>
+                <div id="r_box4" class="box r_box">
+                </div>
+            </div>
+            <div id="red_5" class="member">
+                <div id="r_tip5" class="tips red_tips">
+                </div>
+                <div id="r_box5" class="box r_box">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="padding-top:10px;">
+        <div class="team_info">
+            <div class="team_container">
+                <img id="blue_logo" class="img-responsive center-block" src="" alt="">
+                <p id="blue_name"></p>
+            </div>
+            <div id="blue_tip" class="blue_team_tip">
+            </div>
+            <div id="blue_box" class="blue_team_box">
+            </div>
+        </div>
+        <div class="team_info">
+        	<img src="/public/img/VS.png" width="128" height="128" alt="">
+        	<p id="gameTime"></p>
+        </div>
+        
+        <div class="team_info">
+            <div class="team_container">
+                <img id="red_logo" class="img-responsive center-block" src="" alt="">
+                <p id="red_name"></p>
+            </div>
+            <div id="red_tip" class="red_team_tip">
+            </div>
+            <div id="red_box" class="red_team_box">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/public/node_modules/jquery/dist/jquery.js"></script>
+    <script src="/public/js/heatmap.js"></script>
+    <script src="/public/js/lsbridge.js"></script>
+    <script type="text/javascript" id="code">
+    var myVar;
+    var canvas_size = document.getElementById('canvas_size');
+    var canvas = document.getElementById("canvas");
+    var heat_size = document.getElementById('heat_size');
+    var blue_1 = document.getElementById('blue_1');
+    var blue_2 = document.getElementById('blue_2');
+    var blue_3 = document.getElementById('blue_3');
+    var blue_4 = document.getElementById('blue_4');
+    var blue_5 = document.getElementById('blue_5');
+    var red_1 = document.getElementById('red_1');
+    var red_2 = document.getElementById('red_2');
+    var red_3 = document.getElementById('red_3');
+    var red_4 = document.getElementById('red_4');
+    var red_5 = document.getElementById('red_5');
+    
+    var b_box1 = document.getElementById("b_box1");
+    var b_box2 = document.getElementById("b_box2");
+    var b_box3 = document.getElementById("b_box3");
+    var b_box4 = document.getElementById("b_box4");
+    var b_box5 = document.getElementById("b_box5");
+    var r_box1 = document.getElementById("r_box1");
+    var r_box2 = document.getElementById("r_box2");
+    var r_box3 = document.getElementById("r_box3");
+    var r_box4 = document.getElementById("r_box4");
+    var r_box5 = document.getElementById("r_box5");
+    var blue_box = document.getElementById("blue_box");
+    var red_box = document.getElementById("red_box");
+    var b_sum =true;
+    var r_sum = true;
+    b_box1.className = "box_before";
+    b_box1.style.left = 0;
+    b_box2.className = "box_before";
+    b_box2.style.left = 0;
+    b_box3.className = "box_before";
+    b_box3.style.left = 0;
+    b_box4.className = "box_before";
+    b_box4.style.left = 0;
+    b_box5.className = "box_before";
+    b_box5.style.left = 0;
+    blue_box.className = "sum_box_before";
+    blue_box.style.bottom = 0;
+    blue_box.style.right = 0;
+
+    r_box1.className = "box_before";
+    r_box1.style.right = 0;
+    r_box2.className = "box_before";
+    r_box2.style.right = 0;
+    r_box3.className = "box_before";
+    r_box3.style.right = 0;
+    r_box4.className = "box_before";
+    r_box4.style.right = 0;
+    r_box5.className = "box_before";
+    r_box5.style.right = 0;
+    red_box.className = "sum_box_before";
+    red_box.style.bottom = 0;
+    red_box.style.left = 0;
+    blue_1.onclick = function(){
+        var obj = document.getElementById(heros[0]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    blue_2.onclick = function(){
+        var obj = document.getElementById(heros[1]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    blue_3.onclick = function(){
+        var obj = document.getElementById(heros[2]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    blue_4.onclick = function(){
+        var obj = document.getElementById(heros[3]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    blue_5.onclick = function(){
+        var obj = document.getElementById(heros[4]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    red_1.onclick = function(){
+        var obj = document.getElementById(heros[5]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    red_2.onclick = function(){
+        var obj = document.getElementById(heros[6]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    red_3.onclick = function(){
+        var obj = document.getElementById(heros[7]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    red_4.onclick = function(){
+        var obj = document.getElementById(heros[8]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    red_5.onclick = function(){
+        var obj = document.getElementById(heros[9]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    blue_box.onclick = function(){
+        b_sum = !b_sum;
+
+        for(var i = 0;i<5;i++){
+            var obj = document.getElementById(heros[i]);
+            obj.checked = b_sum;
+            checkboxOnclick();
+        }
+        if(b_sum){
+            blue_box.className = "sum_box_before";
+            blue_box.style.bottom = 0;
+            blue_box.style.right = 0;
+        }else{
+            blue_box.className = "sum_box_after";
+            blue_box.style.bottom = 0;
+            blue_box.style.right = 0;
+        }
+
+    }
+    red_box.onclick = function(){
+        r_sum = !r_sum;
+        for(var i = 5;i<10;i++){
+            var obj = document.getElementById(heros[i]);
+            obj.checked = r_sum;
+            checkboxOnclick();
+        }
+        if(r_sum){
+            red_box.className = "sum_box_before";
+            red_box.style.bottom = 0;
+            red_box.style.left = 0;
+        }else{
+            red_box.className = "sum_box_after";
+            red_box.style.bottom = 0;
+            red_box.style.left = 0;
+        }
+    }
+    //页面中显示时间的id组件
+    var gameTime = document.getElementById("gameTime");
+    //复盘页面中的视频当前时间
+    var currentTime = 0;
+    var totalTime_arr = [];
+    var enterIdx = 0;//进入页面次数，为0表示首次进入
+    var stateChange = true;
+    lsbridge.subscribe('my-namespace',async function(data) {
+        //传过来视频播放当前时间
+        console.log(data);
+        if (data.message[0]<500) {
+            currentTime = parseInt(data.message[0]+2);
+        }else if(data.message[0]>500 && data.message[0]<=1000){
+            currentTime = parseInt(data.message[0]+6);
+        }else if(data.message[0]>1000 && data.message[0]<=2000){
+            currentTime = parseInt(data.message[0]+10);
+        }else if(data.message[0]>2000 && data.message[0]<=3000){
+            currentTime = parseInt(data.message[0]+14);
+        }else if(data.message[0]>3000){
+            currentTime = parseInt(data.message[0]+16);
+        }
+        // currentTime = parseInt(data.message[0]);
+        console.log('currentTime=',currentTime);
+        stateChange = data.message[1];
+        console.log('stateChange=',stateChange);
+
+        if(enterIdx!=0){
+            if(stateChange==false){
+                window.location.reload()
+                // clearTimeout(myVar)
+                // clearHeatMap();
+                }
+            // }else{
+            //     index = await getIndex(currentTime,totalTime_arr);
+            //     console.log('index=',index);
+            // // stateChange = true;
+            // // setTimeout(function(){
+            //     // stateChange=false;
+            //     var out1 = []
+            //     for (let i = 0; i < out.length; i++) {
+            //         var tmpList = []
+            //         for (var item in out[i]) { if (item == "x" || item == "y") { out[i][item] = out[i][item] } tmpList.push(out[i][item]) } out1.push(tmpList)
+            //     }
+            //     draw(out1, ctx, heros_show, 0,index)
+            // }
+            
+            // },2000)
+        }
+        
+    });
+    //获得当前时间所在位置
+    function getIndex(currentTime,totalTime_arr){
+        return new Promise(function(resolve, reject) {
+            for(var i =0;i<totalTime_arr.length;i++){
+                if(currentTime<totalTime_arr[i]){
+                    resolve(i)
+                }else if(currentTime>totalTime_arr[totalTime_arr.length-1]){
+                    resolve(totalTime_arr.length-1)
+                }
+            }
+        })
+    }
+    var ctx = canvas.getContext("2d");
+    //从后端获取人物列表
+    // heros借助6图处的数据获得
+    // heros = ["Gangplank", "Skarner", "Corki", "Xayah", "Rakan", "Tristana", "JarvanⅣ", "Syndra", "Veigar", "Nautilus"]
+    var heros = ["{{t1hero1}}", "{{t1hero2}}", "{{t1hero3}}", "{{t1hero4}}", "{{t1hero5}}", "{{t2hero1}}", "{{t2hero2}}", "{{t2hero3}}", "{{t2hero4}}", "{{t2hero5}}"];
+    // var colors = ['#1E50A2', 'cyan', '#A0D8EF', '#5A79BA', '#674598', '#F35858', '#F6B894', '#F4D03F', '#EA5506', '#B7282E'];
+    var colors = ['#3147A7', '#4557FF', '#4B83D1', '#6BC88C', '#D7EEEF', '#702426', '#CD4144', '#F77F00', '#FCBF49', '#D9F5BB'];
+    //生成复选框
+    var checkBoxArr = new Array();
+    for (i = 0; i < 10; i++) {
+        var input = document.createElement("input");
+        input.id = heros[i];
+        input.type = "checkbox";
+        input.name = "check";
+        input.checked = true;
+        input.style.visibility = "hidden";
+        input.style.width = "120px";
+        input.style.height = "120px";
+        input.style.position = "absolute";
+        input.style.top = "0";
+        input.style.left = "0";
+        checkBoxArr.push(input);
+        input.onclick = checkboxOnclick;
+    }
+
+    // blue_team.insertBefore(checkBoxArr[0], blue_1);
+    blue_1.appendChild(checkBoxArr[0])
+    blue_2.appendChild(checkBoxArr[1])
+    blue_3.appendChild(checkBoxArr[2])
+    blue_4.appendChild(checkBoxArr[3])
+    blue_5.appendChild(checkBoxArr[4])
+    red_1.appendChild(checkBoxArr[5])
+    red_2.appendChild(checkBoxArr[6])
+    red_3.appendChild(checkBoxArr[7])
+    red_4.appendChild(checkBoxArr[8])
+    red_5.appendChild(checkBoxArr[9])
+    //生成人物与颜色的对应关系
+    var map = new Map();
+    for(var i = 0; i < heros.length; i++){
+        map.set(heros[i], colors[i]);
+    }
+    var heros_name = new Array();
+    //要显示的人物
+    var heros_show = new Map();
+    for (i = 0; i < heros.length; i++) {
+        heros_show.set(heros[i], colors[i]);
+        heros_name.push(heros[i]);
+    }
+
+    function checkboxOnclick() {
+        var groupCheckbox = $("input[name='check']");
+        console.log(groupCheckbox)
+        var heros_initial = new Array();
+        for (i = 0; i < groupCheckbox.length; i++) {
+            if (groupCheckbox[i].checked == true) {
+                heros_show.set(groupCheckbox[i].id, map.get(groupCheckbox[i].id));
+                heros_initial.push(heros[i]);
+                if(i==0){
+                    b_box1.className = "box_before";
+                    b_box1.style.left = 0;
+                }else if(i==1){
+                    b_box2.className = "box_before";
+                    b_box2.style.left = 0;
+                }else if(i==2){
+                    b_box3.className = "box_before";
+                    b_box3.style.left = 0;
+                }else if(i==3){
+                    b_box4.className = "box_before";
+                    b_box4.style.left = 0;
+                }else if(i==4){
+                    b_box5.className = "box_before";
+                    b_box5.style.left = 0;
+                }else if(i==5){
+                    r_box1.className = "box_before";
+                    r_box1.style.right = 0;
+                }else if(i==6){
+                    r_box2.className = "box_before";
+                    r_box2.style.right = 0;
+                }else if(i==7){
+                    r_box3.className = "box_before";
+                    r_box3.style.right = 0;
+                }else if(i==8){
+                    r_box4.className = "box_before";
+                    r_box4.style.right = 0;
+                }else{
+                    r_box5.className = "box_before";
+                    r_box5.style.right = 0;
+                }
+                
+
+            } else {
+                heros_show.delete(groupCheckbox[i].id);
+                if(i==0){
+                    b_box1.className = "box_after";
+                    b_box1.style.left = 0;
+                }else if(i==1){
+                    b_box2.className = "box_after";
+                    b_box2.style.left = 0;
+                }else if(i==2){
+                    b_box3.className = "box_after";
+                    b_box3.style.left = 0;
+                }else if(i==3){
+                    b_box4.className = "box_after";
+                    b_box4.style.left = 0;
+                }else if(i==4){
+                    b_box5.className = "box_after";
+                    b_box5.style.left = 0;
+                }else if(i==5){
+                    r_box1.className = "box_after";
+                    r_box1.style.right = 0;
+                }else if(i==6){
+                    r_box2.className = "box_after";
+                    r_box2.style.right = 0;
+                }else if(i==7){
+                    r_box3.className = "box_after";
+                    r_box3.style.right = 0;
+                }else if(i==8){
+                    r_box4.className = "box_after";
+                    r_box4.style.right = 0;
+                }else{
+                    r_box5.className = "box_after";
+                    r_box5.style.right = 0;
+                }
+                if (i < 5) {
+                    blue_box.className = "sum_box_after";
+                    blue_box.style.bottom = 0;
+                    blue_box.style.right = 0;
+                } else {
+                    red_box.className = "sum_box_after";
+                    red_box.style.bottom = 0;
+                    red_box.style.left = 0;
+                }
+            }
+
+        }
+        if(groupCheckbox[0].checked == true&&groupCheckbox[1].checked == true&&groupCheckbox[2].checked == true&&groupCheckbox[3].checked == true&&groupCheckbox[4].checked == true){
+            blue_box.className = "sum_box_before";
+            blue_box.style.bottom = 0;
+            blue_box.style.right = 0;
+        }else if(groupCheckbox[5].checked == true&&groupCheckbox[6].checked == true&&groupCheckbox[7].checked == true&&groupCheckbox[8].checked == true&&groupCheckbox[9].checked == true){
+            red_box.className = "sum_box_before";
+            red_box.style.bottom = 0;
+            red_box.style.left = 0;
+        }
+        // if (groupCheckbox[0].checked && groupCheckbox[2].checked && groupCheckbox[3].checked && groupCheckbox[4].checked && groupCheckbox[1].checked == true) {
+
+        //     document.getElementById("box11").className = "box_before";
+        // }
+        // if (groupCheckbox[5].checked && groupCheckbox[6].checked && groupCheckbox[7].checked && groupCheckbox[8].checked && groupCheckbox[9].checked == true) {
+
+        //     document.getElementById("box12").className = "box_before";
+        // }
+
+        heros_name = heros_initial;
+    }
+    
+    // 上述代码是对页面结构以及交互行为的构造，后边的是对数据获取和展示的构造
+    //绘图
+    async function draw(data, ctx, heros, id,index) {
+        var queue_len = 25;
+        //用于保存每个人最多queue_len个的坐标
+        //即每个人有一个历史位置队列，队列中包含前queue_len个的坐标
+        var pos = new Map();
+        var pos_heat = new Map(); //先声明一维
+        var heatmapInstance = h337.create({
+            container: document.querySelector('.heatmap')
+        });
+        //声明heeatmap长宽与最大值
+        var max = 2;
+        for (var i = 0; i < index&&stateChange==false;) {
+            var num_of_same_frames = 0;
+            var data1 = new Array();
+            var cur_frame = data[i][1];
+            var min = parseInt(data[index][6]);
+            var sec = parseInt(data[index][7]);
+            
+            gameTime.innerHTML= getTimeStr(min,sec);
+            //同一帧内依次读取
+            for (var f = i; f < data.length && data[f][1] == cur_frame; f++) {
+                data[f][2] = data[f][2] * 300 / 295
+                data[f][3] = data[f][3] * 300 / 295
+                data[f][2] = data[f][2]
+                data[f][3] = data[f][3]
+                num_of_same_frames++;
+                //画这一帧对应的人的轨迹
+                var cur_hero = data[f][0];
+                //如果这个人第一次出现，则给pos赋初值，并进入下一循环
+                if (pos.get(cur_hero) == null) {
+                    pos.set(cur_hero, [{
+                        X: data[f][2],
+                        Y: data[f][3]
+                    }]);
+                    pos_heat.set(cur_hero, [{
+                        x: data[f][2],
+                        y: data[f][3],
+                        value: 1,
+                        radius: 25
+                    }]);
+                    continue;
+                }
+
+                //当前帧这个人的坐标
+                var x = data[f][2];
+                var y = data[f][3];
+                //这个人的历史坐标队列
+                var queue = pos.get(cur_hero);
+                var queue_heat = pos_heat.get(cur_hero);
+                var value = 1;
+                //寻找相同坐标
+                for (var a = 0; a < data1.length; a++) {
+                    if (x == data1[a].x && y == data1[a].y) {
+                        //增加频次
+                        value = value + 1;
+                    }
+                    //更新最大频次
+                    if (max < value) {
+                        max = value;
+                    }
+                }
+                queue.push({
+                    X: x,
+                    Y: y
+                });
+                queue_heat.push({
+                    x: x,
+                    y: y,
+                    value: 1,
+                    radius: 10
+                });
+
+                if (pos.get(cur_hero).length > queue_len) {
+                    pos.get(cur_hero).shift();
+                }
+                for (var j = 0; j < heros_name.length; j++) {
+                    if (pos_heat.get(heros_name[j]) != null) {
+                        data1 = data1.concat(pos_heat.get(heros_name[j]));
+                    }
+                }
+            }
+            // console.log("pos_heat:",pos_heat)
+            // console.log("data1:",data1)
+            //await sleep(5000);
+            //更新当前帧所有人的坐标后，画图
+            // if (id === 0) {
+            // 
+            // console.log("gui_pos:",pos)
+            heros.forEach(function(value, key) {
+                //若只有一个坐标，画点
+                if (pos.get(key) != null) {
+                    if (pos.get(key).length == 1) {
+                        ctx.fillRect(pos.get(key)[0].X, pos.get(key)[0].Y, 5, 5);
+                        ctx.fillStyle = value;
+                    }
+                    //画线
+                    for (var num = 0; num < pos.get(key).length - 1; num++) {
+                        ctx.beginPath();
+                        ctx.save();
+                        ctx.lineWidth = 5;
+                        ctx.strokeStyle = value;
+                        ctx.moveTo(pos.get(key)[num].X, pos.get(key)[num].Y);
+                        if (Math.pow(pos.get(key)[num + 1].X - pos.get(key)[num].X, 2) + Math.pow(pos.get(key)[num + 1].Y - pos.get(key)[num].Y, 2) <= 2500) {
+                            ctx.lineTo(pos.get(key)[num + 1].X, pos.get(key)[num + 1].Y);
+                        }
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+            });
+            // }
+            i += num_of_same_frames;
+            //每一帧休息一下，单位ms
+
+            var points = data1;
+
+            //将heatmap数据合并打包
+            var data2 = {
+                max: max,
+                data: points
+            };
+            //发送数据
+            //if (id === 1) {
+            heatmapInstance.setData(data2);
+            // }
+            console.log('正在画之前的数据....')
+            // await sleep(1000);
+            ctx.clearRect(0, 0, 300, 300)
+        }
+        //第0行数据为表头，所以从1开始循环的
+        // 但是我的数据库数据不包含这个垃圾数据所以从0开始
+        for (var i = index; i < data.length&&stateChange==false;) {
+            var num_of_same_frames = 0;
+            var data1 = new Array();
+            var cur_frame = data[i][1];
+            var durTime = 0;
+            var min = parseInt(data[i][6]);
+            var sec = parseInt(data[i][7]);
+            var now_time = 0;
+            var last_time = 0;
+            if(i==0){
+                // min = parseInt(data[0][6]);
+                // sec = parseInt(data[0][7]);
+                durTime = parseInt(data[0][8]);
+                console.log('1durTime=',durTime)
+            }else{
+                now_time = parseInt(data[i][8]);
+                last_time = parseInt(data[i-1][8]);
+                durTime = now_time-last_time;
+                console.log('now_time='+now_time+',last_time='+last_time)
+                console.log('2durTime=',durTime)
+            }
+    		
+    		gameTime.innerHTML= getTimeStr(min,sec);
+            //同一帧内依次读取
+            for (var f = i; f < data.length && data[f][1] == cur_frame; f++) {
+                data[f][2] = data[f][2] * 300 / 295
+                data[f][3] = data[f][3] * 300 / 295
+                data[f][2] = data[f][2]
+                data[f][3] = data[f][3]
+                num_of_same_frames++;
+                //画这一帧对应的人的轨迹
+                var cur_hero = data[f][0];
+                //如果这个人第一次出现，则给pos赋初值，并进入下一循环
+                if (pos.get(cur_hero) == null) {
+                    pos.set(cur_hero, [{
+                        X: data[f][2],
+                        Y: data[f][3]
+                    }]);
+                    pos_heat.set(cur_hero, [{
+                        x: data[f][2],
+                        y: data[f][3],
+                        value: 1,
+                        radius: 25
+                    }]);
+                    continue;
+                }
+
+                //当前帧这个人的坐标
+                var x = data[f][2];
+                var y = data[f][3];
+                //这个人的历史坐标队列
+                var queue = pos.get(cur_hero);
+                var queue_heat = pos_heat.get(cur_hero);
+                var value = 1;
+                //寻找相同坐标
+                for (var a = 0; a < data1.length; a++) {
+                    if (x == data1[a].x && y == data1[a].y) {
+                        //增加频次
+                        value = value + 1;
+                    }
+                    //更新最大频次
+                    if (max < value) {
+                        max = value;
+                    }
+                }
+                queue.push({
+                    X: x,
+                    Y: y
+                });
+                queue_heat.push({
+                    x: x,
+                    y: y,
+                    value: 1,
+                    radius: 10
+                });
+
+                if (pos.get(cur_hero).length > queue_len) {
+                    pos.get(cur_hero).shift();
+                }
+                for (var j = 0; j < heros_name.length; j++) {
+                    if (pos_heat.get(heros_name[j]) != null) {
+                        data1 = data1.concat(pos_heat.get(heros_name[j]));
+                    }
+                }
+            }
+            // console.log("pos_heat:",pos_heat)
+            // console.log("data1:",data1)
+            //await sleep(5000);
+            //更新当前帧所有人的坐标后，画图
+            // if (id === 0) {
+            // 
+            // console.log("gui_pos:",pos)
+            heros.forEach(function(value, key) {
+                //若只有一个坐标，画点
+                if (pos.get(key) != null) {
+                    if (pos.get(key).length == 1) {
+                        ctx.fillRect(pos.get(key)[0].X, pos.get(key)[0].Y, 5, 5);
+                        ctx.fillStyle = value;
+                    }
+                    //画线
+                    for (var num = 0; num < pos.get(key).length - 1; num++) {
+                        ctx.beginPath();
+                        ctx.save();
+                        ctx.lineWidth = 5;
+                        ctx.strokeStyle = value;
+                        ctx.moveTo(pos.get(key)[num].X, pos.get(key)[num].Y);
+                        if (Math.pow(pos.get(key)[num + 1].X - pos.get(key)[num].X, 2) + Math.pow(pos.get(key)[num + 1].Y - pos.get(key)[num].Y, 2) <= 2500) {
+                            ctx.lineTo(pos.get(key)[num + 1].X, pos.get(key)[num + 1].Y);
+                        }
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+            });
+            // }
+            i += num_of_same_frames;
+            //每一帧休息一下，单位ms
+
+            var points = data1;
+
+            //将heatmap数据合并打包
+            var data2 = {
+                max: max,
+                data: points
+            };
+            //发送数据
+            
+            heatmapInstance.setData(data2);
+            
+            console.log('正在画之后的数据....')
+
+            await sleep(durTime*1000);
+            ctx.clearRect(0, 0, 300, 300)
+        }
+        // alert('Finished!!!');
+    }
+    var out;
+    $(document).ready(async function() {
+        out = await $.ajax({ url: `/api/heatmap/{{videoID}}` })
+        var data = await $.ajax({ url: `/api/matchs` })
+        enterIdx++;
+        console.log(out)
+        console.log(data)
+        out.forEach(item=>{
+            totalTime_arr.push(parseInt(item.videoTime));
+        })
+        index = await getIndex(currentTime,totalTime_arr);
+        // console.log('1index=',index);
+        // if(index/totalTime_arr.length>0.1&&index/totalTime_arr.length<=0.3){
+        //     index += 1;
+        // }else if(index/totalTime_arr.length>0.3&&index/totalTime_arr.length<=0.5){
+        //     index += 2;
+        // }else if(index/totalTime_arr.length>0.5&&index/totalTime_arr.length<=0.8){
+        //     index += 3;
+        // }else if(index/totalTime_arr.length>0.8&&index/totalTime_arr.length<=1){
+        //     index += 4;
+        // }
+        // console.log('2index=',index);
+        // console.log(totalTime_arr)
+        var out1 = []
+        for (let i = 0; i < out.length; i++) {
+            var tmpList = []
+            for (var item in out[i]) { if (item == "x" || item == "y") { out[i][item] = out[i][item] } tmpList.push(out[i][item]) } out1.push(tmpList)
+        }
+        draw(out1, ctx, heros_show, 0,index)
+
+        data.forEach(async (item) => {
+            var team_blue_name = item.team_blue_name;
+            var team_red_name = item.team_red_name;
+            var raceID = item.game_id;
+            if (raceID == {{videoID}}) {
+
+                $('#blue_name').append(`${team_blue_name}`);
+                $('#red_name').append(`${team_red_name}`);
+                var team_blue_id = item.team_blue_id;
+                var team_red_id = item.team_red_id;
+                var team1 = await $.ajax({ url: `/api/teams/${team_blue_id}` });
+                var team2 = await $.ajax({ url: `/api/teams/${team_red_id}` });
+                var team1Logo = team1[0].team_logo;
+                var team2Logo = team2[0].team_logo;
+                $("#blue_logo").attr('src', team1Logo);
+                $("#red_logo").attr('src', team2Logo);
+            }
+        })
+    })
+    function getTimeStr(min,sec){
+    	return overTen(min)+':'+overTen(sec);
+    }
+    function overTen(n) {
+	    var str = (n < 10) ? ('0' + n) : ('' + n);
+	    return str;
+	}
+	//休眠函数
+    function sleep(ms) {
+        return new Promise(resolve => myVar=setTimeout(resolve, ms))
+    }
+    function clearHeatMap()
+    {  
+        var parent=document.getElementById("heat_size");
+        var child = parent.getElementsByTagName('canvas');
+        if(child[0] !=null){
+            parent.removeChild(child[0]);
+        }
+        // let newClass = c[0].getAttribute("class").replace("heatmap-canvas","");
+        // c.setAttribute("class",newClass);
+        // var cxt=c[0].getContext("2d");  
+        // c[0].height=c[0].height;  
+    }
+    </script>
+</body>
+
+</html>

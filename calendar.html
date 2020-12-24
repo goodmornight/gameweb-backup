@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>爱看电竞</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- Material Kit CSS -->
+    <link href="/public/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/public/css/owl.theme.default.min.css">
+    <!-- layui -->
+    <link rel="stylesheet" href="/public/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/public/layui/css/layui.mobile.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/public/css/index.css">
+    <!-- fullCalendar -->
+    <link href='/public/fullCalendar/core/main.css' rel='stylesheet' />
+    <link href='/public/fullCalendar/daygrid/main.css' rel='stylesheet' />
+    <link href='/public/fullCalendar/timegrid/main.css' rel='stylesheet' />
+    <link href='/public/fullCalendar/list/main.css' rel='stylesheet' />
+</head>
+
+<body style="width:100%;">
+    <div class="wrapper">
+        <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark" style="margin-bottom:0;border-radius: 0px;">
+            <div class="container" style="max-width: 95%;">
+                <a class="navbar-brand" href="/" style="font-size:20px;font-weight: 900;">爱看电竞</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav mr-auto justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" style="font-size:16px;font-weight: 600;">主页 <span class="sr-only">(current)</span></a><!-- 是用于帮助残障人士阅读的 -->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/videoReply" style="font-size:16px;font-weight: 600;">复盘视频</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/calendar" style="font-size:16px;font-weight: 600;">比赛日程</a>
+                        </li>
+<!--
+                        <li class="nav-item">
+                            <a class="nav-link" href="/news/234123" style="font-size:15px;">热点新闻</a>
+                        </li>   -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/aboutus" style="font-size:16px;font-weight: 600;">关于我们</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto justify-content-end">
+                        <li class="nav-item">
+                            {% if username %}
+                             <a href="/userSetting" style="color:#fff;font-size:16px;font-weight: 600;"> {{username}} </a>
+                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout" style="font-size:16px;font-weight: 600;">退出</a>
+                            {% else %}
+                            <a class="nav-link" href="/login" style="font-size:16px;font-weight: 600;">登录</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register" style="font-size:16px;font-weight: 600;">注册</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="calendar-content">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.5s">
+                    <div id='calendar' style="color:#fff;"></div>
+                </div> <!-- 日程 -->
+            </div><!-- 列 -->
+        </div>
+    </div>
+    <footer class="footer hidden-print wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.5s">
+        <div class="container-fluid text-center">
+            <div class="media-logo row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer-text">
+                    合作媒体
+                </div> <!--
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <img class="img-responsive logo-img" src="/public/img/qqgame.png">
+                </div>-->
+            </div>
+            <div class="about-us">
+                <a href="/aboutus">关于我们</a>
+            </div>
+            <div class="copyright">
+                &copy;
+                <script>
+                document.write(new Date().getFullYear())
+                </script>
+                <a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备 18009052号-3</a>
+            </div>
+            <!-- your footer here -->
+        </div>
+    </footer>
+    </div>
+    </div>
+    <!-- jquery要在bootstrap前面，不然会报错 -->
+    <script type="text/javascript" src="/public/node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/public/node_modules/popper.js/dist/umd/popper.js"></script>
+    <script src="/public/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="/public/node_modules/wowjs/dist/wow.js"></script>
+    <script src='/public/fullCalendar/core/main.js'></script>
+    <script src='/public/fullCalendar/interaction/main.js'></script>
+    <script src='/public/fullCalendar/daygrid/main.js'></script>
+    <script src='/public/fullCalendar/timegrid/main.js'></script>
+    <script src='/public/fullCalendar/list/main.js'></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $(".owl-carousel").owlCarousel({
+            animateOut: 'fadeOutRight',
+            animateIn: 'fadeInLeft',
+            items: 1,
+            loop: true,
+            center: true,
+            autoHeight: true,
+            autoplay: true,
+            autoplaySpeed: 30,
+            transitionStyle: true,
+            // nav: true,
+            dots: true,
+            dotsEach: true,
+            // dotsData:true,
+            // margin: 30,
+            // stagePadding: 30,
+            smartSpeed: 40
+        });
+    });
+    var wow = new WOW({
+        boxClass: 'wow', // animated element css class (default is wow)
+        animateClass: 'animated', // animation css class (default is animated)
+        offset: 0, // distance to the element when triggering the animation (default is 0)
+        mobile: true, // trigger animations on mobile devices (default is true)
+        live: true, // act on asynchronously loaded content (default is true)
+        callback: function(box) {
+            // the callback is fired every time an animation is started
+            // the argument that is passed in is the DOM node being animated
+        },
+        scrollContainer: null // optional scroll container selector, otherwise use window
+    });
+    wow.init();
+    layui.use(['util', 'laydate', 'layer'], function() {
+        var util = layui.util,
+            laydate = layui.laydate,
+            layer = layui.layer;
+        //固定块
+        util.fixbar({
+            bar1: '&#xe68e;',
+            bar2: false,
+            css: { right: 50, bottom: 100 },
+            bgcolor: '#393D49',
+            click: function(type) {
+                if (type === 'bar1') {
+                    window.location.href="/";
+                }
+            }
+        });
+    });
+    document.addEventListener('DOMContentLoaded',async function() {
+     //黎兰慧2019.10.12添加当前时间
+    function conver(s) {
+        return s < 10 ? '0' + s : s;
+    }
+    // 李佳添加后台数
+    var eventObj = []
+    var data = await $.ajax({ url: `/api/matchs` })
+    for(let i =0; i < data.length; i++) {
+      if (data[i].game_status == 1) {
+      eventObj.push({
+                title: `${data[i].game_name}`, //比赛名称
+                    start: JSON.parse(data[i].game_time), //比赛开始时间
+                    color: '#c3143a', //颜色
+                    url:`/index/${data[i].game_id}` //视频地址
+             })
+	} else if (data[i].game_status == 2) {
+            eventObj.push({
+                title: `${data[i].game_name}`, //比赛名称
+                    start: JSON.parse(data[i].game_time), //比赛开始时间
+                    color: '#c3143a', //颜色
+                    url:`/videoReply/${data[i].game_id}` //视频地址
+             })
+          }
+    }
+
+     var calendarEl = document.getElementById('calendar');
+        var today = new Date();
+        var today_str=today.getFullYear()+'-'+conver(today.getMonth()+1)+'-'+conver(today.getDate());
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            },
+            defaultDate: today_str,
+            navLinks: true, // can click day/week names to navigate views
+            businessHours: true, // display business hours
+            editable: true,
+            events: eventObj
+      })
+          calendar.render();
+        });
+    </script>
+</body>
+
+</html>

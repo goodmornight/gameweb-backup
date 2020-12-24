@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html style="height: 100%;width: 100%;">
+	<head>
+                <!--图片获取反防盗-->
+                <meta name="referrer" content="no-referrer" />
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="/public/js/heatmap.js"></script>
+		<script src="https://cdn.bootcss.com/xlsx/0.11.5/xlsx.core.min.js"></script>
+		<script src="https://echarts.baidu.com/dist/echarts.min.js"></script>
+		<title>{{gamename}}</title>
+		<style>
+			.canvas {
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 1;
+			}
+			
+			.box_before {
+				height: 1.2vw;
+				width: 1.2vw;
+				position: absolute;
+				background: url(/public/img/gou.png);
+				background-size: 100% 100%;
+				cursor: pointer;
+			}
+			
+			.box_after {
+				height: 1.2vw;
+				width: 1.2vw;
+				position: absolute;
+				background-size: 100% 100%;
+					cursor: pointer;
+
+			}
+		</style>
+	</head>
+
+	<body style="height: 100%;width: 100%;background:black">
+		<div style="height: 100%;width: 100%;background:url(/public/img/square2x.png) no-repeat;background-size: 100% 100%;position: absolute;">
+		</div>
+		<div style="height: 100%;width: 100%;position: absolute;">
+
+			<div id="top" style=" height:10%;width: 100%;display: flex;text-align: center;" class="container">
+				<div id="top_left" style="height: 100%;width: 50%;display: table;">
+					<div style="display: table-cell;vertical-align: middle;text-align: center;">
+						<div style="background: #D49E26 ;transform: skewX(-30deg);width: 45%;height: 80%; display: table;text-align: center;" class="text-center">
+							<div style="transform: skewX(30deg);font-size: 1.5vw;display: table-cell;vertical-align: middle;#ECECEC -space: nowrap;color: #ECECEC ;text-align: center;">英雄联盟电竞数据可视化系统</div>
+						</div>
+					</div>
+
+				</div>
+				<div id="top_right" style="height: 100%;width: 50%;display: table;">
+					<div style="display: table-cell;vertical-align: middle;">
+						<div style=" display: table;height: 80%;float: right;">
+							<div style="display: table-cell;vertical-align: bottom;">
+								<button style="background: #D49E26 ;font-size: 20px;color: #ECECEC ;font-size: 1vw" id="btnLive">直播视频</button>
+								<button style="background: #D49E26 ;font-size: 20px;color: #ECECEC ;font-size: 1vw" id="btnUserInfo">个人中心</button>
+								<button style="background: #D49E26 ;font-size: 20px;color: #ECECEC ;font-size: 1vw" id="btnExit">退出系统</button>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div style="height: 90% ; width: 100%;opacity: 0.8;background:linear-gradient(to right,transparent,5%,rgba(216,216,216,0.5),95% ,transparent);text-align: center;" class="container">
+				<div style="width: 100%;height: 100%;display: flex;" class="container">
+					<div style="height: 100%;width:15%;margin: 0 5px;display: table;">
+
+						<div style="display: table-cell;">
+							<div style="height: 20%;width:100%;">
+
+								<div style="height: 15vh;width: 15vh;border-radius: 10px;border:2px solid #ECECEC;background: url(/public/img/lolhero/{{t1hero1}}.png);background-size: 100% ;">
+									
+									<div style="position: relative;float: right;width: 50px;height: 50px;">
+										<div style="position: absolute;width: 100%;height: 100%;">
+
+											<div style="position: relative;width: 0;height: 0; transform: rotate(90deg);float: right;border-width: 1.2vw;border-color: #1E50A2 transparent transparent #1E50A2;border-style: solid;border-top-left-radius: 10px;">
+
+											</div>
+											<div id="box1" style="height: 1.2vw;width: 1.2vw;position:absolute;right:2px;background-size: 100% 100%;">
+											</div>
+										</div>
+									</div>
+                                                                      
+								</div>
+                                                        
+							</div>
+							<div style="height: 20%;">
+
+								<div style="height: 15vh;width: 15vh;border-radius: 10px;border:2px solid #ECECEC;background: url(/public/img/lolhero/{{t1hero2}}.png);background-size: 100% ; ">
+
+									<div style="position: relative;float: right;width: 50px;height: 50px;">
+										<div style="position: absolute;width: 100%;height: 100%;">
+
+											<div style="width: 0;height: 0; transform: rotate(90deg);float: right;border-width: 1.2vw;border-color:  cyan transparent transparent cyan;border-style: solid;border-top-left-radius: 10px;">
+
+											</div>
+											<div id="box2" style="height: 1.2vw;width: 1.2vw;position:absolute;right:2px;background-size: 100% 100%;">
+											</div>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+							<div style="height: 20%;">
+
+								<div style="height: 15vh;width: 15vh;border-radius: 10px;border:2px solid #ECECEC;background: url(/public/img/lolhero/{{t1hero3}}.png);background-size: 100% ;">
+
+									<div style="position: relative;float: right;width: 50px;height: 50px;">
+										<div style="position: absolute;width: 100%;height: 100%;">
+
+											<div style="width: 0;height: 0; transform: rotate(90deg);float: right;border-width: 1.2vw;border-color: #A0D8EF transparent transparent #A0D8EF;border-style: solid;border-top-left-radius: 10px;">
+
+											</div>
+											<div id="box3" style="height: 1.2vw;width: 1.2vw;position:absolute;right:2px;background-size: 100% 100%;">
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+							<div style="height: 20%;">
+
+								<div style="height: 15vh;width: 15vh;border-radius: 10px;border:2px solid #ECECEC;background: url(/public/img/lolhero/{{t1hero4}}.png);background-size: 100% ; ">
+
+									<div style="position: relative;float: right;width: 50px;height: 50px;">
+										<div style="position: absolute;width: 100%;height: 100%;">
+
+											<div style="width: 0;height: 0; transform: rotate(90deg);float: right;border-width: 1.2vw;border-color:#5A79BA transparent transparent #5A79BA;border-style: solid;border-top-left-radius: 10px;">
+
+											</div>
+											<div id="box4" style="height: 1.2vw;width: 1.2vw;position:absolute;right:2px;background-size: 100% 100%;">
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+							<div style="height: 20%;">
+
+								<div style="height: 15vh;width: 15vh;border-radius: 10px;border:2px solid #ECECEC ;background: url(/public/img/lolhero/{{t1hero5}}.png);background-size: 100% ; ">
+
+									<div style="position: relative;float: right;width: 50px;height: 50px;">
+										<div style="position: absolute;width: 100%;height: 100%;">
+
+											<div style="width: 0;height: 0; transform: rotate(90deg);float: right;border-width: 1.2vw;border-color:#674598 transparent transparent #674598;border-style: solid;border-top-left-radius: 10px;">
+
+											</div>
+											<div id="box5" style="height: 1.2vw;width: 1.2vw;position:absolute;right:2px;background-size: 100% 100%;">
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+					<div style="height: 100%;width:35%;margin-left: 1vh;display: table;">
+
+						<div style="display: table-cell;vertical-align: middle;">
+							<div style="width: 100%;height: 36vh;display: flex;">
+								<div style="height: 100%;width: calc(100% - 36vh);border-radius: 10px;border:2px solid #ECECEC ;color: white;font-size: 1.5vw;text-align: center;position: relative">
+
+									<div style="width: 100%;height: 100%;position: absolute;">
+
+										<div style="width: 0;height: 0; float:left;border-width: 1.2vw;border-color:#0000FF transparent transparent#0000FF;border-style: solid;border-top-left-radius: 10px;">
+
+										</div>
+										<div id="box11" style="height: 1.2vw;width: 1.2vw;position:absolute;left:2px;background-size: 100% 100%;">
+										</div>
+									</div>
+
+									<div style="height: 50%;width: 100%;display: table;" >
+										<div style="height: 100%;width: 40%;display: table-cell;vertical-align: middle;">
+											<img src="{{team1Obj.team_logo}}" width="100%"  />
+										</div>
+										<div style="height: 100%;width: 60%;display: table-cell;vertical-align: middle;font-size: 1vw;text-align: left;padding-left: 1vw;">
+											<div> 队名：{{team1Obj.team_name}}</div>
+											<div> 别名：{{team1Obj.shortName}}</div>
+											<div> 地区：{{team1Obj.team_area}}</div>
+										</div>
+									</div>
+									<div style="height: 50%;width: 100%;">历史战绩:<br>{{team1Obj.team_win}}/{{team1Obj.team_draw}}/{{team1Obj.team_loss}} 胜/平/负
+									</div>
+
+								</div>
+								<div style="height: 36vh;width: 36vh;margin-left: 5px;">
+
+									<div style="height: 295px;width: 295px;position: absolute;background: url(/public/img/map.jpg);" id="canvas_size">
+										<canvas id="canvas" width="295" height="295" class="canvas"></canvas>
+									</div>
+
+								</div>
+
+							</div>
+
+							<div style="height:18vh;padding-top: 0.5vh;">
+								<div id="economy" style="width: 100%;height: 100%;background: #D8D8D8 "></div>
+							</div>
+							<div style="height:18vh;padding-top: 0.5vh;">
+								<div id="economy_gap" style="width: 100%;height: 100%;background: #D8D8D8 "></div>
+							</div>
+							<div style="height:18vh;padding-top: 0.5vh;">
+								<div id="kda" style="width: 100%;height: 100%;background: #D8D8D8 "></div>
+							</div>
+
+						</div>
+
+					</div>
+					<div style="height: 100%;width:35%;margin-left: 1vh;display: table;">
+
+						<div style="display: table-cell;vertical-align: middle;">
+							<div style="width: 100%;height: 36vh;display: flex;">
+								<div style="height: 36vh;width: 36vh;margin-right: 5px;">
+									<div class="heatmap" style="position: relative;width:295px;height: 295px;" id="heat_size">
+										<img src="/public/img/map.jpg" style="width: 100%;height: 100%;">
+									</div>
+								</div>
+								<div style="height: 100%;width: calc(100% - 36vh);border-radius: 10px;border:2px solid #ECECEC ;color: white;font-size: 1.5vw;text-align: center;position: relative;">
+
+									<div style="width: 100%;height: 100%;position: absolute;">
+
+										<div style="width: 0;height: 0;transform: rotate(90deg); float: right;border-width: 1.2vw;border-color: #FF0000 transparent transparent #FF0000;border-style: solid;border-top-left-radius: 10px;">
+
+										</div>
+										<div id="box12" style="height: 1.2vw;width: 1.2vw;position:absolute;right:2px;background-size: 100% 100%;">
+										</div>
+									</div>
+
+									<div style="height: 50%;width: 100%;display: table;" >
+										<div style="height: 100%;width: 40%;display: table-cell;vertical-align: middle;">
+											<img src="{{team2Obj.team_logo}}" width="100%"/>
+										</div>
+										<div style="height: 100%;width: 60%;display: table-cell;vertical-align: middle;font-size: 1vw;text-align: left;padding-left: 1vw;">
+											<div> 队名：{{team2Obj.team_name}}</div>
+											<div> 别名：{{team2Obj.shortName}}</div>
+											<div> 地区：{{team2Obj.team_area}}</div>
+
+										</div>
+									</div>
+									<div style="height: 50%;width: 100%;">历史战绩:<br>{{team2Obj.team_win}}/{{team2Obj.team_draw}}/{{team2Obj.team_loss}} 胜/平/负
+									</div>
+
+								</div>
+
+							</div>
+
+							<div style="height:18vh;padding-top: 0.5vh;">
+								<div id="predict_win" style="width: 100%;height: 100%;background: #D8D8D8 "></div>
+							</div>
+							<div style="height:18vh;padding-top: 0.5vh;">
+								<div id ="knife" style="width: 100%;height: 100%;background: #D8D8D8 "></div>
+							</div>
+							<div style="height:18vh;padding-top: 0.5vh;">
+								<div id ="group_rate" style="width: 100%;height: 100%;background: #D8D8D8 "></div>
+							</div>
+
+						</div>
+
+					</div>
+					<div style="height: 100%;width:15%;margin: 0 5px;display: table;">
+
+						<div style="display: table-cell;">
+							<div style="height: 20%;">
+								<div style="height: 15vh;width: 15vh;border-radius: 10px;border:2px solid #ECECEC ;background: url(/public/img/lolhero/{{t2hero1}}.png);background-size: 100% ;margin-left: 35%;">
+
+									<div style="position: relative;float: left;width: 50px;height: 50px;">
+										<div style="position: absolute;width: 100%;height: 100%;">
+
+											<div style="width: 0;height: 0; float: left;border-width: 1.2vw;border-color: #F35858 transparent transparent #F35858;border-style: solid;border-top-left-radius: 10px;">
+
+											</div>
+											<div id="box6" style="height: 1.2vw;width: 1.2vw;position:absolute;left:2px;background-size: 100% 100%;">
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+							<div style="height: 20%;">
+								<div style="height: 15vh;width: 15vh;border-radius: 10px;border:2px solid #ECECEC ;background: url(/public/img/lolhero/{{t2hero2}}.png);background-size: 100% ;margin-left: 35%;">
+
+									<div style="position: relative;float: left;width: 50px;height: 50px;">
+										<div style="position: absolute;width: 100%;height: 100%;">
+
+											<div style="width: 0;height: 0; float: left;border-width: 1.2vw;border-color: #F6B894 transparent transparent #F6B894;border-style: solid;border-top-left-radius: 10px;">
+
+											</div>
+											<div id="box7" style="height: 1.2vw;width: 1.2vw;position:absolute;left:2px;background-size: 100% 100%;">
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+							<div style="height: 20%;">
+								<div style="height: 15vh;width: 15vh;border-radius: 10px;border:2px solid #ECECEC ;background: url(/public/img/lolhero/{{t2hero3}}.png);background-size: 100% ;margin-left: 35%;">
+
+									<div style="position: relative;float:left;width: 50px;height: 50px;">
+										<div style="position: absolute;width: 100%;height: 100%;">
+
+											<div style="width: 0;height: 0; float:left;border-width: 1.2vw;border-color: #F4D03F  transparent transparent #F4D03F ;border-style: solid;border-top-left-radius: 10px;">
+
+											</div>
+											<div id="box8" style="height: 1.2vw;width: 1.2vw;position:absolute;left:2px;background-size: 100% 100%;">
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+							<div style="height: 20%;">
+								<div style="height: 15vh;width: 15vh;border-radius: 10px;border:2px solid #ECECEC ;background: url(/public/img/lolhero/{{t2hero4}}.png);background-size: 100% ;margin-left: 35%;">
+
+									<div style="position: relative;float: left;width: 50px;height: 50px;">
+										<div style="position: absolute;width: 100%;height: 100%;">
+
+											<div style="width: 0;height: 0; float: left;border-width: 1.2vw;border-color: #EA5506 transparent transparent #EA5506;border-style: solid;border-top-left-radius: 10px;">
+
+											</div>
+											<div id="box9" style="height: 1.2vw;width: 1.2vw;position:absolute;left:2px;background-size: 100% 100%;">
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+							<div style="height: 20%;">
+								<div style="height: 15vh;width: 15vh;border-radius: 10px;border:2px solid #ECECEC ;background: url(/public/img/lolhero/{{t2hero5}}.png);background-size: 100% ;margin-left: 35%;">
+
+									<div style="position: relative;float: left;width: 50px;height: 50px;">
+										<div style="position: absolute;width: 100%;height: 100%;">
+
+											<div style="width: 0;height: 0; float: left;border-width: 1.2vw;border-color: #B7282E transparent transparent #B7282E;border-style: solid;border-top-left-radius: 10px;">
+
+											</div>
+											<div id="box10" style="height: 1.2vw;width: 1.2vw;position:absolute;left:2px;background-size: 100% 100%;">
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+				<input type="file" id="xlsxfile" />
+			</div>
+
+		</div>
+		</div>
+<div id="test-response-text">
+
+</div>
+		<!--画热点图-->
+		<script>
+			window.addEventListener('resize', function() {
+
+				document.getElementById("canvas_size").style.zoom = (window.innerHeight * 0.36) / 295;
+				document.getElementById("heat_size").style.zoom = (window.innerHeight * 0.36) / 295;
+
+			})
+			window.onload = function() {
+				$('#btnLive').on('click',function(){
+					window.open('/liveVideo', 'newwindow', 'height=320, width=360, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no')
+				})
+				$('#btnExit').on('click', function (e) {
+					window.location.href = '/logout'
+				})
+				$('#btnUserInfo').on('click', function (e) {
+					window.location.href = '/userSetting'
+				})
+				document.getElementById("canvas_size").style.zoom = (window.innerHeight * 0.36) / 295;
+				document.getElementById("heat_size").style.zoom = (window.innerHeight * 0.36) / 295;
+
+				var f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12 = 0;
+				var box_id = [box1, box2, box3, box4, box5, box6, box7, box8, box9, box10]
+				// 这里的英雄人物头像的点击事件是写死的，应该写活才行
+				// 注册选英雄的按钮的点击事件
+				// 点击后的逻辑操作以及css展示
+				// 英雄人物的ID是后边动态生成的，但是这里不宜写死
+				document.getElementById("box1").onclick = function() {
+					document.getElementById("{{t1hero1}}").click();
+					if(!f1) {
+						document.getElementById("box1").className = "box_before";
+						f1 = 1;
+					} else {
+						document.getElementById("box1").className = "box_after";
+						f1 = 0;
+					}
+				}
+				document.getElementById("box2").onclick = function() {
+					document.getElementById("{{t1hero2}}").click();
+					if(!f2) {
+						document.getElementById("box2").className = "box_before";
+						f2 = 1;
+					} else {
+						document.getElementById("box2").className = "box_after";
+						f2 = 0;
+					}
+				}
+				document.getElementById("box3").onclick = function() {
+					document.getElementById("{{t1hero3}}").click();
+					if(!f3) {
+						document.getElementById("box3").className = "box_before";
+						f3 = 1;
+					} else {
+						document.getElementById("box3").className = "box_after";
+						f3 = 0;
+					}
+				}
+				document.getElementById("box4").onclick = function() {
+					document.getElementById("{{t1hero4}}").click();
+					if(!f4) {
+
+						document.getElementById("box4").className = "box_before";
+						f4 = 1;
+					} else {
+						document.getElementById("box4").className = "box_after";
+						f4 = 0;
+					}
+				}
+				document.getElementById("box5").onclick = function() {
+					document.getElementById("{{t1hero5}}").click();
+					if(!f5) {
+
+						document.getElementById("box5").className = "box_before";
+						f5 = 1;
+					} else {
+						document.getElementById("box5").className = "box_after";
+						f5 = 0;
+					}
+				}
+				// 队伍选中的按钮
+				document.getElementById("box11").onclick = function() {
+					team1();
+				}
+				document.getElementById("box12").onclick = function() {
+					team2();
+				
+				}
+				document.getElementById("box6").onclick = function() {
+					document.getElementById("{{t2hero1}}").click();
+					if(!f8) {
+						document.getElementById("box6").className = "box_before";
+						f8 = 1;
+					} else {
+						document.getElementById("box6").className = "box_after";
+						f8 = 0;
+					}
+				}
+				document.getElementById("box7").onclick = function() {
+					document.getElementById("{{t2hero2}}").click();
+					if(!f9) {
+						document.getElementById("box7").className = "box_before";
+						f9 = 1;
+					} else {
+						document.getElementById("box7").className = "box_after";
+						f9 = 0;
+					}
+				}
+				document.getElementById("box8").onclick = function() {
+					document.getElementById("{{t2hero3}}").click();
+					if(!f10) {
+						document.getElementById("box8").className = "box_before";
+						f10 = 1;
+					} else {
+						document.getElementById("box8").className = "box_after";
+						f10 = 0;
+					}
+				}
+				document.getElementById("box9").onclick = function() {
+					document.getElementById("{{t2hero4}}").click();
+					if(!f11) {
+						document.getElementById("box9").className = "box_before";
+						f11 = 1;
+					} else {
+						document.getElementById("box9").className = "box_after";
+						f11 = 0;
+					}
+				}
+				document.getElementById("box10").onclick = function() {
+					document.getElementById("{{t2hero5}}").click();
+					if(!f12) {
+						document.getElementById("box10").className = "box_before";
+						f12 = 1;
+					} else {
+						document.getElementById("box10").className = "box_after";
+						f12 = 0;
+					}
+				}
+				// 默认选中队伍按钮
+				document.getElementById("box11").click();
+				document.getElementById("box12").click();
+			}
+		</script>
+		<script type="text/javascript" id="code">
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+
+			//从后端获取人物列表
+			// 这里的数据也必须从后台获取，也就是参赛的英雄都有谁
+			// 目前是写死的
+			var heros = ["{{t1hero1}}", "{{t1hero2}}", "{{t1hero3}}", "{{t1hero4}}", "{{t1hero5}}", "{{t2hero1}}", "{{t2hero2}}", "{{t2hero3}}", "{{t2hero4}}", "{{t2hero5}}"];
+			var colors = ['#1E50A2', 'cyan', '#A0D8EF', '#5A79BA', '#674598', '#F35858', '#F6B894', '#F4D03F', '#EA5506', '#B7282E'];
+			var heros_name = new Array();
+			//生成复选框
+			for(i = 0; i < 10; i++) {
+				var input = document.createElement("input");
+				document.body.appendChild(input);
+				input.id = heros[i];
+				input.type = "checkbox";
+				input.name = "check";
+				input.style.visibility = "hidden"
+				input.onclick = checkboxOnclick;
+			}
+			//生成人物与颜色的对应关系
+			var map = new Map();
+			for(var i = 0; i < heros.length; i++)
+				map.set(heros[i], colors[i]);
+			//要显示的人物
+			var heros_show = new Map();
+			var box_id = ["box1", "box2", "box3", "box4", "box5", "box6", "box7", "box8", "box9", "box10"]
+			//勾选要显示的英雄
+			function checkboxOnclick(checkbox) {
+				var groupCheckbox = $("input[name='check']");
+				var heros_initial = new Array();
+				for(i = 0; i < groupCheckbox.length; i++) {
+					if(groupCheckbox[i].checked == true) {
+						heros_show.set(groupCheckbox[i].id, map.get(groupCheckbox[i].id));
+						heros_initial.push(heros[i]);
+
+					} else {
+						heros_show.delete(groupCheckbox[i].id);
+						if(i < 5) {
+							document.getElementById("box11").className = "box_after";
+						} else {
+							document.getElementById("box12").className = "box_after";
+						}
+					}
+
+				}
+				if(groupCheckbox[0].checked && groupCheckbox[2].checked && groupCheckbox[3].checked && groupCheckbox[4].checked && groupCheckbox[1].checked == true) {
+
+					document.getElementById("box11").className = "box_before";
+				}
+				if(groupCheckbox[5].checked && groupCheckbox[6].checked && groupCheckbox[7].checked && groupCheckbox[8].checked && groupCheckbox[9].checked == true) {
+
+					document.getElementById("box12").className = "box_before";
+				}
+
+				heros_name = heros_initial;
+			}
+			//选取队伍
+			var allClick1 = false;
+
+			function team1() {
+				var groupCheckbox = $("input[name='check']");
+				var x = document.getElementById(groupCheckbox[0].id).checked && document.getElementById(groupCheckbox[1].id).checked && document.getElementById(groupCheckbox[2].id).checked && document.getElementById(groupCheckbox[3].id).checked && document.getElementById(groupCheckbox[4].id).checked
+				var y = document.getElementById(groupCheckbox[0].id).checked || document.getElementById(groupCheckbox[1].id).checked || document.getElementById(groupCheckbox[2].id).checked || document.getElementById(groupCheckbox[3].id).checked || document.getElementById(groupCheckbox[4].id).checked
+				if(x == false&&y==false) {
+					allClick1 = true
+				}
+				if(x == true&&y==true) {
+					allClick1 = false
+				}
+				for(j = 0; j < 5; j++) {
+					if(allClick1) {
+						document.getElementById("box11").className = "box_before";
+						if(document.getElementById(groupCheckbox[j].id).checked == false) {
+							document.getElementById(box_id[j]).click();
+						}
+
+					}
+					if(!allClick1) {
+						document.getElementById("box11").className = "box_after";
+						if(document.getElementById(groupCheckbox[j].id).checked == true) {
+							document.getElementById(box_id[j]).click();
+						}
+
+					}
+
+				}
+				
+
+			}
+			var isClick2 = false;
+
+			function team2() {
+				var groupCheckbox = $("input[name='check']");
+				var x = document.getElementById(groupCheckbox[6].id).checked && document.getElementById(groupCheckbox[7].id).checked && document.getElementById(groupCheckbox[8].id).checked && document.getElementById(groupCheckbox[9].id).checked && document.getElementById(groupCheckbox[5].id).checked
+				var y = document.getElementById(groupCheckbox[6].id).checked || document.getElementById(groupCheckbox[7].id).checked || document.getElementById(groupCheckbox[8].id).checked || document.getElementById(groupCheckbox[9].id).checked || document.getElementById(groupCheckbox[5].id).checked
+				if(x == false&&y==false) {
+					isClick2 = true
+				}
+				if(x == true&&y==true) {
+					isClick2 = false
+				}
+				for(j = 5; j < 10; j++) {
+					if(isClick2) {
+						document.getElementById("box12").className = "box_before";
+						if(document.getElementById(groupCheckbox[j].id).checked == false) {
+							document.getElementById(box_id[j]).click();
+						}
+
+					}
+					if(!isClick2) {
+						document.getElementById("box12").className = "box_after";
+						if(document.getElementById(groupCheckbox[j].id).checked == true) {
+							document.getElementById(box_id[j]).click();
+						}
+
+					}
+
+				}
+			}
+			
+			// 上述代码是对页面结构以及交互行为的构造，后边的是对数据获取和展示的构造
+			//休眠函数
+			function sleep(ms) {
+				return new Promise(resolve => setTimeout(resolve, ms))
+			}
+
+			//绘图
+			
+			async function draw(data, ctx, heros,id) {
+                                //用于保存每个人最多queue_len个的坐标
+                        //即每个人有一个历史位置队列，队列中包含前queue_len个的坐标
+                        var pos = new Map();
+                        var pos_heat = new Map(); //先声明一维
+				var queue_len = 25;
+				//用于保存每个人最多queue_len个的坐标
+				//即每个人有一个历史位置队列，队列中包含前queue_len个的坐标
+				// var pos = new Map();
+
+				// var pos_heat = new Map(); //先声明一维
+
+				var heatmapInstance = h337.create({
+					container: document.querySelector('.heatmap')
+				});
+				//声明heeatmap长宽与最大值
+
+				var max = 2;
+				//第0行数据为表头，所以从1开始循环的
+				// 但是我的数据库数据不包含这个垃圾数据所以从0开始
+				for(var i = 0; i < data.length;) {
+					var num_of_same_frames = 0;
+					var data1 = new Array();
+					var cur_frame = data[i][1];
+					//同一帧内依次读取
+					for(var f = i; f < data.length && data[f][1] == cur_frame; f++) {
+
+						num_of_same_frames++;
+						//画这一帧对应的人的轨迹
+						var cur_hero = data[f][0];
+						//如果这个人第一次出现，则给pos赋初值，并进入下一循环
+						if(pos.get(cur_hero) == null) {
+							pos.set(cur_hero, [{
+								X: data[f][2],
+								Y: data[f][3]
+							}]);
+							pos_heat.set(cur_hero, [{
+								x: data[f][2],
+								y: data[f][3],
+								value: 1,
+								radius: 10
+							}]);
+							continue;
+						}
+						//当前帧这个人的坐标
+						var x = data[f][2];
+						var y = data[f][3];
+						//这个人的历史坐标队列
+						var queue = pos.get(cur_hero);
+						var queue_heat = pos_heat.get(cur_hero);
+						var value = 1;
+						//寻找相同坐标
+						for(var a = 0; a < data1.length; a++) {
+
+							if(x == data1[a].x && y == data1[a].y) {
+								//增加频次
+								value = value + 1;
+							}
+							//更新最大频次
+							if(max < value) {
+								max = value;
+							}
+						}
+						queue.push({
+							X: x,
+							Y: y
+						});
+						queue_heat.push({
+							x: x,
+							y: y,
+							value: 1,
+							radius: 10
+						});
+						if(pos.get(cur_hero).length > queue_len) {
+							pos.get(cur_hero).shift();
+						}
+						for(var j = 0; j < heros_name.length; j++) {
+							if(pos_heat.get(heros_name[j]) != null) {
+								data1 = data1.concat(pos_heat.get(heros_name[j]));
+							}
+
+						}
+					}
+					//更新当前帧所有人的坐标后，画图
+					if (id === 0) {
+						// 绘制折线图的代码
+						heros.forEach(function(value, key) {
+							//若只有一个坐标，画点
+							if(pos.get(key) != null) {
+									if(pos.get(key).length == 1) {
+											ctx.fillRect(pos.get(key)[0].X, pos.get(key)[0].Y, 5, 5);
+											ctx.fillStyle = value;
+									}
+									//画线
+									for(var num = 0; num < pos.get(key).length - 1; num++) {
+											ctx.beginPath();
+											ctx.save();
+											ctx.lineWidth = 5;
+											ctx.strokeStyle = value;
+											ctx.moveTo(pos.get(key)[num].X, pos.get(key)[num].Y);
+											if(Math.pow(pos.get(key)[num + 1].X - pos.get(key)[num].X, 2) + Math.pow(pos.get(key)[num + 1].Y - pos.get(key)[num].Y, 2) <= 10000){
+													ctx.lineTo(pos.get(key)[num + 1].X, pos.get(key)[num + 1].Y);
+											}
+											ctx.stroke();
+											ctx.closePath();
+									}
+							}
+						});
+					}
+					i += num_of_same_frames;
+					//每一帧休息一下，单位ms
+					var points = data1;
+					//将heatmap数据合并打包
+					var data2 = {
+						max: max,
+						data: points
+					};
+					//发送热点数据
+					if (id === 1) {
+                                               
+						heatmapInstance.setData(data2);
+					}
+					await sleep(100);
+				}
+			}
+			// 程序入口
+			// 不会覆盖前边的window.onload事件
+			$(document).ready(function() {
+				var queryResults = []
+				var queryResultsHeat = []
+				let ws = new WebSocket('wss://www2.game2hub.com:8000/heatmap/{{gameID}}')
+				ws.onopen = () => {
+					console.log('连接成功')
+				}
+				// 有新的数据推送过来
+				// 增量增加和原来文件形式一样的二维数组
+               			var frameTmp = -1
+				ws.onmessage = async (message) => {
+					console.log("got  message")
+					var queryResult = message.data
+					queryResult = JSON.parse(queryResult)
+					if (frameTmp == -1) {
+                                                console.log(123)
+						// 第一次获得更新的数据，说明用户刚刚进来，于是先用ajax获得全部数据
+						var queryResult1 = await $.ajax({ url: `/api/liveheatmap/{{gameID}}`})
+                                                var length = queryResult1.length
+						frameTmp = queryResult1[length-1].frame
+                                                for (let i=0;i < queryResult1.length;i++) {
+
+
+var tempList = []
+                                                for(var key in queryResult1[i]) {
+                                                        tempList.push(queryResult1[i][key])
+                                                }
+                                                queryResultsHeat.push(tempList)
+}
+                                          
+                                                queryResult.forEach((item) => {
+                                                var tempList = []
+                                                for(var key in item) {
+                                                        tempList.push(item[key])
+                                                }
+                                                queryResults.push(tempList) 
+                                        })
+					}else if (frameTmp == queryResult[0].frame) {
+                                                console.log(222)
+						return
+					} else {
+					// 经过对于原数据的分析这里要把对象转为数组,再放到父数组当中
+					queryResult.forEach((item) => {
+						var tempList = []
+						for(var key in item) {
+							tempList.push(item[key])
+						}
+						queryResults.push(tempList)
+                                                
+						queryResultsHeat.push(tempList)
+					})
+                                        
+                                        }
+                                        console.log(frameTmp)
+                                       console.log( queryResult[0].frame)
+                                        
+					// heatmap
+					draw(queryResultsHeat, ctx, heros_show,1)
+                                        // guiji
+					await sleep(1000);
+					
+					draw(queryResults, ctx, heros_show,0)
+					if (queryResults.length >=  80) {
+						ctx.clearRect(0, 0, 295, 295)
+						for (var i =0; i<40; i++) {
+						queryResults.shift()
+						}
+						// 避免带图出现断档 
+						draw(queryResults, ctx, heros_show,0)
+						await sleep(1000)
+					}
+					// 这里是核心关键代码，其中data是核心数据，heros_show中蕴含的核心数据就是前边的heros列表
+					// 既然数据库更改了，那么原来的代码需要更改吗？其他的套路应该一样，用id来判断有没有新数据，如果有的话就把新数据推过来，数据中也带着frame,因此可以很好的画出图来
+					// 之前的讨论说过，跟学长的思路是一样的，也就是直接往data中增添数据就可以了，往数组中堆叠数组
+					//draw(data1, ctx, heros_show)
+				}
+			});
+		</script>
+		<!--画下边的6个图-->
+        <script>
+		var myChart1 = echarts.init(document.getElementById('economy'),'dark');
+		var myChart2 = echarts.init(document.getElementById('knife'),'dark');
+		var myChart3 = echarts.init(document.getElementById('kda'),'dark');
+		var myChart4 = echarts.init(document.getElementById('economy_gap'),'dark');
+		var myChart5 = echarts.init(document.getElementById('group_rate'),'dark');
+		var myChart6 = echarts.init(document.getElementById('predict_win'),'dark');
+		 window.onresize = function(){
+			myChart1.resize();
+			myChart2.resize();
+			myChart3.resize();
+			myChart4.resize();
+			myChart5.resize();
+			myChart6.resize();
+      	}
+		var time = []
+		var economy_red = []
+		var economy_blue=[]
+		var economy_gap = []
+		var redknife = []
+		var blueknife = []
+		var win_red = []
+		var win_blue = []
+		var kda_red
+		var kda_blue
+		var group_red
+		var group_blue
+		var count = 0
+		// 一旦进入赛事主页就会尝试建立一个长连接
+		// 并等待数据的推送
+		let ws = new WebSocket('wss://www2.game2hub.com:8000/statistic/{{gameID}}')
+		ws.onopen = () => {
+			console.log('连接成功')
+		}
+		// 有新的数据推送过来
+		// 这里的数据肯定也是查询到的一条ID的数据
+		// 不过注意为了兼容原来的代码，这里的data应该是只有一个数的列表
+                // 上一次数据的ID，避免出现重复数据的渲染
+                var idTmp = 0
+		ws.onmessage = (message) => {
+			console.log("收到数据！")
+			var data = message.data
+			data = JSON.parse(data)
+                        if (idTmp == 0) {
+				idTmp = data[0].id
+			} else if (data[0].id != idTmp) {
+				count ++
+                                time.push(count)
+                           
+			} else {
+                          return
+                        }
+			// data[0] 代表的是数据库中的一行，是一个对象，获取数据的方式为： data[0].blue_economy  data[0].red_economy等等
+			// 此行一下是数据展示的代码
+			economy_blue.push(Math.round((data[0].economy_blue) * 100) / 100)
+			economy_red.push(Math.round((data[0].economy_red) * 100) / 100) 
+			economy_gap.push(Math.round((data[0].economy_gap) * 100) / 100)
+			redknife.push(Math.round((data[0].red_knife) * 100) / 100)
+			blueknife.push(Math.round((data[0].blue_knife) * 100) / 100)
+			win_red.push(Math.round(data[0].red_win *100) / 100)              //Math.round((data[0].win_red *100) * 10) / 10
+			win_blue.push(Math.round(data[0].blue_win *100) / 100)            // Math.round((data[0].win_blue *100) * 10) / 10
+			group_red = [data[0].redone_group,data[0].redtwo_group,data[0].redthree_group,data[0].redfour_group,data[0].redfive_group]
+			group_blue = [data[0].blueone_group,data[0].bluetwo_group,data[0].bluethree_group,data[0].bluefour_group,data[0].bluefive_group]
+			kda_blue = [data[0].blueone_kda,data[0].bluetwo_kda,data[0].bluethree_kda,data[0].bluefour_kda,data[0].bluefive_kda]
+			kda_red = [data[0].redone_kda,data[0].redtwo_kda,data[0].redthree_kda,data[0].redfour_kda,data[0].redfive_kda]
+			for(let i =0; i< group_red.length; i++) {
+				group_red[i] = group_red[i].toFixed(2)
+			}
+			for(let i =0; i< group_blue.length; i++) { 
+                                group_blue[i] = group_blue[i].toFixed(2)
+                        }
+			for(let i =0; i< kda_blue.length; i++) {
+                                kda_blue[i] = kda_blue[i].toFixed(2)
+                        }
+			for(let i =0; i< kda_red.length; i++) {
+                                kda_red[i] = kda_red[i].toFixed(2)
+                        }
+                        for (let i = 0; i < economy_gap.length; i++) {
+                                economy_gap[i] = economy_gap[i]
+                        }
+			// 画参团率图
+			// var myChart5 = echarts.init(document.getElementById('group_rate'),'dark');
+			var option = {
+				title : {
+					text: '双方选手参团率'
+				},
+				tooltip : {
+					trigger: 'axis'
+				},
+				legend: {
+					data:['红方选手','蓝方选手']
+				},
+				grid: {
+					left: 30,
+					right: 30,
+					bottom: 30,
+					top: 40
+				},
+				
+				calculable : true,
+				xAxis : [
+					{
+						type : 'category',
+						data : ['上单','打野','中单','ADC','辅助']
+					}
+				],
+				yAxis : [
+					{
+						type : 'value'
+					}
+				],
+				series : [
+					{
+						name:'红方选手',
+						type:'bar',
+						data:group_red,
+						markLine : {
+							data : [
+								{type : 'average', name: '平均值'}
+							]
+						},
+						markPoint : {
+							data : [
+								{type : 'max', name: '最大值'},
+								{type : 'min', name: '最小值'}
+							]
+						}
+					},
+					{
+						name:'蓝方选手',
+						type:'bar',
+						data:group_blue,
+						markLine : {
+							data : [
+								{type : 'average', name: '平均值'}
+							]
+						},
+						markPoint : {
+							data : [
+								{type : 'max', name: '最大值'},
+								{type : 'min', name: '最小值'}
+							]
+						}
+					
+					}
+				]
+			};
+			myChart5.setOption(option);
+			// // 画KDA图..........................................
+			// var myChart3 = echarts.init(document.getElementById('kda'),'dark');
+				var option = {
+				title : {
+					text: '双方选手KDA'
+				},
+				tooltip : {
+					trigger: 'axis'
+				},
+				legend: {
+					data:['红方选手','蓝方选手']
+				},
+				grid: {
+					left: 30,
+					right: 30,
+					bottom: 30,
+					top: 40
+				},
+				calculable : true,
+				xAxis : [
+					{
+						type : 'category',
+						data : ['上单','打野','中单','ADC','辅助']
+					}
+				],
+				yAxis : [
+					{
+						type : 'value'
+					}
+				],
+				series : [
+					{
+						name:'红方选手',
+						type:'bar',
+						data:kda_red,
+						markLine : {
+							data : [
+								{type : 'average', name: '平均值'}
+							]
+						},
+						markPoint : {
+							data : [
+								{type : 'max', name: '最大值'},
+								{type : 'min', name: '最小值'}
+							]
+						}
+					},
+					{
+						name:'蓝方选手',
+						type:'bar',
+						data:kda_blue,
+						markLine : {
+							data : [
+								{type : 'average', name: '平均值'}
+							]
+					},
+						markPoint : {
+							data : [
+								{type : 'max', name: '最大值'},
+								{type : 'min', name: '最小值'}
+							]
+						}
+					
+					}
+			]
+				};
+					myChart3.setOption(option);
+			// 画胜率预测图...............................................................
+			i=i+1;
+			// var myChart6 = echarts.init(document.getElementById('predict_win'),'dark');
+			var colors = ['#5793f3', '#d14a61', '#675bba'];
+			var option = {
+				title: {
+				text: '比赛双方胜率预测'
+				},
+				tooltip: {
+					trigger: 'none',
+					axisPointer: {
+						type: 'cross'
+					}
+				},
+				legend: {
+					data:['红方胜率','蓝方胜率']
+				},
+				grid: {
+					left: 40,
+					right: 30,
+					bottom: 30,
+					top: 40
+				},
+				xAxis: [
+					{
+						type: 'category',
+						// 新加的
+						show:false,
+						axisTick: {
+							alignWithLabel: true
+						},
+						axisLine: {
+							onZero: false
+							
+						},
+						data: time
+					},
+					{
+						// 新加的
+						show:false,
+						type: 'category',
+						axisTick: {
+							alignWithLabel: true
+						},
+						axisLine: {
+							onZero: false
+						},
+						axisPointer: {
+						data: time
+						}
+					}
+				],
+				yAxis: [
+					{
+						type: 'value',
+						// 新加的
+						//axisLabel:{formatter:'{value} K'}
+						axisLabel:{formatter:'{value} %'}
+
+
+					}
+				],
+				series: [
+					{
+						name:'红方胜率',
+						type:'line',
+						xAxisIndex: 1,
+						smooth: true,
+						data: win_red,//[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+						markPoint : {
+							data : [
+								{type : 'max', name: '最大值'}
+								//新加的
+								//{name:'当前值', value: win_red[win_red.length-1] , xAxis:time[time.length-1], yAxis:win_red[win_red.length-1]}
+
+							]
+						}
+					},
+					{
+						name:'蓝方胜率',
+						type:'line',
+						smooth: true,
+						data: win_blue,//[3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
+						markPoint : {
+							data : [
+								{type : 'max', name: '最大值'}
+								// 新加的
+								//{name:'当前值', value: win_blue[win_blue.length-1] , xAxis:time[time.length-1], yAxis:win_blue[win_blue.length-1]}
+
+							]
+						}
+					}
+				]
+			};
+					myChart6.setOption(option);
+			// 画补刀数图..........................................................................
+			// var myChart2 = echarts.init(document.getElementById('knife'),'dark');
+			//var colors = ['#5793f3', '#d14a61', '#675bba'];
+			var option = {
+				title: {
+				text: '双方伤害输出'
+				},
+
+				tooltip: {
+					trigger: 'none',
+					axisPointer: {
+						type: 'cross'
+					}
+				},
+				legend: {
+					data:['红方伤害输出','蓝方伤害输出',]
+				},
+				grid: {
+					left: 30,
+					right: 30,
+					bottom: 30,
+					top: 40
+				},
+				xAxis: [
+					{
+						type: 'category',
+						axisTick: {
+							alignWithLabel: true
+						},
+						axisLine: {
+							onZero: false
+							
+						},
+						
+
+						data: time
+					},
+					{
+						type: 'category',
+						axisTick: {
+							alignWithLabel: true
+						},
+						axisLine: {
+							onZero: false
+							
+						},
+						axisPointer: {
+						
+						data: time
+						}
+					}
+				],
+				yAxis: [
+					{
+						type: 'value'
+					}
+				],
+				series: [
+					{
+						name:'红方伤害输出',
+						type:'line',
+						xAxisIndex: 1,
+						smooth: true,
+						data:redknife, //[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+						markPoint : {
+							data : [
+								{type : 'max', name: '最大值'}
+								//{name:'当前值', value: redknife[redknife.length-1] , xAxis:time[time.length-1], yAxis: redknife[redknife.length-1]}
+							]
+						}
+					},
+					{
+						name:'蓝方伤害输出',
+						type:'line',
+						smooth: true,
+						data:blueknife, //[3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
+						markPoint : {
+							data : [
+								{type : 'max', name: '最大值'}
+								// {name:'当前值', value: blueknife[blueknife.length-1] , xAxis:time[time.length-1], yAxis:blueknife[blueknife.length-1]}
+							]
+						}
+					}
+				]
+			};
+			myChart2.setOption(option);
+			//画经济差图.............................................................
+			i=i+1;  
+			// var myChart4 = echarts.init(document.getElementById('economy_gap'),'dark');
+			var option={
+				tooltip: {
+					trigger: 'axis',
+					position: function (pt) {
+					return [pt[0], '10%'];
+					}
+				},
+				title: {
+					left: 'center',
+					text: '经济差面积图',
+				},
+				grid: {
+					left: 40,
+					right: 30,
+					bottom: 30,
+					top: 40
+				},
+				
+				xAxis: {
+					type: 'category',
+					boundaryGap: false,
+					data: time
+				},
+				yAxis: {
+					type: 'value',
+					boundaryGap: [0, '100%'],
+					axisLabel:{formatter:'{value} K'}
+				},
+				series: [
+					{
+						name:'经济差',
+						type:'line',
+						smooth:true,
+						symbol: 'none',
+						sampling: 'average',
+						itemStyle: {
+							color: 'rgb(255, 70, 131)'
+						},
+						areaStyle: {
+							color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+								offset: 0,
+								color: 'rgb(255, 158, 68)'
+							}, {
+								offset: 1,
+								color: 'rgb(255, 70, 131)'
+							}])
+						},
+						data: economy_gap,
+						markPoint : {
+							data : [
+								{type : 'max', name: '最大值'},
+								{name:'当前值', value: economy_gap[economy_gap.length-1] , xAxis:time[time.length-1], yAxis: economy_gap[economy_gap.length-1]},
+								{type : 'min', name: '最小值'}
+							]
+						}
+					}
+				]
+
+			};
+			myChart4.setOption(option);
+		
+			// 画经济图..................................................................
+			var colors = ['#5793f3', '#d14a61', '#675bba'];
+			var option = {
+				title: {
+				text: '比赛双方经济'
+				},
+
+				tooltip: {
+					trigger: 'none',
+					axisPointer: {
+						type: 'cross'
+					}
+				},
+				legend: {
+					data:['红方经济','蓝方经济']
+				},
+				grid: {
+					left: 40,
+					right: 30,
+					bottom: 30,
+					top: 40
+				},
+				xAxis: [
+					{
+						type: 'category',
+						axisTick: {
+							alignWithLabel: true
+						},
+						axisLine: {
+							onZero: false
+							
+						},
+						
+
+						data: time
+					},
+					{
+						type: 'category',
+						axisTick: {
+							alignWithLabel: true
+						},
+						axisLine: {
+							onZero: false
+							
+						},
+						axisPointer: {
+						
+						data: time
+						}
+					}
+				],
+				yAxis: [
+					{
+						type: 'value',
+						axisLabel:{formatter:'{value} K'}
+
+					}
+				],
+				series: [
+					{
+						name:'红方经济',
+						type:'line',
+						xAxisIndex: 1,
+						smooth: true,
+						data: economy_red,// [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+						markPoint : {
+							data : [
+								{type : 'max', name: '最大值'}
+								//{name:'当前值', value: economy_red[economy_red.length-1] , xAxis:time[time.length-1], yAxis: economy_red[economy_red.length-1]}
+							]
+						}
+					},
+					{
+						name:'蓝方经济',
+						type:'line',
+						smooth: true,
+						data: economy_blue,// [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
+						markPoint : {
+							data : [
+								{type : 'max', name: '最大值'}
+								//{name:'当前值', value: economy_blue[economy_blue.length-1] , xAxis:time[time.length-1], yAxis: economy_blue[economy_blue.length-1]}
+							]
+						}
+					}
+				]
+			};
+			myChart1.setOption(option);	
+		}		
+        </script>
+	</body>
+</html>

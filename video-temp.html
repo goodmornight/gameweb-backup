@@ -1,0 +1,3387 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+    <title>爱看电竞</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!--图片获取反防盗-->
+    <meta name="referrer" content="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- Material Kit CSS -->
+    <link href="/public/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/public/css/owl.theme.default.min.css">
+    <!-- layui -->
+    <link rel="stylesheet" href="/public/layui/css/layui.css" media="all">
+    <!-- <link rel="stylesheet" href="/public/layui/css/layui.mobile.css" media="all"> -->
+    <link rel="stylesheet" type="text/css" href="/public/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/map.css">
+    <style>
+        #blue_1{
+            background: url(/public/img/lolhero/{{t1hero1}}.png) no-repeat;
+            background-size: cover;
+        }
+        #blue_2{
+            background: url(/public/img/lolhero/{{t1hero2}}.png) no-repeat;
+            background-size: cover;
+        }
+        #blue_3{
+            background: url(/public/img/lolhero/{{t1hero3}}.png) no-repeat;
+            background-size: cover;
+        }
+        #blue_4{
+            background: url(/public/img/lolhero/{{t1hero4}}.png) no-repeat;
+            background-size: cover;
+        }
+        #blue_5{
+            background: url(/public/img/lolhero/{{t1hero5}}.png) no-repeat;
+            background-size: cover;
+        }
+        #red_1{
+            background: url(/public/img/lolhero/{{t2hero1}}.png) no-repeat;
+            background-size: cover;
+        }
+        #red_2{
+            background: url(/public/img/lolhero/{{t2hero2}}.png) no-repeat;
+            background-size: cover;
+        }
+        #red_3{
+            background: url(/public/img/lolhero/{{t2hero3}}.png) no-repeat;
+            background-size: cover;
+        }
+        #red_4{
+            background: url(/public/img/lolhero/{{t2hero4}}.png) no-repeat;
+            background-size: cover;
+        }
+        #red_5{
+            background: url(/public/img/lolhero/{{t2hero5}}.png) no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body style="width:100%;">
+    <div class="wrapper">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="margin-bottom:0;border-radius: 0px;">
+            <div class="container" style="max-width: 95%;">
+                <a class="navbar-brand" href="/" style="font-size:20px;font-weight: 900;">爱看电竞</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <!-- <ul class="navbar-nav ml-auto justify-content-end"> -->
+                    <ul class="navbar-nav mr-auto justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" style="font-size:16px;font-weight: 600;">主页 <span class="sr-only">(current)</span></a><!-- 是用于帮助残障人士阅读的 -->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/videoReply" style="font-size:16px;font-weight: 600;">复盘视频</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/calendar" style="font-size:16px;font-weight: 600;">比赛日程</a>
+                        </li>
+                        <!--
+                        <li class="nav-item">
+                            <a class="nav-link" href="/news/234123" style="font-size:15px;">热点新闻</a>
+                        </li>-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/aboutus" style="font-size:16px;font-weight: 600;">关于我们</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto justify-content-end">
+                        <li class="nav-item">
+                            {% if username %}
+                            <a class="nav-link" href="/userSetting" style="color:#fff;font-size:16px;font-weight: 600;"> {{username}} </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout" style="font-size:16px;font-weight: 600;">退出</a>
+                            {% else %}
+                            <a class="nav-link" href="/login" style="font-size:16px;font-weight: 600;">登录</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register" style="font-size:16px;font-weight: 600;">注册</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="content wow fadeIn" data-wow-duration="1s" data-wow-delay="0s">
+            <div class="modal fade" id="timelineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" style="background-color: #1f1f1f;">
+                        <div class="modal-header" style="color:#ccc;">
+                            <h5 class="modal-title" id="exampleModalLabel">时间轴</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span style="color: #ccc;" aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="color: #ccc;">
+                                <div class="teamInfo col-lg-4 col-md-4">
+                                    <img id="blueLogo" alt="">
+                                    <span id="blueName"></span>
+                                    <i class="fa fa-circle fa-lg" style="color: rgb(91, 160, 255);"></i>
+                                </div>
+                                <div class="teamNum col-lg-4 col-md-4">
+                                    <span id="timeline_score"></span>
+                                </div>
+                                <div class="teamInfo col-lg-4 col-md-4">
+                                    <i class="fa fa-circle fa-lg" style="color:#cd4144;"></i>
+                                    <span id="redName"></span>
+                                    <img id="redLogo" alt="">
+                                </div>
+                            </div>
+                            <div id="timelineChart" style="width: 450px;height: 750px;">
+                            </div>
+                        </div>
+                        <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div> -->
+                    </div>
+                </div>
+            </div>
+            <div style="width:95%;margin: 0 auto;background-color: #232325;">
+                <div class="row" style="margin: 0;">
+                    <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                        <div class="embed-responsive embed-responsive-16by9 col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin:10px 0;background-color: #1f1f1f;">
+                            <video controls="controls" preload="auto" id="videoURL" src="" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12" style="margin:10px auto;">
+                        <div id="lg-chart" class="row video-list-card video-list-card-lg">
+                        </div>
+                        <div class="row" style="margin:5px 0 0 0;">
+                            <!-- <div id="mapBtn" class="col-lg-3 col-md-4 col-sm-12 col-xs-12" style="background-color: #333;color: #fff;font-size: 1.2em;text-align: center;height: 40px;line-height: 40px;border-radius: 5px;display: inline-block;margin: 5px;cursor:pointer;">轨迹分析</div> -->
+                            <div id="timeline" class="col-lg-3 col-md-4 col-sm-12 col-xs-12" style="background-color: #333;color: #fff;font-size: 1.2em;text-align: center;height: 40px;line-height: 40px;border-radius: 4px;display: inline-block;margin: 5px;cursor:pointer;" data-toggle="modal" data-target="#timelineModal">时间轴</div>
+                            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12" style="background-color: #333;color: #fff;font-size: 1.2em;text-align: center;height: 40px;line-height: 40px;border-radius: 4px;display: inline-block;margin: 5px;cursor:pointer;">比赛时间：
+                                <span id="gameCurTime">00:00</span>
+                            </div>
+                            <!-- <div id="allData" class="col-lg-3 col-md-4 col-sm-12 col-xs-12" style="background-color: #333;color: #fff;font-size: 1.2em;text-align: center;height: 40px;line-height: 40px;border-radius: 5px;display: inline-block;margin: 5px;cursor:pointer;" onclick="allData_click()">全局</div> -->
+                            <div id="checkboxCon" class="layui-form col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                                <div class="layui-form-item">
+                                    <input id="dataCheckBox" type="checkbox" lay-filter="dataCheck" lay-skin="switch" lay-text="全局|局部" checked>
+                                </div>
+                            </div>
+                            
+                            <!-- <div id="timer" class="col-lg-3 col-md-4 col-sm-12 col-xs-12" style="background-color: #333;color: #fff;font-size: 1.2em;text-align: center;height: 40px;line-height: 40px;border-radius: 5px;display: inline-block;margin: 5px;cursor:pointer;"></div>
+                            <div id="play_btn" style="display: inline-block;" onclick="play_click()">
+                                <svg t="1575892338622" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6748" width="46" height="46" style="margin:2px auto;"><path d="M896.4 127.9v767.6H128V127.9h768.4m4-64H124c-33.1 0-60 26.9-60 60v775.6c0 33.1 26.9 60 60 60h776.3c33.1 0 60-26.9 60-60V123.9c0.1-33.1-26.8-60-59.9-60z" p-id="6749" fill="#333333"></path><path d="M321.7 284v455.8c0 21.6 23.4 35.1 42 24.3l390.8-227.9c18.7-10.8 18.7-37.8 0-48.6L363.7 259.7c-18.7-10.7-42 2.7-42 24.3z" p-id="6750" fill="#ccc"></path></svg>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:0;margin-bottom:10px;background-color: #1f1f1f;">
+                    <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 text-center" style="padding:0;background-color: #1f1f1f;color:#ccc;">
+                        <h3 class="col-lg-12 col-md-12 col-sm-12" style="font-weight:600;margin-top: 0.2rem;font-size: 1.5rem;text-align: left;" id="gameName"></h3>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="row" style="font-family:'SimHei';font-weight: 900;font-style:oblique;font-size: 3rem;line-height: 50px;">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="row" style="margin-top: 2rem;">
+                                            <p class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="margin-bottom: 0;padding-left:3rem;text-align:left;display: inline-block;color:#5ba0ff;" id="team1"></p>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                <img class="img-responsive center-block" style="width:50px;margin: 0 auto;display: inline-block;" referrer="no-referrer|origin|unsafe-url" src="" id="team1Logo">
+                                            </div>
+                                            <span class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="color:rgb(91, 160, 255);" id="bscore"></span>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex;flex-direction: row;padding:5px 5px 5px 40px;">
+                                                <div class="member" id="blue_1"></div>
+                                                <div class="member" id="blue_2"></div>
+                                                <div class="member" id="blue_3"></div>
+                                                <div class="member" id="blue_4"></div>
+                                                <div class="member" id="blue_5"></div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="display: flex;flex-direction: row;padding-left: 3rem;padding-top: 10px;font-size: 2rem;">
+                                            <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex;flex-direction: row;padding-left: 3rem;padding-top: 10px;"> -->
+                                                <span style="color:rgb(91, 160, 255);padding: 0;margin: 0;">V</span>
+                                                <span style="color: #cd4144;padding: 0;margin: 0;">S</span>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-3 col-xs-3" style="display: flex;flex-direction: column;padding-left: 2.5rem;padding-top: 10px;">
+                                                <svg t="1578493665543" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3723" width="25" height="25"><path id="b_box" d="M480 480m-288 0a4.5 4.5 0 1 0 576 0 4.5 4.5 0 1 0-576 0Z" p-id="3724" fill="#5ba0ff"></path></svg>
+                                                <svg style="margin-top:10px;" t="1578493665543" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3723" width="25" height="25"><path id="r_box" d="M480 480m-288 0a4.5 4.5 0 1 0 576 0 4.5 4.5 0 1 0-576 0Z" p-id="3724" fill="#cd4144"></path></svg>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex;flex-direction: column;padding-left: 4.5rem;">
+                                                <ul style="display: flex;flex-direction: row;justify-content: space-between;line-height: 35px;">
+                                                    <li><svg t="1578493665543" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3723" width="25" height="25"><path id="b_tip1" d="M480 480m-288 0a4.5 4.5 0 1 0 576 0 4.5 4.5 0 1 0-576 0Z" p-id="3724" fill="#5ba0ff"></path></svg></li>
+                                                    <li><svg t="1578493665543" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3723" width="25" height="25"><path id="b_tip2" d="M480 480m-288 0a4.5 4.5 0 1 0 576 0 4.5 4.5 0 1 0-576 0Z" p-id="3724" fill="#5ba0ff"></path></svg></li>
+                                                    <li><svg t="1578493665543" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3723" width="25" height="25"><path id="b_tip3" d="M480 480m-288 0a4.5 4.5 0 1 0 576 0 4.5 4.5 0 1 0-576 0Z" p-id="3724" fill="#5ba0ff"></path></svg></li>
+                                                    <li><svg t="1578493665543" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3723" width="25" height="25"><path id="b_tip4" d="M480 480m-288 0a4.5 4.5 0 1 0 576 0 4.5 4.5 0 1 0-576 0Z" p-id="3724" fill="#5ba0ff"></path></svg></li>
+                                                    <li><svg t="1578493665543" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3723" width="25" height="25"><path id="b_tip5" d="M480 480m-288 0a4.5 4.5 0 1 0 576 0 4.5 4.5 0 1 0-576 0Z" p-id="3724" fill="#5ba0ff"></path></svg></li>
+                                                </ul>
+                                                <ul style="display: flex;flex-direction: row;justify-content: space-between;line-height: 35px;">
+                                                    <li><svg t="1578493665543" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3723" width="25" height="25"><path id="r_tip1" d="M480 480m-288 0a4.5 4.5 0 1 0 576 0 4.5 4.5 0 1 0-576 0Z" p-id="3724" fill="#cd4144"></path></svg></li>
+                                                    <li><svg t="1578493665543" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3723" width="25" height="25"><path id="r_tip2" d="M480 480m-288 0a4.5 4.5 0 1 0 576 0 4.5 4.5 0 1 0-576 0Z" p-id="3724" fill="#cd4144"></path></svg></li>
+                                                    <li><svg t="1578493665543" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3723" width="25" height="25"><path id="r_tip3" d="M480 480m-288 0a4.5 4.5 0 1 0 576 0 4.5 4.5 0 1 0-576 0Z" p-id="3724" fill="#cd4144"></path></svg></li>
+                                                    <li><svg t="1578493665543" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3723" width="25" height="25"><path id="r_tip4" d="M480 480m-288 0a4.5 4.5 0 1 0 576 0 4.5 4.5 0 1 0-576 0Z" p-id="3724" fill="#cd4144"></path></svg></li>
+                                                    <li><svg t="1578493665543" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3723" width="25" height="25"><path id="r_tip5" d="M480 480m-288 0a4.5 4.5 0 1 0 576 0 4.5 4.5 0 1 0-576 0Z" p-id="3724" fill="#cd4144"></path></svg></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 0.5rem;">
+                                        <div class="row">
+                                            <p class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="margin-bottom: 0;padding-left:3rem;text-align:left;display: inline-block;color: #cd4144;" id="team2"></p>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                <img class="img-responsive center-block" style="width:50px;margin: 0 auto;display: inline-block;" referrer="no-referrer|origin|unsafe-url" src="" id="team2Logo">
+                                            </div>
+                                        
+                                            <span class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="color:#cd4144;" id="rscore"></span>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex;flex-direction: row;padding:5px 5px 5px 40px;">
+                                                <div class="member" id="red_1"></div>
+                                                <div class="member" id="red_2"></div>
+                                                <div class="member" id="red_3"></div>
+                                                <div class="member" id="red_4"></div>
+                                                <div class="member" id="red_5"></div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div id="canvas_size" class="img-responsive" style="position:relative;background: url(/public/img/map2.jpg) no-repeat;background-size:cover;margin:0 auto;padding:0;width: 240px;height: 240px;display: inline-block;">
+                                    <canvas id="canvas" width="240" height="240" style="position: absolute; left: 0px; top: 0px;"></canvas>
+                                </div>
+                                <div class="heatmap img-responsive" id="heat_size" style="background: url(/public/img/map2.jpg) no-repeat;background-size:cover;margin:0 auto;width: 240px;height: 240px;display: inline-block;">
+                                    <input class="radioPoint" type="radio" name="heatmap" value="0" checked="checked" style="position: absolute;bottom:0;right:20px;z-index: 10;" />
+                                    <input class="radioPoint" type="radio" name="heatmap" value="1" style="position: absolute;bottom:0;right:10px;z-index: 10;" />
+                                    <input class="radioPoint" type="radio" name="heatmap" value="2" style="position: absolute;bottom:0;right:0px;z-index: 10;" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div><!-- 视频相关信息-->
+                    
+                    <!-- 复盘表 -->
+                    <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12" style="margin:0 auto;padding: 0;">
+                        <div id="dataContainer" class="carousel slide col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin:20px 0;">
+                            <!-- 轮播（Carousel）项目 -->
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div style="display: flex;text-align: center;flex-direction: row;">
+                                        <div class="video-list-card video-list-card-sm">
+                                            <div id="economy" onclick="economy_click()" style="width: 100%;height:100%;margin:4px auto;">
+                                            </div>
+                                        </div>
+                                        <div class="video-list-card video-list-card-sm">
+                                            <div id="economy_gap" onclick="economy_gap_click()" style="width: 100%;height:100%;margin:4px auto;">
+                                            </div>
+                                        </div>
+                                        <div class="video-list-card video-list-card-sm">
+                                            <div id="knife" onclick="knife_click()" style="width: 100%;height:100%;margin:4px auto;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div style="display: flex;text-align: center;flex-direction: row;">
+                                        <div class="video-list-card video-list-card-sm">
+                                            <div id="predict_win" onclick="predict_win_click()" style="width: 100%;height:100%;margin:4px auto;">
+                                            </div>
+                                        </div>
+                                        <div class="video-list-card video-list-card-sm">
+                                            <div id="kda" onclick="kda_click()" style="width: 100%;height:100%;margin:4px auto;">
+                                            </div>
+                                        </div>
+                                        <div class="video-list-card video-list-card-sm">
+                                            <div id="group_rate" onclick="group_rate_click()" style="width: 100%;height:100%;margin:4px auto;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 轮播（Carousel）导航 -->
+                            <a class="carousel-control-prev" href="#dataContainer" data-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#dataContainer" data-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div><!-- 视频列表 -->
+            </div>
+            <div class="row" style="background-color: #fff;margin: 0 auto;">
+                <div class="row" style="width:95%;margin: 0 auto;">
+                    <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.5s" style="border: 1px #eee solid;margin:1em 0;border-radius: 5px;">
+                        <div style="background:#fff;padding:10px;margin:10px 0;">
+                            <div class="comment-header">
+                                <p>评论</p>
+                            </div>
+                            <hr class="layui-bg-gray">
+                            <div class="comment-container">
+                                {% if username %}
+                                <input type="text" class="comment-input col-lg-12" id="comment" placeholder="说点什么">
+                                <button type="button" class="btn col-lg-2 pull-right" style="background: linear-gradient(60deg, #353535, #212121); font-size:0.9rem;margin-bottom: 10px;text-align: center;" id="commentBtn">评 论</button>
+                                {% else %}
+                                <input type="text" class="comment-input col-lg-12" id="comment" placeholder="登录后评论">
+                                <button type="button" disabled="disabled" class="btn col-lg-2 pull-right" style="background: linear-gradient(60deg, #353535, #212121); font-size:0.9rem;margin-bottom: 10px;text-align: center;" id="commentBtn">评 论</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div><!-- 评论 -->
+                </div>
+                <div class="row" style="width:95%;margin: 0 auto;">
+                    <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.5s" id="commentcontainer" style="border: 1px #eee solid;margin:1em 0;border-radius: 5px;">
+                    </div><!-- 往期评论 -->
+                </div>
+            </div>
+        </div><!-- 内容 -->
+        <footer class="footer hidden-print wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.5s">
+            <div class="container-fluid text-center">
+                <div class="media-logo row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer-text">
+                        合作媒体
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <!-- <img class="img-responsive logo-img" src="/public/img/qqgame.png">-->
+                    </div>
+                </div>
+                <div class="about-us">
+                    <a href="/aboutus">关于我们</a>
+                </div>
+                <div class="copyright">
+                    &copy;
+                    <script>
+                    document.write(new Date().getFullYear())
+                    </script>
+                    <a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备18009052号-3</a>
+                </div>
+                <!-- your footer here -->
+            </div>
+        </footer>
+    </div>
+    </div>
+    <!-- jquery要在bootstrap前面，不然会报错 -->
+    <script type="text/javascript" src="/public/node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/public/node_modules/popper.js/dist/umd/popper.js"></script>
+    <script src="/public/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="/public/node_modules/wowjs/dist/wow.js"></script>
+    <script src="/public/js/heatmap.js"></script>
+    <script src="/public/js/lsbridge.js"></script>
+    <script src="https://cdn.bootcss.com/xlsx/0.11.5/xlsx.core.min.js"></script>
+    <script src="https://echarts.baidu.com/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script type="text/javascript">
+
+    
+    $("#dataContainer").carousel({
+        interval: 6000
+    });
+    var heros = [];
+    $(document).ready(async function() {
+        // 李佳添加
+        // 用来从后台获取比赛数据
+        // 获得视频ID也就是比赛ID对应的比赛数据，不用单独获取，因为下边的列表中肯定能获得，所以直接从中抽取即可
+        // 注意会获取全部的比赛场次，未来肯定会设置为只显示部分数据
+        var data = await $.ajax({ url: `/api/matchs` })
+        var flag = 0
+        // data已经被解析为JSON对象了
+        data.forEach(async (item) => {
+            flag++
+            var team_blue_name = item.team_blue_name
+            var team_red_name = item.team_red_name
+            var raceID = item.game_id
+            var game_status = item.game_status
+            if (raceID == {{ videoID }}) {
+                heros = [item.team_blue_hero1, item.team_blue_hero2, item.team_blue_hero3, item.team_blue_hero4, item.team_blue_hero5, item.team_red_hero1, item.team_red_hero2, item.team_red_hero3, item.team_red_hero4, item.team_red_hero5, ]
+                var team_blue_id = item.team_blue_id
+                var team_red_id = item.team_red_id
+                var raceTime = item.game_time
+                raceTime = raceTime.split('.')[0]
+                raceTime = raceTime.split('-', 3)[1] + '-' + raceTime.split('-', 3)[2].split("T")[0]
+                $("#team1").append(`${team_blue_name}`)
+                $("#blueName").append(`${team_blue_name}`)
+                $("#team2").append(`${team_red_name}`)
+                $("#redName").append(`${team_red_name}`)
+                $("#raceTime").append(`${raceTime}`)
+                // console.log(item.gameURL)
+                // 游戏视频的url填充 1. 借助虎牙的连接
+                //$("#videoURL").append(`${item.gameURL}`)
+                // 游戏视频填充 2. 本地
+                $("#videoURL").attr('src', `/public/video/${raceID}.mp4`)
+                // console.log(`/public/video/${raceID}.mp4`)
+                var team1 = await $.ajax({ url: `/api/teams/${team_blue_id}` })
+                var team2 = await $.ajax({ url: `/api/teams/${team_red_id}` })
+                var team1Logo = team1[0].team_logo
+                var team2Logo = team2[0].team_logo
+                $("#team1Logo").attr('src', team1Logo)
+                $("#blueLogo").attr('src', team1Logo)
+                $("#team2Logo").attr('src', team2Logo)
+                $("#redLogo").attr('src', team2Logo)
+
+                $("#team1Area").append(`${team1[0].team_area}`)
+                $("#team2Area").append(`${team2[0].team_area}`)
+                // $("#score").append(`${item.bresult} : ${item.rresult}`)
+                $("#bscore").append(`${item.bresult}`)
+                $("#rscore").append(`${item.rresult}`)
+                $("#timeline_score").append(`<span style='color:rgb(91, 160, 255);'>${item.bresult}</span> : <span style='color:#cd4144;'>${item.rresult}</span>`)
+                $("#gameName").text(`${item.game_name}`)
+                // 获取评论信息
+                var comments = await $.ajax({ url: `/api/gamecomments/${raceID}` })
+                if (comments.length != 0) {
+                    for (let i = 0; i < comments.length; i++) {
+                        comments[i].createdAt = comments[i].createdAt.split('.')[0]
+                        comments[i].createdAt = comments[i].createdAt.split('-', 3)[1] + '-' + comments[i].createdAt.split('-', 3)[2].split("T")[0]
+                        if (i == 0) {
+                            document.getElementById('commentcontainer').innerHTML = '<div style="background:#fff;padding:10px;margin:10px 0;" id="usercomment"></div>'
+                        }
+                        document.getElementById('usercomment').insertAdjacentHTML('beforeend', `
+            <div class="other-comment-item">
+                        <div class="other-comment-header">
+                            <div class="user-logo" id="userlogoComment">
+                                <img class="img-circle" src="${comments[i].headimgURL}" alt="">
+                            </div>
+                            <span class="user-name" id="usernameComment">${comments[i].user_nickname}</span>
+                            <div class="other-comment-time" id="timeComment">
+                                <p>${comments[i].createdAt}</p>
+                            </div>
+                            <div class="other-comment-floor">
+                                <p>#${i + 1}</p>
+                            </div>
+                        </div>
+                        <hr class="layui-bg-gray">
+                        <div class="other-comment-container">
+                            <p id="contentComment">${comments[i].content}</p>
+                        </div>
+                        <!-- <div class="return-other-comment">
+                            <p><a href="">评论</a></p>
+                        </div> -->
+            </div>
+            `)
+                    }
+                }
+            }
+            // console.log(heros)
+        })
+        // 为按钮点击注册事件
+        var formData = {}
+        $('#commentBtn').on('click', function(e) {
+            formData.content = $('#comment').val()
+            if (formData.content == '' || formData.content.length > 90) { return }
+            formData.game_id = {{videoID}}
+            formData.user_nickname = '{{username}}'
+            $.ajax({
+                url: '/videoReply',
+                type: 'post',
+                data: formData,
+                dataType: 'json',
+                success: function(data) {
+                    var err_code = data.err_code
+                    if (err_code === 0) {
+                        $('#comment').val('') //黎兰慧添加
+                        // window.location.href = '/videoReply'
+                    } else if (err_code === 1) {
+                        window.alert('用户名或者密码错误')
+                    } else if (err_code === 500) {
+                        window.alert('服务器繁忙')
+                    } else if (err_code === 2) {
+                        window.location.href = '/userinfo'
+                    }
+                }
+            })
+        })
+        $('#mapBtn').on('click', function() {
+            let url = window.location.href
+            let gameID = url.split('videoReply/')[1];
+            lsbridge.send('my-namespace', {
+                message: [parseInt(gameVideo.currentTime), gameVideo.paused]
+            });
+            window.open(`/mapContent/${gameID}`, 'newwindow', 'height=800, width=600, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no');
+
+        })
+        $(".owl-carousel").owlCarousel({
+            animateOut: 'fadeOutRight',
+            animateIn: 'fadeInLeft',
+            items: 1,
+            loop: true,
+            center: true,
+            autoHeight: true,
+            autoplay: true,
+            autoplaySpeed: 30,
+            transitionStyle: true,
+            // nav: true,
+            dots: true,
+            dotsEach: true,
+            // dotsData:true,
+            // margin: 30,
+            // stagePadding: 30,
+            smartSpeed: 40
+        });
+    });
+    var wow = new WOW({
+        boxClass: 'wow', // animated element css class (default is wow)
+        animateClass: 'animated', // animation css class (default is animated)
+        offset: 0, // distance to the element when triggering the animation (default is 0)
+        mobile: true, // trigger animations on mobile devices (default is true)
+        live: true, // act on asynchronously loaded content (default is true)
+        callback: function(box) {
+            // the callback is fired every time an animation is started
+            // the argument that is passed in is the DOM node being animated
+        },
+        scrollContainer: null // optional scroll container selector, otherwise use window
+    });
+    wow.init();
+
+    var dataCheckBox = document.getElementById('dataCheckBox');
+    var all_data;
+    var gameVideo = document.getElementById("videoURL");
+    var tolTime = 0; //视频总时长
+    var videoPaused = gameVideo.paused; //是否暂停
+    var videoLastTime = gameVideo.currentTime; //上一次播放时间
+    var videoCurrentTime; //当前播放时间
+    var toTimed = false; //是否人为改变时间
+    
+    gameVideo.addEventListener('pause',async function() {
+        videoPaused = gameVideo.paused; //暂停的布尔值
+        videoLastTime = gameVideo.currentTime;
+        all_state = false;
+        await stopData_all();
+        // stateFlag = true;
+        // clearTimeout(myVar);
+        // lsbridge.send('my-namespace', { 
+        //     message: [parseInt(gameVideo.currentTime),gameVideo.paused]
+        // });
+    });
+    gameVideo.addEventListener('play',async function() {
+        videoCurrentTime = gameVideo.currentTime;
+        all_data = await $.ajax({ url: `/api/gameData/{{videoID}}/` + parseInt(videoCurrentTime) });
+        /*if($('#dataCheckBox').attr("checked")=='checked'){
+            await changeState();
+            setTimeout(function(){
+                layui.form.render();//layui重新渲染效果
+            },1000)
+            
+        }*/
+        // all_state = false;
+        // stateFlag = false;
+        // demo(parseInt(videoCurrentTime), all_state);
+        // if(gameVideo.currentTime==0){
+            // lsbridge.send('my-namespace', { message: [parseInt(gameVideo.currentTime), gameVideo.paused] });
+        // }
+        
+        videoPaused = false;
+    })
+    gameVideo.addEventListener('playing',async function() {//暂停后再次播放视频,或者视频正在加载
+        // clearTimeout(myVar).then(function(){
+        //     stateFlag = true;
+        //     console.log('stateFlag变为true')
+        // });
+        await stopData_all();
+        // await startData();
+        all_state = false;
+        stateFlag = false;
+        await changeState();
+        $('#dataCheckBox').prop("checked", false)
+        layui.form.render();
+
+        currentTime = parseInt(gameVideo.currentTime);
+        demo(parseInt(videoCurrentTime), all_state);
+        
+        index = await getIndex(currentTime,totalTime_arr);
+        //0214暂时删除
+        // clearHeatMap();
+        out1 = []
+        for (let i = 0; i < out.length; i++) {
+            var tmpList = []
+            for (var item in out[i]) { if (item == "x" || item == "y") { out[i][item] = out[i][item]} tmpList.push(out[i][item]) } out1.push(tmpList)
+        }
+        draw(window.map_data, ctx, heros_show, 0,index)
+        // lsbridge.send('my-namespace', { 
+        //     message: [parseInt(gameVideo.currentTime),gameVideo.paused]
+        // });
+    })
+    // gameVideo.addEventListener("seeking", function() {
+        
+    //     console.log('1paused=',gameVideo.paused)//false,播放
+    // })
+    gameVideo.addEventListener("seeked",function() {//跳转
+        stateFlag = true;
+        clearTimeout(myVar);
+        // lsbridge.send('my-namespace', { message: [parseInt(gameVideo.currentTime), gameVideo.paused] });
+    })
+    gameVideo.addEventListener("timeupdate",async function() {
+        //用秒数来显示当前播放进度
+        videoCurrentTime = gameVideo.currentTime;
+        // $("#dataCheckBox").attr("disabled",false);
+        // layui.form.render();
+        
+    }, false);
+    gameVideo.addEventListener("loadedmetadata", function() {
+        tolTime = parseInt(gameVideo.duration);
+    })
+    gameVideo.addEventListener('error', function() {
+        // alert('视频错误！请换其他视频观看。')
+    })
+    function changeState(){
+        return new Promise(async function(resolve, reject) {
+            $("#dataCheckBox").attr("checked",false);
+            resolve()
+        })
+        
+    }
+    function startData(){
+        return new Promise(async function(resolve, reject) {
+            all_state = false;
+            stateFlag = false;
+            
+            currentTime = parseInt(gameVideo.currentTime);
+            demo(parseInt(videoCurrentTime), all_state);
+            
+            index = await getIndex(currentTime,totalTime_arr);
+            //0214暂时删除
+            // clearHeatMap();
+            out1 = []
+            for (let i = 0; i < out.length; i++) {
+                var tmpList = []
+                for (var item in out[i]) { if (item == "x" || item == "y") { out[i][item] = out[i][item]} tmpList.push(out[i][item]) } out1.push(tmpList)
+            }
+            draw(window.map_data, ctx, heros_show, 0,index)
+            resolve()
+        })
+    }
+    function stopData(){
+        return new Promise(function(resolve, reject) {
+            stateFlag = true;
+            clearTimeout(myVar);//停止表
+            resolve()
+        })
+    }
+    function stopData_all(){
+        return new Promise(function(resolve, reject) {
+            stateFlag = true;
+            clearTimeout(myVar);//停止表
+            clearTimeout(myVar_heat);//停止热力图轨迹图
+            resolve()
+        })
+    }
+    var stateFlag = true;
+    var all_state = true; //true,是播放，false是暂停
+    var time_value = '';
+    var myVar;
+    var myVar_heat;
+    // var myVar_draw;
+    var checkedState;
+    layui.use('form', function(){
+      var form = layui.form;
+      form.on('switch(dataCheck)',async function(data){
+        checkedState = data.elem.checked;
+          
+            if(data.elem.checked == true){
+                // if(gameVideo.paused==true){
+                //     $("#dataCheckBox").attr("disabled",true);
+                //     layui.form.render();
+                // }
+                all_state = true;
+                await stopData();
+                demo(0, all_state)
+            }else{
+                
+                all_state = false;
+                stateFlag = false;
+                demo(parseInt(gameVideo.currentTime), all_state)
+                currentTime = parseInt(gameVideo.currentTime);
+        
+		        // index = await getIndex(currentTime,totalTime_arr);
+		        
+		        // clearHeatMap();
+		        // out1 = []
+		        // for (let i = 0; i < out.length; i++) {
+		        //     var tmpList = []
+		        //     for (var item in out[i]) { if (item == "x" || item == "y") { out[i][item] = out[i][item]} tmpList.push(out[i][item]) } out1.push(tmpList)
+		        // }
+		        // draw(out1, ctx, heros_show, 0,index)
+
+                setTimeout(function() {
+                    if(gameVideo.paused==true){
+                        stateFlag = true;
+                        clearTimeout(myVar);
+                    }
+                }, 1000);
+            }
+
+        });
+    });
+
+    // layui.use(['util', 'laydate', 'layer'], function() {
+    //     var util = layui.util,
+    //         laydate = layui.laydate,
+    //         layer = layui.layer;
+    //     // 时间选择器
+    //     laydate.render({
+    //         elem: '#timer',
+    //         type: 'time',
+    //         value: '00分',
+    //         max: '01:00:00', //获取总时长参数
+    //         format: 'mm分',
+    //         btns: ['clear', 'confirm'],
+    //         theme: '#212121',
+    //         done: function(value, date) {
+    //             console.log(value); //得到日期生成的值，如：'04:02:00'
+    //             time_value = value;
+    //             choose_min = date.minutes;
+    //             choose_sec = date.seconds;
+    //             stateFlag = true;
+    //             play_state = true;
+    //             play_btn.innerHTML ='<svg t="1575892338622" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6748" width="46" height="46" style="margin:2px auto;"><path d="M896.4 127.9v767.6H128V127.9h768.4m4-64H124c-33.1 0-60 26.9-60 60v775.6c0 33.1 26.9 60 60 60h776.3c33.1 0 60-26.9 60-60V123.9c0.1-33.1-26.8-60-59.9-60z" p-id="6749" fill="#333333"></path><path d="M321.7 284v455.8c0 21.6 23.4 35.1 42 24.3l390.8-227.9c18.7-10.8 18.7-37.8 0-48.6L363.7 259.7c-18.7-10.7-42 2.7-42 24.3z" p-id="6750" fill="#ccc"></path></svg>'
+    //             // play_btn.innerHTML = "<i class='fa fa-play-circle fa-3x' style='color: #333;color: #333;margin-top: 3px;margin-left: 15px;'></i>";
+    //             demo(choose_min, play_state)
+    //         }
+    //     });
+
+    // })
+    var gameCurTime = document.getElementById('gameCurTime');//显示比赛时间
+    var economy_con = document.getElementById('economy');
+    var knife_con = document.getElementById('knife');
+    var kda_con = document.getElementById('kda');
+    var economy_gap_con = document.getElementById('economy_gap');
+    var group_rate_con = document.getElementById('group_rate');
+    var predict_win_con = document.getElementById('predict_win');
+
+
+    //自适应窗口大小
+
+    economy_con.style.width = window.innerWidth * 0.115 + 'px';
+    economy_con.style.height = window.innerHeight * 0.24 + 'px';
+    knife_con.style.width = window.innerWidth * 0.115 + 'px';
+    knife_con.style.height = window.innerHeight * 0.24 + 'px';
+    kda_con.style.width = window.innerWidth * 0.115 + 'px';
+    kda_con.style.height = window.innerHeight * 0.24 + 'px';
+    economy_gap_con.style.width = window.innerWidth * 0.115 + 'px';
+    economy_gap_con.style.height = window.innerHeight * 0.24 + 'px';
+    group_rate_con.style.width = window.innerWidth * 0.115 + 'px';
+    group_rate_con.style.height = window.innerHeight * 0.24 + 'px';
+    predict_win_con.style.width = window.innerWidth * 0.115 + 'px';
+    predict_win_con.style.height = window.innerHeight * 0.24 + 'px';
+    // console.log('document.body.clientWidth=' + document.body.clientWidth);
+    // console.log('document.body.clientHeight=' + document.body.clientHeight);
+    // economy_con.style.width=window.screen.width*0.2+'px';
+    // economy_con.style.height=window.screen.height*0.22+'px';
+    // knife_con.style.width=window.screen.width*0.2+'px';
+    // knife_con.style.height=window.screen.height*0.22+'px';
+    // kda_con.style.width=window.screen.width*0.2+'px';
+    // kda_con.style.height=window.screen.height*0.22+'px';
+    // economy_gap_con.style.width=window.screen.width*0.2+'px';
+    // economy_gap_con.style.height=window.screen.height*0.22+'px';
+    // group_rate_con.style.width=window.screen.width*0.2+'px';
+    // group_rate_con.style.height=window.screen.height*0.22+'px';
+    // predict_win_con.style.width=window.screen.width*0.2+'px';
+    // predict_win_con.style.height=window.screen.height*0.22+'px';
+
+    var myChart1 = echarts.init(document.getElementById('economy'), 'dark');
+    var myChart2 = echarts.init(document.getElementById('knife'), 'dark');
+    var myChart3 = echarts.init(document.getElementById('kda'), 'dark');
+    var myChart4 = echarts.init(document.getElementById('economy_gap'), 'dark');
+    var myChart5 = echarts.init(document.getElementById('group_rate'), 'dark');
+    var myChart6 = echarts.init(document.getElementById('predict_win'), 'dark');
+
+    //放大图表的显示
+    var lgChart = echarts.init(document.getElementById('lg-chart'), 'dark');
+    var option1 = {};
+    var option2 = {};
+    var option3 = {};
+    var option4 = {};
+    var option5 = {};
+    var option6 = {};
+    var lg_option = {}
+
+    var timeline_option = {};
+    var optionNum = 1;
+    lgChart.on('click', async function(params) {
+        // console.log(params)
+        var data = await $.ajax({ url: `/api/gameData/{{videoID}}/` + videoLastTime });
+        
+        // if(videoPaused==true){
+        if (params.componentType == 'series' && params.componentSubType == 'line') {
+            var index = params.dataIndex;
+            
+            if (data.initialObj.videoTime.length != 0) {
+                if (index - data.initialObj.videoTime.length > 0) {
+                    gameVideo.currentTime = data.videoTime[index - data.initialObj.videoTime.length];
+                } else {
+                    gameVideo.currentTime = data.initialObj.videoTime[index];
+                }
+
+            } else {
+                gameVideo.currentTime = data.videoTime[index];
+            }
+            gameVideo.pause();
+        } else if (params.componentType == 'markPoint') {
+            // console.log(params)
+        }
+    })
+    myChart1.on('dblclick', async function(params) {
+        // console.log(params)
+        var data = await $.ajax({ url: `/api/gameData/{{videoID}}/` + videoLastTime });
+        
+        // if(videoPaused==true){
+        if (params.componentType == 'series' && params.componentSubType == 'line') {
+            var index = params.dataIndex;
+            
+            if (data.initialObj.videoTime.length != 0) {
+                if (index - data.initialObj.videoTime.length > 0) {
+                    gameVideo.currentTime = data.videoTime[index - data.initialObj.videoTime.length];
+                } else {
+                    gameVideo.currentTime = data.initialObj.videoTime[index];
+                }
+
+            } else {
+                gameVideo.currentTime = data.videoTime[index];
+            }
+            gameVideo.pause();
+        } else if (params.componentType == 'markPoint') {
+            // console.log(params)
+        }
+    })
+    myChart2.on('dblclick', async function(params) {
+        // console.log(params)
+        var data = await $.ajax({ url: `/api/gameData/{{videoID}}/` + videoLastTime });
+        
+        // if(videoPaused==true){
+        if (params.componentType == 'series' && params.componentSubType == 'line') {
+            var index = params.dataIndex;
+            
+            if (data.initialObj.videoTime.length != 0) {
+                if (index - data.initialObj.videoTime.length > 0) {
+                    gameVideo.currentTime = data.videoTime[index - data.initialObj.videoTime.length];
+                } else {
+                    gameVideo.currentTime = data.initialObj.videoTime[index];
+                }
+
+            } else {
+                gameVideo.currentTime = data.videoTime[index];
+            }
+            gameVideo.pause();
+        } else if (params.componentType == 'markPoint') {
+            // console.log(params)
+        }
+    })
+    myChart6.on('dblclick', async function(params) {
+        // console.log(params)
+        var data = await $.ajax({ url: `/api/gameData/{{videoID}}/` + videoLastTime });
+        
+        // if(videoPaused==true){
+        if (params.componentType == 'series' && params.componentSubType == 'line') {
+            var index = params.dataIndex;
+            
+            if (data.initialObj.videoTime.length != 0) {
+                if (index - data.initialObj.videoTime.length > 0) {
+                    gameVideo.currentTime = data.videoTime[index - data.initialObj.videoTime.length];
+                } else {
+                    gameVideo.currentTime = data.initialObj.videoTime[index];
+                }
+
+            } else {
+                gameVideo.currentTime = data.videoTime[index];
+            }
+            gameVideo.pause();
+        } else if (params.componentType == 'markPoint') {
+            // console.log(params)
+        }
+    })
+    function str2Time(str) {
+        var arr = str.split(':');
+        var min = parseInt(arr[0]);
+        var sec = parseInt(arr[1]);
+        return min * 60 + sec;
+    }
+
+    function allData_click() {
+        all_state = true;
+        if (all_state == true) {
+            gameVideo.pause();
+            demo(0, all_state)
+            all_state = false;
+        }
+
+    }
+
+    function economy_click() {
+        optionNum = 1;
+        lg_option = myChart1.getOption();
+        //清除大的图表原有的option
+        lgChart.clear();
+
+        lg_option.legend = {
+            show: true,
+            data: ['红方经济', '蓝方经济'],
+            x: 'right',
+            y: 'top'
+        };
+        lg_option.series[0].markPoint.data = [
+            { type: 'max', name: '最大值' }
+        ];
+        lg_option.series[1].markPoint.data = [
+            { type: 'max', name: '最大值' }
+        ];
+        // lg_option.dataZoom[0].start = 60;
+        lgChart.setOption(lg_option);
+        // option1.legend.show = true;
+        // option1.series[0].markPoint.data =[
+        //     { type: 'max', name: '最大值' }
+        // ];
+        // option1.series[1].markPoint.data =[
+        //     { type: 'max', name: '最大值' }
+        // ];
+        // lgChart.setOption(option1);
+
+    }
+
+    function knife_click() {
+        optionNum = 2;
+        lg_option = myChart2.getOption();
+        lgChart.clear();
+
+        lg_option.legend = {
+            show: true,
+            data: ['红方伤害输出', '蓝方伤害输出'],
+            x: 'right',
+            y: 'top'
+        };
+        lg_option.series[0].markPoint.data = [
+            { type: 'max', name: '最大值' }
+        ];
+        lg_option.series[1].markPoint.data = [
+            { type: 'max', name: '最大值' }
+        ];
+        // lg_option.dataZoom[0].start = 60;
+        lgChart.setOption(lg_option);
+
+    }
+
+    function kda_click() {
+        optionNum = 3;
+        lg_option = myChart3.getOption();
+        lgChart.clear();
+
+        lg_option.legend = {
+            show: true,
+            data: ['红方选手', '蓝方选手'],
+            x: 'right',
+            y: 'top'
+        };
+        lg_option.series[0].markLine.data = [
+            { type: 'average', name: '平均值' }
+        ];
+        lg_option.series[1].markLine.data = [
+            { type: 'average', name: '平均值' }
+        ];
+        lg_option.series[0].markPoint.data = [
+            { type: 'max', name: '最大值' },
+            { type: 'min', name: '最小值' }
+        ];
+        lg_option.series[1].markPoint.data = [
+            { type: 'max', name: '最大值' },
+            { type: 'min', name: '最小值' }
+        ]
+        lgChart.setOption(lg_option);
+
+    }
+
+    function economy_gap_click() {
+        optionNum = 4;
+        lg_option = myChart4.getOption();
+        lgChart.clear();
+
+        lg_option.legend = [{
+            show: true,
+            data: ['红队'],
+            x: 'left',
+            y: 'bottom'
+        }, {
+            show: true,
+            data: ['蓝队'],
+            x: 'left',
+            y: 'top'
+        }];
+        // lg_option.dataZoom[0].start = 60;
+        lgChart.setOption(lg_option);
+
+    }
+
+    function group_rate_click() {
+        optionNum = 5;
+        lg_option = myChart5.getOption();
+        lgChart.clear();
+
+        lg_option.legend = {
+            show: true,
+            data: ['红方选手', '蓝方选手'],
+            x: 'right',
+            y: 'top'
+        };
+        lg_option.series[0].markLine.data = [
+            { type: 'average', name: '平均值' }
+        ];
+        lg_option.series[1].markLine.data = [
+            { type: 'average', name: '平均值' }
+        ];
+        lg_option.series[0].markPoint.data = [
+            { type: 'max', name: '最大值' },
+            { type: 'min', name: '最小值' }
+        ];
+        lg_option.series[1].markPoint.data = [
+            { type: 'max', name: '最大值' },
+            { type: 'min', name: '最小值' }
+        ];
+        lgChart.setOption(lg_option);
+
+    }
+
+    function predict_win_click() {
+        optionNum = 6;
+        lg_option = myChart6.getOption();
+        lgChart.clear();
+
+        lg_option.legend = {
+            show: false,
+            data: ['红方胜率', '蓝方胜率'],
+            x: 'right',
+            y: 'top'
+        };
+        lg_option.visualMap[0].show=true;
+        // console.log(lg_option)
+        // lg_option.series[0].markPoint.data = [
+        //     { type: 'max', name: '最大值' }
+        // ];
+        // lg_option.series[1].markPoint.data = [
+        //     { type: 'max', name: '最大值' }
+        // ];
+        // lg_option.dataZoom[0].start = 60;
+        lgChart.setOption(lg_option);
+
+    }
+    window.onresize = function() {
+        economy_con.style.width = window.innerWidth * 0.115 + 'px';
+        economy_con.style.height = window.innerHeight * 0.24 + 'px';
+        knife_con.style.width = window.innerWidth * 0.115 + 'px';
+        knife_con.style.height = window.innerHeight * 0.24 + 'px';
+        kda_con.style.width = window.innerWidth * 0.115 + 'px';
+        kda_con.style.height = window.innerHeight * 0.24 + 'px';
+        economy_gap_con.style.width = window.innerWidth * 0.115 + 'px';
+        economy_gap_con.style.height = window.innerHeight * 0.24 + 'px';
+        group_rate_con.style.width = window.innerWidth * 0.115 + 'px';
+        group_rate_con.style.height = window.innerHeight * 0.24 + 'px';
+        predict_win_con.style.width = window.innerWidth * 0.115 + 'px';
+        predict_win_con.style.height = window.innerHeight * 0.24 + 'px';
+        myChart1.resize();
+        myChart2.resize();
+        myChart3.resize();
+        myChart4.resize();
+        myChart5.resize();
+        myChart6.resize();
+        lgChart.resize();
+    }
+
+    //时间的显示，小于10的前面加上0
+    function overTen(n) {
+        var str = (n < 10) ? ('0' + n) : ('' + n);
+        return str;
+    }
+    //把时间数组转换为以秒为单位的数字
+    function turnSec(arr) {
+        return arr.min * 60 + arr.sec;
+    }
+    //拆分时间字符串的数字
+    function splitTime(str) {
+        var arr = str.split(':');
+        var time = {
+            min: 0,
+            sec: 0
+        }
+        time.min = parseInt(arr[0]);
+        time.sec = parseInt(arr[1]);
+        return time;
+    }
+    //合成时间的函数
+    function getTime(m, s) {
+        return overTen(m) + ":" + overTen(s)
+    }
+    //休眠函数
+    function sleep(ms) {
+        return new Promise(resolve => myVar = setTimeout(resolve, ms))
+    }
+    //休眠函数_当选择全局
+    function heat_sleep(ms) {
+        return new Promise(resolve =>myVar_heat =  setTimeout(resolve, ms))
+    }
+
+    async function demo(vtime, all_state) {
+        var time = [];
+        var economy_red = [];
+        var economy_blue = [];
+        var economy_gap = [];
+        var redknife = [];
+        var blueknife = [];
+        var win_red = [];
+        var win_blue = [];
+        var kda_red = [];
+        var kda_blue = [];
+        var group_red = [];
+        var group_blue = [];
+        myChart1.clear();
+        myChart2.clear();
+        myChart3.clear();
+        myChart4.clear();
+        myChart5.clear();
+        myChart6.clear();
+        lgChart.clear();
+        var origin_data = await $.ajax({url: `/api/gameData/{{videoID}}/`+0})
+        var data = await $.ajax({ url: `/api/gameData/{{videoID}}/` + vtime });
+        var last_time = origin_data.videoTime[origin_data.videoTime.length-1];
+        // var first_time = origin_data
+        
+
+        // 画参团率图
+        // var myChart5 = echarts.init(document.getElementById('group_rate'),'dark');
+        option5 = {
+            // backgroundColor:'#2a2f32',
+            backgroundColor:'#333',
+            title: {
+                left: 'center',
+                text: '双方选手参团率'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                show: false,
+                data: ['红方选手', '蓝方选手'],
+                x: 'right',
+                y: 'top'
+            },
+            grid: {
+                left: 30,
+                right: 30,
+                bottom: 30,
+                top: 40
+            },
+            calculable: true,
+            xAxis: [{
+                type: 'category',
+                data: ['上单', '打野', '中单', 'ADC', '辅助']
+            }],
+            yAxis: [{
+                type: 'value'
+            }],
+            series: [{
+                    name: '红方选手',
+                    type: 'bar',
+                    data: group_red,
+                    markLine: {
+                        data: []
+                    },
+                    markPoint: {
+                        data: []
+                    },
+                    itemStyle: {
+                        color: '#cd4144'
+                    },
+                },
+                {
+                    name: '蓝方选手',
+                    type: 'bar',
+                    data: group_blue,
+                    markLine: {
+                        data: []
+                    },
+                    markPoint: {
+                        data: []
+                    },
+                    itemStyle: {
+                        color: 'rgb(91, 160, 255)'
+                    }
+                }
+            ]
+        };
+        // myChart5.setOption(option5);
+
+        // // 画KDA图..........................................
+        // var myChart3 = echarts.init(document.getElementById('kda'),'dark');
+        option3 = {
+            // backgroundColor:'#2a2f32',
+            backgroundColor:'#333',
+            title: {
+                left: 'center',
+                text: '双方选手KDA'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                show: false,
+                data: ['红方选手', '蓝方选手'],
+                x: 'right',
+                y: 'top'
+            },
+            grid: {
+                left: 30,
+                right: 30,
+                bottom: 30,
+                top: 40
+            },
+            calculable: true,
+            xAxis: [{
+                type: 'category',
+                data: ['上单', '打野', '中单', 'ADC', '辅助']
+            }],
+            yAxis: [{
+                type: 'value'
+            }],
+            series: [{
+                    name: '红方选手',
+                    type: 'bar',
+                    data: kda_red,
+                    markLine: {
+                        data: []
+                    },
+                    markPoint: {
+                        data: []
+                    },
+                    itemStyle: {
+                        color: '#cd4144'
+                    },
+                },
+                {
+                    name: '蓝方选手',
+                    type: 'bar',
+                    data: kda_blue,
+                    markLine: {
+                        data: []
+                    },
+                    markPoint: {
+                        data: []
+                    },
+                    itemStyle: {
+                        color: 'rgb(91, 160, 255)'
+                    },
+                }
+            ]
+        };
+        // myChart3.setOption(option3);
+
+        // 画胜率预测图...............................................................
+        // var myChart6 = echarts.init(document.getElementById('predict_win'),'dark');
+        // var colors = ['#5793f3', '#d14a61', '#675bba'];
+        option6 = {
+            // backgroundColor:'#2a2f32',
+            backgroundColor:'#333',
+
+            title: {
+                left: 'center',
+                text: '比赛双方胜率预测'
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: function(datas) 
+                  {
+                    let value = datas[0].value;
+                    if(value<50){
+                        return '红队胜率：'+(100-value)+'%';
+                    }
+                    return '蓝队胜率：'+value+'%';
+                    
+                   }
+            },
+            // tooltip: {
+            //     trigger: 'none',
+            //     axisPointer: {
+            //         type: 'cross',
+            //         label: {
+            //             backgroundColor: '#d14a61'
+            //         }
+            //     },
+
+            // },
+            legend: {
+                show: false,
+                // data:[{
+                //     name: '红方胜率',
+                //     // 强制设置图形为圆。
+                //     icon: 'circle',
+                //     // 设置文本为红色
+                //     textStyle: {
+                //         color: 'red'
+                //     }
+                // },{
+                //     name: '蓝方胜率',
+                //     // 强制设置图形为圆。
+                //     icon: 'circle',
+                //     // 设置文本为红色
+                //     textStyle: {
+                //         color: 'blue'
+                //     }
+                // }],
+                data: ['红方胜率', '蓝方胜率'],
+                x: 'right',
+                y: 'top'
+            },
+            grid: {
+                left: 40,
+                right: 30,
+                bottom: 30,
+                top: 40
+            },
+            xAxis: [{
+                    type: 'category',
+                    // 新加的
+                    show: false,
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        onZero: false
+                    },
+                    data: time
+                },
+                {
+                    // 新加的
+                    show: false,
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        onZero: false
+                    },
+                    axisPointer: {
+                        data: time
+                    }
+                }
+            ],
+            yAxis: [{
+                type: 'value',
+                // axisLabel: { formatter: '{value}%' },
+                axisLabel:{
+                    formatter: function (data) {
+                        if(data<50){
+                            return (100-data)+'%';
+                        }else{
+                            return (data)+'%';
+                        }
+                        
+                    }
+                },
+
+                // axisLabel: function (value) {
+                //     if(value<50){
+                //         return (50+value);
+                //     }else{
+                //         return (value);
+                //     }
+                // },
+                // min:50,
+                max: 100
+            }],
+            visualMap: {
+                show: false,
+                // showLabel:true,
+                dimension: 1,
+                text:['蓝方胜率','红方胜率'],
+                top:0,
+                right:0,
+                pieces: [
+                {
+                    gt: 50,
+                    color: '#5ba0ff'//蓝
+                },{
+                    gt:0,
+                    lte: 50,
+                    color: '#cd4144'
+                }
+                ]
+            },
+            dataZoom: [{
+                    type: 'inside',
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 100,
+                    filterMode: 'empty'
+                },
+                // {
+                //     type: 'inside',
+                //     yAxisIndex: 0,
+                //     filterMode: 'empty'
+                // }
+            ],
+            series: [
+                // {
+                //     name: '红方胜率',
+                //     type: 'line',
+                //     // xAxisIndex: 1,
+                //     smooth: true,
+                //     data: win_red, //[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+                //     markPoint: {
+                //         data: []
+                //     },
+                //     markLine: {
+                //         silent: true,
+                //         lineStyle:{
+                //             // color:'#f6ab00'
+                //             color:'white'
+                //         },
+                //         data: [{
+                //             yAxis: 50
+                //         }]
+                //     },
+                    
+                //     itemStyle: {
+                //         color: '#cd4144'
+                //     },
+                // },
+                {
+                    name: '蓝方胜率',
+                    type: 'line',
+                    smooth: true,
+                    data: win_blue, //[3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
+                    markPoint: {
+                        data: []
+                    },
+                    markLine: {
+                        silent: true,
+                        lineStyle:{
+                            // color:'#f6ab00'
+                            color:'white'
+                        },
+                        data: [{
+                            yAxis: 50
+                        }]
+                    },
+                    itemStyle: {
+                        color: '#5ba0ff'
+                    },
+                }
+            ]
+        };
+        // myChart6.setOption(option6);
+
+        // 画补刀数图..........................................................................
+        // var myChart2 = echarts.init(document.getElementById('knife'),'dark');
+        //var colors = ['#5793f3', '#d14a61', '#675bba'];
+        option2 = {
+            // backgroundColor:'#2a2f32',
+            backgroundColor:'#333',
+            title: {
+                left: 'center',
+                text: '双方伤害输出'
+            },
+            tooltip: {
+                trigger: 'none',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#d14a61'
+                    }
+                }
+            },
+            legend: {
+                show: false,
+                data: ['红方伤害输出', '蓝方伤害输出', ],
+                x: 'right',
+                y: 'top'
+            },
+            grid: {
+                left: 30,
+                right: 30,
+                bottom: 30,
+                top: 40
+            },
+            xAxis: [{
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        onZero: false
+                    },
+                    data: time
+                },
+                {
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        onZero: false
+                    },
+                    axisPointer: {
+                        data: time
+                    }
+                }
+            ],
+            yAxis: [{
+                type: 'value'
+            }],
+            dataZoom: [{
+                    type: 'inside',
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 100,
+                    filterMode: 'empty'
+                },
+                // {
+                //     type: 'inside',
+                //     yAxisIndex: 0,
+                //     filterMode: 'empty'
+                // }
+            ],
+            series: [{
+                    name: '红方伤害输出',
+                    type: 'line',
+                    // xAxisIndex: 1,
+                    smooth: true,
+                    data: redknife, //[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+                    markPoint: {
+                        data: []
+                    },
+                    itemStyle: {
+                        color: '#cd4144'
+                    },
+                },
+                {
+                    name: '蓝方伤害输出',
+                    type: 'line',
+                    smooth: true,
+                    data: blueknife, //[3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
+                    markPoint: {
+                        data: []
+                    },
+                    itemStyle: {
+                        color: 'rgb(91, 160, 255)'
+                    },
+                }
+            ]
+        };
+        // myChart2.setOption(option2);
+
+        //画经济差图.............................................................
+        // var myChart4 = echarts.init(document.getElementById('economy_gap'),'dark');
+        option4 = {
+            // backgroundColor:'#2a2f32',
+            backgroundColor:'#333',
+            tooltip: {
+                trigger: 'axis',
+                position: function(pt) {
+                    return [pt[0], '10%'];
+                },
+                formatter: function(params) {
+                    if (params[0].data < 0) {
+                        // console.log(data)
+                        return params[0].axisValue + '红队领先' + (-params[0].data) + 'K'
+                    } else if (params[1].data > 0) {
+                        // console.log(data)
+                        return params[1].axisValue + '蓝队领先' + params[1].data + 'K'
+                    }
+                }
+            },
+            legend: [{
+                show: false,
+                data: ['红队'],
+                x: 'left',
+                y: 'bottom'
+            }, {
+                show: false,
+                data: ['蓝队'],
+                x: 'left',
+                y: 'top'
+            }],
+            title: {
+                left: 'center',
+                text: '经济差面积图',
+            },
+            grid: {
+                left: 40,
+                right: 30,
+                bottom: 40,
+                top: 40
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: time
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: [0, '100%'],
+                axisLabel: { formatter: '{value} K' }
+            },
+            dataZoom: [{
+                    type: 'inside',
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 100,
+                    filterMode: 'empty'
+                },
+                // {
+                //     type: 'inside',
+                //     yAxisIndex: 0,
+                //     filterMode: 'empty'
+                // }
+            ],
+            series: [{
+                name: '红队',
+                type: 'line',
+                smooth: true,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    color: '#cd4144'
+                },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(255, 158, 68)'
+                    }, {
+                        offset: 1,
+                        color: '#cd4144'
+                    }])
+                },
+                data: [],
+                markPoint: {
+
+                    data: [
+                        // { type: 'max', name: '最大值' },
+                        // { name: '最大值', value: parseFloat(Math.max.apply(null, economy_gap)), xAxis: economy_gap.indexOf(parseFloat(Math.max.apply(null, economy_gap))), yAxis: parseFloat(Math.max.apply(null, economy_gap)) },
+                        // { name: '最小值', value: parseFloat(Math.min.apply(null, economy_gap)), xAxis: economy_gap.indexOf(parseFloat(Math.min.apply(null, economy_gap))), yAxis: parseFloat(Math.min.apply(null, economy_gap)) },
+                        // { name: '当前值', value: economy_gap[economy_gap.length - 1], xAxis: time[time.length - 1], yAxis: economy_gap[economy_gap.length - 1] },
+                        // { type: 'min', name: '最小值' }
+                    ]
+                }
+            }, {
+                name: '蓝队',
+                type: 'line',
+                smooth: true,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    color: 'rgb(91, 160, 255)'
+                },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(53, 71, 239)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(91, 160, 255)'
+                    }])
+                },
+                data: [],
+                markPoint: {
+
+                    data: [
+                        // { type: 'max', name: '最大值' },
+                        // { name: '最大值', value: parseFloat(Math.max.apply(null, economy_gap)), xAxis: economy_gap.indexOf(parseFloat(Math.max.apply(null, economy_gap))), yAxis: parseFloat(Math.max.apply(null, economy_gap)) },
+                        // { name: '最小值', value: parseFloat(Math.min.apply(null, economy_gap)), xAxis: economy_gap.indexOf(parseFloat(Math.min.apply(null, economy_gap))), yAxis: parseFloat(Math.min.apply(null, economy_gap)) },
+                        // { name: '当前值', value: economy_gap[economy_gap.length - 1], xAxis: time[time.length - 1], yAxis: economy_gap[economy_gap.length - 1] },
+                        // { type: 'min', name: '最小值' }
+                    ]
+                }
+            }]
+        };
+        // myChart4.setOption(option4);
+
+        // 画经济图..................................................................
+        // var colors = ['#5793f3', '#d14a61', '#675bba'];
+        option1 = {
+            // backgroundColor:'#2a2f32',
+            backgroundColor:'#333',
+            title: {
+                left: 'center',
+                text: '比赛双方经济'
+            },
+            tooltip: {
+                trigger: 'none',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#d14a61'
+                    }
+                }
+            },
+            legend: {
+                show: false,
+                data: ['红方经济', '蓝方经济'],
+                x: 'right',
+                y: 'top'
+            },
+            grid: {
+                left: 40,
+                right: 30,
+                bottom: 30,
+                top: 40
+            },
+            xAxis: [{
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        onZero: false
+                    },
+                    data: time
+                },
+                {
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        onZero: false
+                    },
+                    axisPointer: {
+                        data: time
+                    }
+                }
+            ],
+            yAxis: [{
+                type: 'value',
+                axisLabel: { formatter: '{value} K' }
+            }],
+            dataZoom: [{
+                    type: 'inside',
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 100,
+                    filterMode: 'empty'
+                },
+                // {
+                //     type: 'inside',
+                //     yAxisIndex: 0,
+                //     filterMode: 'empty'
+                // }
+            ],
+            series: [{
+                    name: '红方经济',
+                    type: 'line',
+                    // xAxisIndex: 1,
+                    smooth: true,
+                    data: economy_red, // [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+                    markPoint: {
+                        data: []
+                    },
+                    itemStyle: {
+                        color: '#cd4144'
+                    }
+                },
+                {
+                    name: '蓝方经济',
+                    type: 'line',
+                    smooth: true,
+                    data: economy_blue, // [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
+                    markPoint: {
+                        data: []
+                    },
+                    itemStyle: {
+                        color: 'rgb(91, 160, 255)'
+                    }
+                }
+            ]
+        };
+        // console.log('last_time=',last_time);
+        // console.log('parseInt(gameVideo.currentTime)=',parseInt(gameVideo.currentTime));
+        // myChart1.setOption(option1);
+        if (all_state == true||parseInt(gameVideo.currentTime)>last_time) {
+        // if (all_state == true) {
+            //play_state为暂停状态
+            // console.log(choose_min)
+            // console.log(stateFlag)
+            // console.log(data)
+            var t_economy_blue = [];
+            var t_economy_red = [];
+            var t_economy_gap = [];
+            var t_redknife = [];
+            var t_blueknife = [];
+            var t_win_red = [];
+            var t_win_blue = [];
+            var t_group_red = [];
+            var t_group_blue = [];
+            var t_kda_blue = [];
+            var t_kda_red = [];
+            var t_time = [];
+            var index = 0;
+            gameCurTime.innerHTML ="00:00";
+            for (let counter = 0; counter < origin_data.time_min.length; counter++) {
+                var time_min = origin_data.time_min[counter];
+                var time_sec = origin_data.time_sec[counter];
+                t_time.push(getTime(time_min, time_sec));
+
+                index++;
+                if (index == origin_data.time_min.length - 1) {
+                    var t_economy_gap_gt = [];
+                    var t_economy_gap_lt = [];
+                    origin_data.economy_gap.forEach(item => {
+                        if (item > 0) {
+                            t_economy_gap_gt.push(item)
+                            t_economy_gap_lt.push(0)
+                        } else {
+                            t_economy_gap_lt.push(item)
+                            t_economy_gap_gt.push(0)
+                        }
+                    })
+                    t_economy_blue = origin_data.economy_blue;
+                    t_economy_red = origin_data.economy_red;
+                    t_economy_gap = origin_data.economy_gap;
+                    t_redknife = origin_data.redknife;
+                    t_blueknife = origin_data.blueknife;
+                    t_win_red = origin_data.win_red;
+                    t_win_blue = origin_data.win_blue;
+                    t_group_red = origin_data.group_red[origin_data.group_red.length - 1];
+                    t_group_blue = origin_data.group_blue[origin_data.group_blue.length - 1];
+                    t_kda_blue = origin_data.kda_blue[origin_data.kda_blue.length - 1];
+                    t_kda_red = origin_data.kda_red[origin_data.kda_red.length - 1];
+
+                    option1.xAxis[0].data = t_time;
+                    option1.xAxis[1].axisPointer.data = t_time;
+                    option2.xAxis[0].data = t_time;
+                    option2.xAxis[1].axisPointer.data = t_time;
+                    option4.xAxis.data = t_time;
+                    option6.xAxis[0].data = t_time;
+                    option6.xAxis[1].axisPointer.data = t_time;
+
+                    option1.series[0].data = t_economy_red;
+                    option1.series[1].data = t_economy_blue;
+                    option2.series[0].data = t_redknife;
+                    option2.series[1].data = t_blueknife;
+                    option3.series[0].data = t_kda_red;
+                    option3.series[1].data = t_kda_blue;
+                    // option4.series[0].data = t_economy_gap;
+                    option4.series[0].data = t_economy_gap_lt;
+                    option4.series[1].data = t_economy_gap_gt;
+                    option5.series[0].data = t_group_red;
+                    option5.series[1].data = t_group_blue;
+                    option6.series[0].data = t_win_blue;
+
+                    // option6.series[0].data = t_win_red;
+                    // option6.series[1].data = t_win_blue;
+
+                    myChart1.setOption(option1)
+                    myChart2.setOption(option2)
+                    myChart3.setOption(option3)
+                    myChart4.setOption(option4)
+                    myChart5.setOption(option5)
+                    myChart6.setOption(option6)
+                    if (optionNum == 1) {
+                        economy_click()
+                    } else if (optionNum == 2) {
+                        knife_click()
+                        // lgChart.setOption(lg_option)
+                    } else if (optionNum == 3) {
+                        kda_click()
+                        // lgChart.setOption(option3)
+                    } else if (optionNum == 4) {
+                        economy_gap_click()
+                        // lgChart.setOption(option4)
+                    } else if (optionNum == 5) {
+                        group_rate_click()
+                        // lgChart.setOption(option5)
+                    } else if (optionNum == 6) {
+                        predict_win_click()
+                        // lgChart.setOption(option6)
+                    }
+                    // if (optionNum == 1) {
+                    //     lgChart.setOption(lg_option)
+                    // } else if (optionNum == 2) {
+                    //     lgChart.setOption(lg_option)
+                    // } else if (optionNum == 3) {
+                    //     lgChart.setOption(lg_option)
+                    // } else if (optionNum == 4) {
+                    //     lgChart.setOption(lg_option)
+                    // } else if (optionNum == 5) {
+                    //     lgChart.setOption(lg_option)
+                    // } else if (optionNum == 6) {
+                    //     lgChart.setOption(lg_option)
+                    // }
+                }
+            }
+
+
+        } else{
+            //play_state为播放状态
+            
+            var f_economy_blue = data.initialObj.economy_blue;
+            var f_economy_red = data.initialObj.economy_red;
+            // var f_economy_gap = data.initialObj.economy_gap;
+            var f_redknife = data.initialObj.redknife;
+            var f_blueknife = data.initialObj.blueknife;
+            var f_win_red = data.initialObj.win_red;
+            var f_win_blue = data.initialObj.win_blue;
+            var f_group_red = [];
+            var f_group_blue = [];
+            var f_kda_blue = [];
+            var f_kda_red = [];
+            var f_time = [];
+            var f_economy_gap_gt = [];
+            var f_economy_gap_lt = [];
+            for (let counter = 0; counter < data.initialObj.time_min.length && stateFlag == false; counter++) {
+                var time_min = parseInt(data.initialObj.time_min[counter]);
+                var time_sec = parseInt(data.initialObj.time_sec[counter]);
+                f_time.push(getTime(time_min, time_sec));
+                if (data.initialObj.economy_gap[counter] > 0) {
+                    f_economy_gap_gt.push(data.initialObj.economy_gap[counter]);
+                    f_economy_gap_lt.push(0)
+
+                } else {
+                    f_economy_gap_lt.push(data.initialObj.economy_gap[counter]);
+                    f_economy_gap_gt.push(0)
+
+                }
+                
+            }
+            
+            for(let counter = 0;counter<data.videoTime.length&&stateFlag==false;counter++){
+                var videoTime = (counter==0) ? ((data.initialObj.videoTime.length == 0) ? (parseInt(gameVideo.currentTime)) : (data.initialObj.videoTime[data.initialObj.videoTime.length - 1])) : (data.videoTime[counter]);
+                // var videoTime = (data.initialObj.videoTime.length == 0) ? (parseInt(gameVideo.currentTime)) : (data.initialObj.videoTime[data.initialObj.videoTime.length - 1]);
+                gameCurTime.innerHTML = (((data.initialObj.videoTime.length == 0)&&(counter==0))?"00:00":(overTen(data.time_min[counter])+":"+overTen(data.time_sec[counter])));
+                
+                var next_time = data.videoTime[counter+1];
+                
+                var durTime = next_time-parseInt(gameVideo.currentTime);
+                // var durTime = next_time - videoTime;
+                
+                if(gameVideo.currentTime<data.videoTime[0]){
+                    myChart1.setOption(option1)
+                    myChart2.setOption(option2)
+                    myChart3.setOption(option3)
+                    myChart4.setOption(option4)
+                    myChart5.setOption(option5)
+                    myChart6.setOption(option6)
+                    lgChart.setOption(option1);
+                }
+                    var time_min = parseInt(data.time_min[counter]);
+                    var time_sec = parseInt(data.time_sec[counter]);
+                    f_economy_blue.push(data.economy_blue[counter])
+                    f_economy_red.push(data.economy_red[counter])
+                    if (data.economy_gap[counter] > 0) {
+                        f_economy_gap_gt.push(data.economy_gap[counter]);
+                        f_economy_gap_lt.push(0)
+
+                    } else {
+                        f_economy_gap_lt.push(data.economy_gap[counter]);
+                        f_economy_gap_gt.push(0)
+
+                    }
+
+                    f_redknife.push(data.redknife[counter])
+                    f_blueknife.push(data.blueknife[counter])
+                    f_win_red.push(data.win_red[counter])
+                    f_win_blue.push(data.win_blue[counter])
+                    f_group_red = data.group_red[counter];
+                    f_group_blue = data.group_blue[counter];
+                    f_kda_blue = data.kda_blue[counter];
+                    f_kda_red = data.kda_red[counter];
+                    f_time.push(getTime(time_min, time_sec));
+
+                    option1.xAxis[0].data = f_time;
+                    option1.xAxis[1].axisPointer.data = f_time;
+                    
+
+                    option2.xAxis[0].data = f_time;
+                    option2.xAxis[1].axisPointer.data = f_time;
+                    option4.xAxis.data = f_time;
+                    option6.xAxis[0].data = f_time;
+                    option6.xAxis[1].axisPointer.data = f_time;
+
+                    option1.series[0].data = f_economy_red;
+                    option1.series[1].data = f_economy_blue;
+                    option2.series[0].data = f_redknife;
+                    option2.series[1].data = f_blueknife;
+                    option3.series[0].data = f_kda_red;
+                    option3.series[1].data = f_kda_blue;
+                    // option4.series[0].data = f_economy_gap;
+                    option4.series[0].data = f_economy_gap_lt;
+                    option4.series[1].data = f_economy_gap_gt;
+                    option5.series[0].data = f_group_red;
+                    option5.series[1].data = f_group_blue;
+                    option6.series[0].data = f_win_blue;
+                    // option6.series[0].data = f_win_red;
+                    // option6.series[1].data = f_win_blue;
+
+                    myChart1.setOption(option1)
+                    myChart2.setOption(option2)
+                    myChart3.setOption(option3)
+                    myChart4.setOption(option4)
+                    myChart5.setOption(option5)
+                    myChart6.setOption(option6)
+                    if (optionNum == 1) {
+                        lg_option = myChart1.getOption();
+                        lg_option.xAxis[0].data = f_time;
+                        lg_option.xAxis[1].axisPointer.data = f_time;
+                        lg_option.legend = {
+                            show: true,
+                            data: ['红方经济', '蓝方经济'],
+                            x: 'right',
+                            y: 'top'
+                        };
+                        lg_option.series[0].markPoint.data = [
+                            { type: 'max', name: '最大值' }
+                        ];
+                        lg_option.series[1].markPoint.data = [
+                            { type: 'max', name: '最大值' }
+                        ];
+                        // lg_option.dataZoom[0].start = 60;
+                        lg_option.dataZoom[0].start = (f_economy_red.length<10)?(0):(100-(10/f_economy_red.length)*100)
+                        lg_option.yAxis[0].scale = true;
+                        // lg_option.yAxis[0].maxInterval = 5;
+                        // option1.yAxis[0].boundaryGap=['0%','5%'];
+                        lg_option.yAxis[0].min = function (value) {
+                            var len_r = f_economy_red.length;
+                            var len_b = f_economy_blue.length;
+                            // if(f_economy_red.length<=10){
+                            //     return (value.min*0.7).toFixed(0);
+                            // }
+                            // if(f_economy_red[len_r-11]<f_economy_blue[len_b-11]){
+                            //     return (f_economy_red[len_r-11]*0.9).toFixed(0);
+                            // }else{
+                            //     return (f_economy_blue[len_b-11]*0.9).toFixed(0);
+                            // }
+                            if(f_economy_red.length<=10){
+                                return (value.min-1).toFixed(0);
+                            }
+                            if(f_economy_red[len_r-11]<f_economy_blue[len_b-11]){
+                                return (f_economy_red[len_r-11]-1).toFixed(0);
+                            }else{
+                                return (f_economy_blue[len_b-11]-1).toFixed(0);
+                            }
+                        }
+                        lg_option.yAxis[0].max=function (value) {
+                            var len_r = f_economy_red.length;
+                            var len_b = f_economy_blue.length;
+                            // if(f_economy_red.length<=10){
+                            //     return (value.max*1.3).toFixed(0);
+                            // }
+                            // if(f_economy_red[len_r-1]>f_economy_blue[len_b-1]){
+                            //     return (f_economy_red[len_r-1]*1.1).toFixed(0);
+                            // }else{
+                            //     return (f_economy_blue[len_b-1]*1.1).toFixed(0);
+                            // }
+                            if(f_economy_red.length<=10){
+                                return (value.max+1).toFixed(0);
+                            }
+                            if(f_economy_red[len_r-1]>f_economy_blue[len_b-1]){
+                                return (f_economy_red[len_r-1]+1).toFixed(0);
+                            }else{
+                                return (f_economy_blue[len_b-1]+1).toFixed(0);
+                            }
+                        }
+                        // lg_option.yAxis[0].min = function (value) {
+                        //     console.log(value)
+                        //     return parseInt(value.max*0.8);
+                        // }
+                        // lg_option.yAxis[0].max=function (value) {
+                        //     return parseInt(value.max + value.max*0.2);
+                        // }
+                        lgChart.setOption(lg_option)
+                    } else if (optionNum == 2) {
+                        lg_option = myChart2.getOption();
+
+                        lg_option.legend = {
+                            show: true,
+                            data: ['红方伤害输出', '蓝方伤害输出'],
+                            x: 'right',
+                            y: 'top'
+                        };
+                        lg_option.series[0].markPoint.data = [
+                            { type: 'max', name: '最大值' }
+                        ];
+                        lg_option.series[1].markPoint.data = [
+                            { type: 'max', name: '最大值' }
+                        ];
+                        lg_option.yAxis[0].min = function (value) {
+                            var len_r = f_redknife.length;
+                            var len_b = f_blueknife.length;
+                            // if(f_redknife.length<=10){
+                            //     return parseInt(value.min*0.5);
+                            // }
+                            // if(f_redknife[len_r-11]<f_blueknife[len_b-11]){
+                            //     return (f_redknife[len_r-11]*0.9).toFixed(0);
+                            // }else{
+                            //     return (f_blueknife[len_b-11]*0.9).toFixed(0);
+                            // }
+                            if(f_redknife.length<=10){
+                                return parseInt(value.min-1);
+                            }
+                            if(f_redknife[len_r-11]<f_blueknife[len_b-11]){
+                                return (f_redknife[len_r-11]-1).toFixed(0);
+                            }else{
+                                return (f_blueknife[len_b-11]-1).toFixed(0);
+                            }
+                        }
+                        lg_option.yAxis[0].max=function (value) {
+                            var len_r = f_redknife.length;
+                            var len_b = f_blueknife.length;
+                            // if(f_redknife.length<=10){
+                            //     return parseInt(value.max*1.3);
+                            // }
+                            // if(f_redknife[len_r-1]>f_blueknife[len_b-1]){
+                            //     return (f_redknife[len_r-1]*1.1).toFixed(0);
+                            // }else{
+                            //     return (f_blueknife[len_b-1]*1.1).toFixed(0);
+                            // }
+                            if(f_redknife.length<=10){
+                                return parseInt(value.max+1);
+                            }
+                            if(f_redknife[len_r-1]>f_blueknife[len_b-1]){
+                                return (f_redknife[len_r-1]+1).toFixed(0);
+                            }else{
+                                return (f_blueknife[len_b-1]+1).toFixed(0);
+                            }
+                        }
+                        lg_option.dataZoom[0].start = (f_redknife.length<10)?(0):(100-(10/f_redknife.length)*100);
+                        lgChart.setOption(lg_option);
+                        // lgChart.setOption(lg_option)
+                    } else if (optionNum == 3) {
+                        lg_option = myChart3.getOption();
+
+                        lg_option.legend = {
+                            show: true,
+                            data: ['红方选手', '蓝方选手'],
+                            x: 'right',
+                            y: 'top'
+                        };
+                        lg_option.series[0].markLine.data = [
+                            { type: 'average', name: '平均值' }
+                        ];
+                        lg_option.series[1].markLine.data = [
+                            { type: 'average', name: '平均值' }
+                        ];
+                        lg_option.series[0].markPoint.data = [
+                            { type: 'max', name: '最大值' },
+                            { type: 'min', name: '最小值' }
+                        ];
+                        lg_option.series[1].markPoint.data = [
+                            { type: 'max', name: '最大值' },
+                            { type: 'min', name: '最小值' }
+                        ]
+                        lgChart.setOption(lg_option);
+                        // lgChart.setOption(option3)
+                    } else if (optionNum == 4) {
+                        lg_option = myChart4.getOption();
+
+                        lg_option.legend = [{
+                            show: true,
+                            data: ['红队'],
+                            x: 'left',
+                            y: 'bottom'
+                        }, {
+                            show: true,
+                            data: ['蓝队'],
+                            x: 'left',
+                            y: 'top'
+                        }];
+                        lg_option.dataZoom[0].start = (f_economy_gap_lt.length<10)?(0):(100-(10/f_economy_gap_lt.length)*100);
+                        lgChart.setOption(lg_option);
+                        // lgChart.setOption(option4)
+                    } else if (optionNum == 5) {
+                        lg_option = myChart5.getOption();
+
+                        lg_option.legend = {
+                            show: true,
+                            data: ['红方选手', '蓝方选手'],
+                            x: 'right',
+                            y: 'top'
+                        };
+                        lg_option.series[0].markLine.data = [
+                            { type: 'average', name: '平均值' }
+                        ];
+                        lg_option.series[1].markLine.data = [
+                            { type: 'average', name: '平均值' }
+                        ];
+                        lg_option.series[0].markPoint.data = [
+                            { type: 'max', name: '最大值' },
+                            { type: 'min', name: '最小值' }
+                        ];
+                        lg_option.series[1].markPoint.data = [
+                            { type: 'max', name: '最大值' },
+                            { type: 'min', name: '最小值' }
+                        ];
+                        lgChart.setOption(lg_option);
+                    } else if (optionNum == 6) {
+                        lg_option = myChart6.getOption();
+
+                        lg_option.legend = {
+                            show: false,
+                            data: ['红方胜率', '蓝方胜率'],
+                            x: 'right',
+                            y: 'top'
+                        };
+                        // lg_option.series[0].markPoint.data = [
+                        //     { type: 'max', name: '最大值' }
+                        // ];
+                        // lg_option.series[1].markPoint.data = [
+                        //     { type: 'max', name: '最大值' }
+                        // ];
+                        lg_option.dataZoom[0].start = (f_win_red.length<10)?(0):(100-(10/f_win_red.length)*100);
+                        lgChart.setOption(lg_option);
+                    }
+                    if(parseInt(gameVideo.currentTime)>last_time){
+                        stateFlag == true;
+                        clearTimeout(myVar)
+                    }
+               
+                await sleep(durTime * 1000);
+
+            }
+        }
+    }
+    demo(videoLastTime, all_state)
+    
+    //合成时间的函数
+    function getTime(m, s) {
+        return overTen(parseInt(m)) + ":" + overTen(parseInt(s))
+    }
+    // 程序入口
+    // 不会覆盖前边的window.onload事件
+    $(document).ready(async function() {
+
+        var timeline_event = [];
+        var timeline_num = [];
+        let result = await $.ajax({ url: `/api/gameEvents/{{videoID}}` })
+        var timelineChart_con = document.getElementById('timelineChart');
+        //时间轴显示
+        var timelineChart = echarts.init(document.getElementById('timelineChart'));
+        result.forEach(item => {
+            // console.log(item)
+            var event = {
+                thing: '',
+                time: ''
+            }
+            var event_arr = [];
+            event.time = getTime(item.time_fen, item.time_miao);
+            if (item.event.indexOf(':') == -1) {
+                if (item.event == 'dragon') {
+                    event.thing = event.time + '击杀' + '小龙';
+                    if (item.team == 'red') {
+                        timeline_num.push(2.5)
+                    } else {
+                        timeline_num.push(-2.5)
+                    }
+                } else if (item.event == 'baron') {
+                    event.thing = event.time + '击杀' + '大龙';
+                    if (item.team == 'red') {
+                        timeline_num.push(2.5)
+                    } else {
+                        timeline_num.push(-2.5)
+                    }
+                }
+
+            } else {
+                event_arr = item.event.split(':');
+                if (event_arr[0] == 'kill') {
+                    event.thing = event.time + '击杀' + parseInt(event_arr[1]) + '人';
+                    if (item.team == 'red') {
+                        timeline_num.push(1)
+                    } else {
+                        timeline_num.push(-1)
+                    }
+                } else if (event_arr[0] == 'tower') {
+                    event.thing = event.time + '攻破' + parseInt(event_arr[1]) + '个塔';
+                    if (item.team == 'red') {
+                        timeline_num.push(2)
+                    } else {
+                        timeline_num.push(-2)
+                    }
+                }
+            }
+            timeline_event.push(event.thing)
+
+        })
+        //测试时间轴图像      
+        var timeline_index = 0;
+        $('#timeline').on('click', function() {
+            var temp_num = [];
+            var temp_event = [];
+            for (var i = 0; i < result.length; i++) {
+                temp_num.push(timeline_num[i])
+                temp_event.push(timeline_event[i])
+
+                timeline_option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                        },
+                        formatter: '{b}'
+                    },
+                    // itemStyle:{
+                    //     normal:{
+                    //         color:function(params){
+                    //             console.log(params)
+                    //             var colorList = ['rgb(164,205,238)','rgb(42,170,227)','rgb(25,46,94)','rgb(195,229,235)'];
+                    //             return colorList[params.dataIndex];
+                    //         }
+                    //     }
+                    // },
+                    grid: {
+                        top: 80,
+                        bottom: 30
+                    },
+                    xAxis: {
+                        show: false,
+                        type: 'value',
+                        position: 'top',
+                        splitLine: { lineStyle: { type: 'dashed' } },
+                        max: 2,
+                        min: -2
+                    },
+                    yAxis: {
+                        type: 'category',
+                        //axisLine: {show: false},
+                        axisLabel: { show: false },
+                        axisTick: { show: false },
+                        splitLine: { show: false },
+                        data: temp_event
+                    },
+                    dataZoom: [{
+                        type: 'inside',
+                        yAxisIndex: 0,
+                        start: 50,
+                        end: 100,
+                        zoomOnMouseWheel: false,
+                        moveOnMouseMove: true,
+                        moveOnMouseWheel: true
+                        //          type: 'inside',
+                        //          orient:'vertical',
+                        //          zoomLock:true,
+                        //          yAxisIndex: 0,
+                        //          start:50,
+                        //          end:100,
+                        //          filterMode: 'empty',
+                        //          moveOnMouseMove:true,
+                        // moveOnMouseWheel:true,
+                    }],
+                    series: [{
+                        //name:'生活费',
+                        type: 'bar',
+                        barWidth: '25',
+                        //stack: '总量',
+                        label: {
+                            fontSize: 25,
+                            normal: {
+                                show: true,
+                                formatter: '{b}'
+                            }
+                        },
+                        data: temp_num,
+                        itemStyle: {
+                            normal: {
+                                color: function(params) {
+                                    if (params.value < 0) {
+                                        return 'rgb(91, 160, 255)'
+
+                                    } else {
+
+                                        return '#cd4144'
+                                    }
+                                }
+
+                            }
+                        }
+                    }]
+                };
+                timelineChart.setOption(timeline_option)
+                sleep(1000);
+            }
+        })
+
+
+
+        $("#timer").on("click", function() {
+            var content = document.getElementsByClassName("layui-laydate-content");
+
+            content[0].style.textAlign = "center";
+            var time_list = document.getElementsByClassName("laydate-time-list");
+
+            var time_list_li = time_list[0].getElementsByTagName('li');
+
+            time_list_li[0].style.display = "none";
+            time_list_li[86].style.display = "none";
+            time_list_li[1].style.width = "100%";
+            // time_list_li[2].style.width = "50%";
+        })
+    });
+    // var myVar;
+    var heatmapInstance_short = h337.create({
+            container: document.querySelector('.heatmap'),
+            minOpacity:0.3,
+            radius:6
+        });
+    var heatmapInstance_long = h337.create({
+            container: document.querySelector('.heatmap'),
+            minOpacity:0.3,
+            radius:6
+        }); 
+    var heatmapInstance_all = h337.create({
+            container: document.querySelector('.heatmap'),
+            minOpacity:0.3,
+            radius:6
+        }); 
+    var canvas_size = document.getElementById('canvas_size');
+    var canvas = document.getElementById("canvas");
+    var heat_size = document.getElementById('heat_size');
+
+    var blue_1 = document.getElementById('blue_1');
+    var blue_2 = document.getElementById('blue_2');
+    var blue_3 = document.getElementById('blue_3');
+    var blue_4 = document.getElementById('blue_4');
+    var blue_5 = document.getElementById('blue_5');
+    var red_1 = document.getElementById('red_1');
+    var red_2 = document.getElementById('red_2');
+    var red_3 = document.getElementById('red_3');
+    var red_4 = document.getElementById('red_4');
+    var red_5 = document.getElementById('red_5');
+    var b_tip1 = document.getElementById('b_tip1');
+    var b_tip2 = document.getElementById('b_tip2');
+    var b_tip3 = document.getElementById('b_tip3');
+    var b_tip4 = document.getElementById('b_tip4');
+    var b_tip5 = document.getElementById('b_tip5');
+    var r_tip1 = document.getElementById('r_tip1');
+    var r_tip2 = document.getElementById('r_tip2');
+    var r_tip3 = document.getElementById('r_tip3');
+    var r_tip4 = document.getElementById('r_tip4');
+    var r_tip5 = document.getElementById('r_tip5');
+    
+    var b_box = document.getElementById("b_box");
+    var r_box = document.getElementById("r_box");
+    
+    // var b_box2 = document.getElementById("b_box2");
+    // var b_box3 = document.getElementById("b_box3");
+    // var b_box4 = document.getElementById("b_box4");
+    // var b_box5 = document.getElementById("b_box5");
+    
+    // var r_box2 = document.getElementById("r_box2");
+    // var r_box3 = document.getElementById("r_box3");
+    // var r_box4 = document.getElementById("r_box4");
+    // var r_box5 = document.getElementById("r_box5");
+    // var blue_box = document.getElementById("blue_box");
+    // var red_box = document.getElementById("red_box");
+    var b_sum =true;
+    var r_sum = true;
+    // b_box1.className = "box_before";
+    // b_box1.style.left = 0;
+    // b_box2.className = "box_before";
+    // b_box2.style.left = 0;
+    // b_box3.className = "box_before";
+    // b_box3.style.left = 0;
+    // b_box4.className = "box_before";
+    // b_box4.style.left = 0;
+    // b_box5.className = "box_before";
+    // b_box5.style.left = 0;
+    // blue_box.className = "sum_box_before";
+    // blue_box.style.bottom = 0;
+    // blue_box.style.right = 0;
+
+    // r_box1.className = "box_before";
+    // r_box1.style.right = 0;
+    // r_box2.className = "box_before";
+    // r_box2.style.right = 0;
+    // r_box3.className = "box_before";
+    // r_box3.style.right = 0;
+    // r_box4.className = "box_before";
+    // r_box4.style.right = 0;
+    // r_box5.className = "box_before";
+    // r_box5.style.right = 0;
+    // red_box.className = "sum_box_before";
+    // red_box.style.bottom = 0;
+    // red_box.style.left = 0;
+
+    blue_1.onclick = function(){
+        var obj = document.getElementById(heros[0]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    blue_2.onclick = function(){
+        var obj = document.getElementById(heros[1]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    blue_3.onclick = function(){
+        var obj = document.getElementById(heros[2]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    blue_4.onclick = function(){
+        var obj = document.getElementById(heros[3]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    blue_5.onclick = function(){
+        var obj = document.getElementById(heros[4]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    red_1.onclick = function(){
+        var obj = document.getElementById(heros[5]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    red_2.onclick = function(){
+        var obj = document.getElementById(heros[6]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    red_3.onclick = function(){
+        var obj = document.getElementById(heros[7]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    red_4.onclick = function(){
+        var obj = document.getElementById(heros[8]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    red_5.onclick = function(){
+        var obj = document.getElementById(heros[9]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    b_tip1.onclick = function(){
+        var obj = document.getElementById(heros[0]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    b_tip2.onclick = function b_tip2_click(){
+        var obj = document.getElementById(heros[1]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    b_tip3.onclick = function b_tip3_click(){
+        var obj = document.getElementById(heros[2]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    b_tip4.onclick = function b_tip4_click(){
+        var obj = document.getElementById(heros[3]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    b_tip5.onclick = function b_tip5_click(){
+        var obj = document.getElementById(heros[4]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    r_tip1.onclick = function r_tip1_click(){
+        var obj = document.getElementById(heros[5]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    r_tip2.onclick = function r_tip2_click(){
+        var obj = document.getElementById(heros[6]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    r_tip3.onclick = function r_tip3_click(){
+        var obj = document.getElementById(heros[7]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    r_tip4.onclick = function r_tip4_click(){
+        var obj = document.getElementById(heros[8]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    r_tip5.onclick = function r_tip5_click(){
+        var obj = document.getElementById(heros[9]);
+        obj.checked =!obj.checked;
+        checkboxOnclick();
+    }
+    //点击战队logo，可以控制全部显示或者全不显示
+    team1Logo.onclick = function(){
+        b_sum = !b_sum;
+        for(var i = 0;i<5;i++){
+            var obj = document.getElementById(heros[i]);
+            obj.checked = b_sum;
+            checkboxOnclick();
+        }
+        if(b_sum){
+            b_box.setAttribute("style", "fill:" + b_color);
+        }else{
+            b_box.setAttribute("style", "fill:" + null_color);
+        }
+    }
+    team2Logo.onclick = function(){
+        r_sum = !r_sum;
+        for(var i = 5;i<10;i++){
+            var obj = document.getElementById(heros[i]);
+            obj.checked = r_sum;
+            checkboxOnclick();
+        }
+        if(r_sum){
+            r_box.setAttribute("style", "fill:" + r_color);
+        }else{
+            r_box.setAttribute("style", "fill:" + null_color);
+        }
+    }
+    b_box.onclick = function(){
+        b_sum = !b_sum;
+        for(var i = 0;i<5;i++){
+            var obj = document.getElementById(heros[i]);
+            obj.checked = b_sum;
+            checkboxOnclick();
+        }
+        if(b_sum){
+            b_box.setAttribute("style", "fill:" + b_color);
+        }else{
+            b_box.setAttribute("style", "fill:" + null_color);
+        }
+
+    }
+    r_box.onclick = function(){
+        r_sum = !r_sum;
+        for(var i = 5;i<10;i++){
+            var obj = document.getElementById(heros[i]);
+            obj.checked = r_sum;
+            checkboxOnclick();
+        }
+        if(r_sum){
+            r_box.setAttribute("style", "fill:" + r_color);
+        }else{
+            r_box.setAttribute("style", "fill:" + null_color);
+        }
+    }
+    //复盘页面中的视频当前时间
+    var currentTime = 0;
+    var totalTime_arr = [];
+    var enterIdx = 0;//进入页面次数，为0表示首次进入
+    //获得当前时间所在位置
+    function getIndex(currentTime,totalTime_arr){
+        return new Promise(function(resolve, reject) {
+            for(var i =0;i<totalTime_arr.length;i++){
+                if(currentTime<totalTime_arr[i]){
+                    resolve(i)
+                }else if(currentTime>totalTime_arr[totalTime_arr.length-1]){
+                    resolve(totalTime_arr.length-1)
+                }
+            }
+        })
+    }
+    var ctx = canvas.getContext("2d");
+    //从后端获取人物列表
+    // heros借助6图处的数据获得
+    // heros = ["Gangplank", "Skarner", "Corki", "Xayah", "Rakan", "Tristana", "JarvanⅣ", "Syndra", "Veigar", "Nautilus"]
+    var heros = ["{{t1hero1}}", "{{t1hero2}}", "{{t1hero3}}", "{{t1hero4}}", "{{t1hero5}}", "{{t2hero1}}", "{{t2hero2}}", "{{t2hero3}}", "{{t2hero4}}", "{{t2hero5}}"];
+    // var colors = ['#131077', '#0500de', '#5653e4', '#928fff', '#a8bfff', '#930000', '#df2629', '#fa7170', '#f29d9d', '#fed5d5'];
+    var colors = ['rgba(19,16,119,1)', 'rgba(5,0,222,1)', 'rgba(86,83,228,1)', 'rgba(146,143,255,1)', 'rgba(168,191,255,1)', 'rgba(147,0,0,1)', 'rgba(223,38,41,1)', 'rgba(250,113,112,1)', 'rgba(242,157,157,1)', 'rgba(254,213,213,1)'];
+    var null_color = "#7a7b78";
+    var b_color = "#5ba0ff";
+    var r_color = "#cd4144";
+    // var colors = ['#3147A7', '#4557FF', '#4B83D1', '#6BC88C', '#D7EEEF', '#702426', '#CD4144', '#F77F00', '#FCBF49', '#D9F5BB'];
+    b_tip1.setAttribute("style", "fill:" + colors[0]);
+    b_tip2.setAttribute("style", "fill:" + colors[1]);
+    b_tip3.setAttribute("style", "fill:" + colors[2]);
+    b_tip4.setAttribute("style", "fill:" + colors[3]);
+    b_tip5.setAttribute("style", "fill:" + colors[4]);
+    r_tip1.setAttribute("style", "fill:" + colors[5]);
+    r_tip2.setAttribute("style", "fill:" + colors[6]);
+    r_tip3.setAttribute("style", "fill:" + colors[7]);
+    r_tip4.setAttribute("style", "fill:" + colors[8]);
+    r_tip5.setAttribute("style", "fill:" + colors[9]);
+    //生成复选框
+    var checkBoxArr = new Array();
+    for (i = 0; i < 10; i++) {
+        var input = document.createElement("input");
+        input.id = heros[i];
+        input.type = "checkbox";
+        input.name = "check";
+        input.checked = true;
+        input.style.visibility = "hidden";
+        input.style.width = "45px";
+        input.style.height = "45px";
+        input.style.position = "absolute";
+        input.style.top = "0";
+        input.style.left = "0";
+        checkBoxArr.push(input);
+        input.onclick = checkboxOnclick;
+    }
+
+    // blue_team.insertBefore(checkBoxArr[0], blue_1);
+    blue_1.appendChild(checkBoxArr[0])
+    blue_2.appendChild(checkBoxArr[1])
+    blue_3.appendChild(checkBoxArr[2])
+    blue_4.appendChild(checkBoxArr[3])
+    blue_5.appendChild(checkBoxArr[4])
+    red_1.appendChild(checkBoxArr[5])
+    red_2.appendChild(checkBoxArr[6])
+    red_3.appendChild(checkBoxArr[7])
+    red_4.appendChild(checkBoxArr[8])
+    red_5.appendChild(checkBoxArr[9])
+    var canvas_size = document.getElementById('canvas_size');
+    var canvas_size_h = parseInt(window.getComputedStyle(canvas_size).height);
+    //生成人物与颜色的对应关系
+    var map = new Map();
+    for(var i = 0; i < heros.length; i++){
+        
+        map.set(heros[i], colors[i]);
+    }
+    var heros_name = new Array();
+    //要显示的人物
+    var heros_show = new Map();
+    for (i = 0; i < heros.length; i++) {
+        heros_show.set(heros[i], colors[i]);
+        // heros_show.set(heros[i], [colors[i],colors_8[i] ,colors_5[i]]);
+        heros_name.push(heros[i]);
+    }
+
+    function checkboxOnclick() {
+        var groupCheckbox = $("input[name='check']");
+        var heros_initial = new Array();
+        for (i = 0; i < groupCheckbox.length; i++) {
+            if (groupCheckbox[i].checked == true) {
+                heros_show.set(groupCheckbox[i].id, map.get(groupCheckbox[i].id));
+                heros_initial.push(heros[i]);
+                if(i==0){
+                    b_tip1.setAttribute("style", "fill:" + colors[i]);
+                }else if(i==1){
+                    b_tip2.setAttribute("style", "fill:" + colors[i]);
+                }else if(i==2){
+                    b_tip3.setAttribute("style", "fill:" + colors[i]);
+                }else if(i==3){
+                    b_tip4.setAttribute("style", "fill:" + colors[i]);
+                }else if(i==4){
+                    b_tip5.setAttribute("style", "fill:" + colors[i]);
+                }else if(i==5){
+                    r_tip1.setAttribute("style", "fill:" + colors[i]);
+                }else if(i==6){
+                    r_tip2.setAttribute("style", "fill:" + colors[i]);
+                }else if(i==7){
+                    r_tip3.setAttribute("style", "fill:" + colors[i]);
+                }else if(i==8){
+                    r_tip4.setAttribute("style", "fill:" + colors[i]);
+                }else{
+                    r_tip5.setAttribute("style", "fill:" + colors[i]);
+                }
+                
+
+            } else {
+                heros_show.delete(groupCheckbox[i].id);
+                if(i==0){
+                    b_tip1.setAttribute("style", "fill:" + null_color);
+                }else if(i==1){
+                    b_tip2.setAttribute("style", "fill:" + null_color);
+                }else if(i==2){
+                    b_tip3.setAttribute("style", "fill:" + null_color);
+                }else if(i==3){
+                    b_tip4.setAttribute("style", "fill:" + null_color);
+                }else if(i==4){
+                    b_tip5.setAttribute("style", "fill:" + null_color);
+                }else if(i==5){
+                    r_tip1.setAttribute("style", "fill:" + null_color);
+                }else if(i==6){
+                    r_tip2.setAttribute("style", "fill:" + null_color);
+                }else if(i==7){
+                    r_tip3.setAttribute("style", "fill:" + null_color);
+                }else if(i==8){
+                    r_tip4.setAttribute("style", "fill:" + null_color);
+                }else{
+                    r_tip5.setAttribute("style", "fill:" + null_color);
+                }
+                if (i < 5) {
+                    // b_sum = false;
+                    b_box.setAttribute("style", "fill:" + null_color);
+                } else {
+                    // r_sum = false;
+                    r_box.setAttribute("style", "fill:" + null_color);
+                }
+            }
+
+        }
+        if(groupCheckbox[0].checked == true&&groupCheckbox[1].checked == true&&groupCheckbox[2].checked == true&&groupCheckbox[3].checked == true&&groupCheckbox[4].checked == true){
+            b_box.setAttribute("style", "fill:" + b_color);
+        }else if(groupCheckbox[5].checked == true&&groupCheckbox[6].checked == true&&groupCheckbox[7].checked == true&&groupCheckbox[8].checked == true&&groupCheckbox[9].checked == true){
+            r_box.setAttribute("style", "fill:" + r_color);
+        }
+        if (groupCheckbox[0].checked && groupCheckbox[2].checked && groupCheckbox[3].checked && groupCheckbox[4].checked && groupCheckbox[1].checked == true) {
+
+            b_box.setAttribute("style", "fill:" + b_color);
+        }
+        if (groupCheckbox[5].checked && groupCheckbox[6].checked && groupCheckbox[7].checked && groupCheckbox[8].checked && groupCheckbox[9].checked == true) {
+
+            r_box.setAttribute("style", "fill:" + r_color);
+        }
+
+        heros_name = heros_initial;
+        drawData_all(window.map_data, heros_name);
+    }
+    // --------------------控制热力图显示函数------------------
+    function showHeatMap(idx) {
+        var parent = document.getElementById("heat_size");
+        var child = parent.getElementsByTagName('canvas'); //热力图
+        child[idx].style.visibility = "visible";
+        for (var i = 0; i < 3; i++) {
+            if (i != idx) {
+                child[i].style.visibility = "hidden";
+            }
+
+        }
+    }
+    //------------------提前将数据按比例缩放--------------------
+    function changeHeatData(data){
+        var canvas_size = document.getElementById('canvas_size');
+        var canvas_size_h = parseInt(window.getComputedStyle(canvas_size).height);
+        for(let i=0;i<data.length;i++){
+            data[i][2] = data[i][2]*canvas_size_h/295;
+            data[i][3] = data[i][3]*canvas_size_h/295;
+        }
+        return data;
+    }
+    //-----------------------提前处理英雄数据-------------------
+    function heroData(data, heros_name, start, end) {
+
+        let pos_heat = new Map();
+        //需要选中的英雄的数据
+        let data_need = new Array();
+
+        for (var i = start; i < end; i++) {
+            var cur_hero = data[i][0];
+            if (pos_heat.get(cur_hero) == null) {
+                pos_heat.set(cur_hero, [{
+                    x: data[i][2],
+                    y: data[i][3],
+                    value: 1,
+                    // radius: 10
+                }]);
+                continue;
+            }
+            let queue_heat = pos_heat.get(cur_hero);
+            //当前帧这个人的坐标
+            let x = data[i][2];
+            let y = data[i][3];
+            queue_heat.push({
+                x: x,
+                y: y,
+                value: 1,
+                // radius: 10
+            });
+
+        }
+
+        // heros_name.forEach(item => {
+        //     if (pos_heat.get(item) != null) {
+        //         data_need = data_need.concat(pos_heat.get(item));
+        //     }
+        // })
+        // console.log(pos_heat)
+        return pos_heat;
+
+    }
+    //-------------------------处理全部英雄数据------------------
+    function drawData_all(data, heros_name) {
+        let pos_heat = new Map();
+        //需要选中的英雄的数据
+        let data_need = new Array();
+        //处理后画图的数据
+        let data_finally = new Array();
+        for (let i = 1; i < data.length; i++) {
+            let cur_hero = data[i][0];
+            if (pos_heat.get(cur_hero) == null) {
+                pos_heat.set(cur_hero, [{
+                    x: data[i][2],
+                    y: data[i][3],
+                    value: 1,
+                    // radius: 10
+                }]);
+                continue;
+            }
+            let queue_heat = pos_heat.get(cur_hero);
+            //当前帧这个人的坐标
+            let x = data[i][2];
+            let y = data[i][3];
+            queue_heat.push({
+                x: x,
+                y: y,
+                value: 1,
+                // radius: 10
+            });
+        }
+        heros_name.forEach(item => {
+            if (pos_heat.get(item) != null) {
+                data_need = data_need.concat(pos_heat.get(item));
+            }
+        })
+        data_finally = keepHeat(data_need,canvas_size_h);
+        //发送数据
+        heatmapInstance_all.setData(data_finally);
+
+    }
+    // 上述代码是对页面结构以及交互行为的构造，后边的是对数据获取和展示的构造
+    //绘图
+    async function draw(data, ctx, heros, id,index) {
+    	//轨迹图和热力图是大小相同的正方形，所以只需要获取一个即可，获得的为‘240px’,别忘了parseInt()
+    	// var canvas_size = document.getElementById('canvas_size');
+    	// var canvas_size_h = parseInt(window.getComputedStyle(canvas_size).height);
+    	
+        var queue_len = 20;
+        //用于保存每个人最多queue_len个的坐标
+        //即每个人有一个历史位置队列，队列中包含前queue_len个的坐标
+        var pos = new Map();
+        // var pos_heat = new Map();
+        // var heatmapInstance = h337.create({
+        //     container: document.querySelector('.heatmap'),
+        //     minOpacity:0.4
+        // });
+        var pos_heat_short = new Map();
+        var pos_heat_long = new Map();        
+        var data_short = new Array();
+        var data_long = new Array();
+        if (index < 100) {
+            //注意：这个与服务器上的不一样
+            // data_short = heroData(data, heros_name, 1, index);
+            pos_heat_short = heroData(data, heros_name, 0, index);
+        } else {
+            // data_short = heroData(data, heros_name, index - 200, index);
+            pos_heat_short = heroData(data, heros_name, index - 100, index);
+        }
+        pos_heat_long = heroData(data, heros_name, 0, index);
+        // if (index < 200) {
+        //     //注意：这个与服务器上的不一样
+        //     data_short = heroData(data, heros_name, 0, index);
+        // } else {
+        //     data_short = heroData(data, heros_name, index - 200, index);
+        // }
+        // data_long = heroData(data, heros_name, 0, index);
+        //第0行数据为表头，所以从1开始循环的
+        // 但是我的数据库数据不包含这个垃圾数据所以从0开始
+        // for (var i = index; i < data.length&&stateFlag==false;) {
+        for (var i = index; i < data.length;) {
+            // var pos_heat = new Map();
+            var num_of_same_frames = 0;
+            var data1 = new Array();
+            var cur_frame = data[i][1];
+            var durTime_heat = 0;
+            var min = parseInt(data[i][6]);
+            var sec = parseInt(data[i][7]);
+            var now_time = 0;
+            var last_time = 0;
+            if(i==0){
+                
+                if(parseInt(data[0][8])-parseInt(gameVideo.currentTime)>0){
+                    durTime_heat = parseInt(data[0][8])-parseInt(gameVideo.currentTime);    
+                }else{
+                    durTime_heat = 0;
+                }
+                
+            }else{
+                now_time = parseInt(gameVideo.currentTime);
+                last_time = parseInt(data[i][8]);
+                
+                if(now_time<last_time){
+                    durTime_heat = last_time-now_time;
+                }else{
+                    durTime_heat = 0
+                }
+                
+            }
+            
+            // gameTime.innerHTML= getTimeStr(min,sec);
+            //同一帧内依次读取
+            for (var f = i; f < data.length && data[f][1] == cur_frame; f++) {
+                // data[f][2] = data[f][2] * 240 / 448
+                // data[f][3] = data[f][3] * 240 / 448
+                // data[f][2] = data[f][2]*canvas_size_h/295
+                // data[f][3] = data[f][3]*canvas_size_h/295
+                num_of_same_frames++;
+                //画这一帧对应的人的轨迹
+                var cur_hero = data[f][0];
+                //当前帧这个人的坐标
+                var x = data[f][2];
+                var y = data[f][3];
+                //如果这个人第一次出现，则给pos赋初值，并进入下一循环
+                if (pos.get(cur_hero) == null) {
+                	
+                    pos.set(cur_hero, [{
+                        X: data[f][2],
+                        Y: data[f][3]
+                    }]);
+                    
+                }else{
+                    var queue = pos.get(cur_hero);
+                    queue.push({
+                        X: x,
+                        Y: y
+                    });
+                    if (pos.get(cur_hero).length > queue_len) {
+                        pos.get(cur_hero).shift();
+                    }
+
+                }
+                if (pos_heat_short.get(cur_hero) == null) {
+                    pos_heat_short.set(cur_hero, [{
+                        x: data[f][2],
+                        y: data[f][3],
+                        value: 1,
+                        // radius: 10
+                    }]);
+                } else {
+                    let queue_heat = pos_heat_short.get(cur_hero);
+                    queue_heat.push({
+                        x: x,
+                        y: y,
+                        value: 1,
+                        // radius: 10
+                    });
+                    if (pos_heat_short.get(cur_hero).length > 40) {
+                        pos_heat_short.get(cur_hero).shift();
+                    }
+                }
+                if (pos_heat_long.get(cur_hero) == null) {
+                    pos_heat_long.set(cur_hero, [{
+                        x: data[f][2],
+                        y: data[f][3],
+                        value: 1,
+                        // radius: 10
+                    }]);
+                } else {
+                    let queue_heat = pos_heat_long.get(cur_hero);
+                    queue_heat.push({
+                        x: x,
+                        y: y,
+                        value: 1,
+                        // radius: 10
+                    });
+                }
+                
+                //这个人的历史坐标队列
+                // var queue = pos.get(cur_hero);
+                // var queue_heat = pos_heat.get(cur_hero);
+                // var heat_len = queue_heat.length;
+                // 	console.log('热力图数据有'+heat_len+"条");
+                // var value = 1;
+                
+                // queue.push({
+                //     X: x,
+                //     Y: y
+                // });
+                // queue_heat.push({
+                //     x: x,
+                //     y: y,
+                //     value: 1,
+                //     radius: 10
+                // });
+                // console.log(queue_heat)
+                
+                // if (pos_heat.get(cur_hero).length > 30) {
+                //     // pos.get(cur_hero).shift();
+                //     pos_heat.get(cur_hero).shift();
+                // }
+            }
+            heros_name.forEach(item => {
+                // if (pos_heat.get(item) != null) {
+                //     data_short = data_short.concat(pos_heat.get(item));
+
+                //     data_long = data_long.concat(pos_heat.get(item));
+                // }
+                if (pos_heat_short.get(item) != null) {
+                    data_short = data_short.concat(pos_heat_short.get(item));
+                }
+                if (pos_heat_long.get(item) != null) {
+                    data_long = data_long.concat(pos_heat_long.get(item));
+                }
+                
+            })
+            // for (var j = 0; j < heros_name.length; j++) {
+            //     if (pos_heat.get(heros_name[j]) != null) {
+            //         data1 = data1.concat(pos_heat.get(heros_name[j]));
+            //     }
+            // }
+            //更新当前帧所有人的坐标后，画每个英雄
+            
+            heros.forEach(function(value, key) {
+                //若只有一个坐标，画点
+                if (pos.get(key) != null) {
+                    if (pos.get(key).length == 1) {
+                        ctx.fillRect(pos.get(key)[0].X, pos.get(key)[0].Y, 5, 5);
+                        ctx.fillStyle = value;
+                    }
+                    //画线
+                    for (var num = 0; num < pos.get(key).length - 1; num++) {
+                        ctx.beginPath();
+                        ctx.save();
+                        ctx.lineWidth = 5;
+                        if(num<7){
+                            var temp = value.replace('1)','0.'+(num+3)+')');
+                            ctx.strokeStyle = temp;
+                        }else{
+                            ctx.strokeStyle = value;
+                        }
+                        // ctx.strokeStyle = value[0];
+                        ctx.moveTo(pos.get(key)[num].X, pos.get(key)[num].Y);
+                        if (Math.pow(pos.get(key)[num + 1].X - pos.get(key)[num].X, 2) + Math.pow(pos.get(key)[num + 1].Y - pos.get(key)[num].Y, 2) <= 2500) {
+                            ctx.lineTo(pos.get(key)[num + 1].X, pos.get(key)[num + 1].Y);
+                        }
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+            });
+            // }
+            i += num_of_same_frames;
+            // if (data_short.length > 400) {
+            //     data_short.splice(0, 10)
+            //     // data_short.shift();
+            //     // console.log(data_short);
+            // }
+            //每一帧休息一下，单位ms
+            var res_short = keepHeat(data_short,canvas_size_h);
+            var res_long = keepHeat(data_long,canvas_size_h);
+            
+            // console.log(data_short);
+
+            //发送数据
+            heatmapInstance_short.setData(res_short);
+            heatmapInstance_long.setData(res_long);
+            // var points = data1;
+
+            // var res = keepHeat(points,canvas_size_h);
+            // console.log(res)
+            //将heatmap数据合并打包
+    //         var data2 = {
+    //             // max: max,
+    //             // data: points
+    //             max: res.max,	
+				// data: res.list
+    //         };
+    //         //发送数据
+            
+    //         heatmapInstance.setData(data2);
+            
+            
+            // await sleep(durTime_heat*1000);
+            // if(dataCheckBox.checked){
+            await heat_sleep(durTime_heat*1000)
+            data_short.length=0;
+            data_long.length = 0;
+            // }
+            ctx.clearRect(0, 0, canvas_size_h, canvas_size_h)
+        }
+    }
+    // var out;
+    // $(document).ready(async function() {
+    //     var radioPoint = document.getElementsByClassName('radioPoint');
+    //     for(let i=0;i<3;i++){
+    //         if(radioPoint[i].checked){
+    //             showHeatMap(i);
+    //         }
+    //     }
+    //     out = await $.ajax({ url: `/api/heatmap/{{videoID}}` })
+    //     // var data = await $.ajax({ url: `/api/matchs` })
+    //     // enterIdx++;
+    //     console.log(out)
+        
+    //     out.forEach(item=>{
+    //         totalTime_arr.push(parseInt(item.videoTime));
+    //     })
+        
+    //     index = await getIndex(currentTime,totalTime_arr);
+    //     var out1 = []
+    //     for (let i = 0; i < out.length; i++) {
+    //         var tmpList = []
+    //         for (var item in out[i]) { if (item == "x" || item == "y") { out[i][item] = out[i][item] } tmpList.push(out[i][item]) } out1.push(tmpList)
+    //     }
+    //     window.map_data = changeHeatData(out1);
+    // 	console.log(window.map_data)
+    //     draw(window.map_data, ctx, heros_show, 0,index);
+    //     drawData_all(window.map_data, heros_name);
+    // })
+    function getTimeStr(min,sec){
+        return overTen(min)+':'+overTen(sec);
+    }
+    function clearHeatMap()
+    {  
+        var parent=document.getElementById("heat_size");
+        var child = parent.getElementsByTagName('canvas');//热力图
+        if(child[0] !=null){
+            parent.removeChild(child[0]);
+            ctx.clearRect(0,0,240,240);
+        } 
+    }
+    //热力图均衡化
+    function keepHeat(list,h_w) {
+        //总数N
+        var N = list.length;
+        if (N == 0)
+        {
+        	return {
+        		data : [],
+        		max : 0
+        	}
+        }
+        // if(N>500){
+        //     list = list.shift();
+        // }
+        //构建二维数组
+        var list_arr2x = list2Arr2x(list,h_w);
+        //最大值最小值数组
+        var arr_min_max = getMinMax(list_arr2x,h_w);
+        var temp_max = arr_min_max[1];
+        if(temp_max>40){
+            temp_max = temp_max*0.3;
+        }else if(temp_max>30){
+            temp_max = temp_max*0.4;
+        }else if(temp_max>20){
+            temp_max = temp_max*0.6;
+        }else if(temp_max>15){
+            temp_max = temp_max*0.9;
+        }
+        //获得概率一维数组
+        // var pi = getPi(list_arr2x, arr_min_max[1],h_w);
+        // console.log(pi)
+        var newList = new Array();
+        
+        for (var i = 0; i < h_w; ++i)
+        {
+        	for (var j = 0; j < h_w; ++j)
+        	{
+        		var temp = {
+        			x : i,
+        			y : j,
+        			value:list_arr2x[j][i],
+        			// value :parseInt((arr_min_max[1]/2) * getPiSum(list_arr2x[j][i], pi)),
+        			// value :parseInt((arr_min_max[1] - arr_min_max[0]) * getPiSum(list_arr2x[j][i], pi)),
+        			// radius : 10
+        			// opacity : 0.8
+        		};
+        		if (temp.value != 0)
+        			newList.push(temp);
+        	}
+        }
+        return {
+        	data : newList,
+        	max : temp_max,
+            // origin_max:arr_min_max[1]
+        }
+    }
+    //由对象数组变二维数组
+    function list2Arr2x(list,h_w) {
+            //初始化二维数组arr2x[y][x]
+            var arr2x = new Array();
+            for (var i = 0; i < h_w; i++) {
+                arr2x[i] = new Array();
+                for (var j = 0; j < h_w; j++) {
+                    arr2x[i][j] = 0;
+                }
+            }
+            //赋值
+            var idx = 0;
+            list.forEach(item => {
+                idx++;
+                var x = parseInt(item.x);
+                var y = parseInt(item.y);
+                
+                arr2x[y][x]++;
+            })
+            return arr2x
+    }
+    //在二维数组中获得最大值最小值
+    function getMinMax(arr2x,h_w) {
+
+            var min = 1;
+            var max = 0;
+            for (var i = 0; i < h_w; i++) {
+                for (var j = 0; j < h_w; j++) {
+                    if (arr2x[i][j] < min) {
+                        min = arr2x[i][j]
+                    }
+                    if (arr2x[i][j] > max) {
+                        max = arr2x[i][j]
+                    }
+                }
+            }
+            return [min, max]
+
+    }
+    //获得每个值的概率，例如：a = [1,2,3,4],表示，值为0时，出现次数为1
+    function getPi(arr2x, max,h_w) {
+
+            var arr = new Array(max + 1).fill(0);
+            for (var i = 0; i < h_w; i++) {
+                for (var j = 0; j < h_w; j++) {
+                    arr[arr2x[i][j]]++;
+                }
+            }
+            return arr
+
+    }
+    //生成概率和
+    function getPiSum(idx, list,h_w) {
+    	
+            var sum = 0;
+            var i = 1;
+            while(idx >= i)
+            {
+            	sum += list[i]
+            	++i
+            }
+            return sum / (h_w * h_w-list[0])
+
+    }
+    var out;
+    var radioPoint = document.getElementsByClassName('radioPoint');
+    $(document).ready(async function() {
+        // var radioPoint = document.getElementsByClassName('radioPoint');
+        for(let i=0;i<3;i++){
+            if(radioPoint[i].checked){
+                showHeatMap(i);
+            }
+        }
+        out = await $.ajax({ url: `/api/heatmap/{{videoID}}` })
+        // var data = await $.ajax({ url: `/api/matchs` })
+        // enterIdx++;
+        // console.log(out)
+        
+        out.forEach(item=>{
+            totalTime_arr.push(parseInt(item.videoTime));
+        })
+        
+        index = await getIndex(currentTime,totalTime_arr);
+        var out1 = []
+        for (let i = 0; i < out.length; i++) {
+            var tmpList = []
+            for (var item in out[i]) { if (item == "x" || item == "y") { out[i][item] = out[i][item] } tmpList.push(out[i][item]) } out1.push(tmpList)
+        }
+        window.map_data = changeHeatData(out1);
+        // console.log(window.map_data)
+        draw(window.map_data, ctx, heros_show, 0,index);
+        drawData_all(window.map_data, heros_name);
+    })
+
+    // var radioState = 0;
+    radioPoint[0].onclick = function() {
+        // radioState = 0;
+        // console.log(radioPoint[0].value)
+        showHeatMap(0)
+    }
+    radioPoint[1].onclick = function() {
+        // radioState = 1;
+        // console.log(radioPoint[1].value)
+        showHeatMap(1)
+    }
+    radioPoint[2].onclick = function() {
+        drawData_all(window.map_data, heros_name);
+        // radioState = 2;
+        // console.log(radioPoint[2].value)
+        showHeatMap(2)
+    }
+</script>
+</body>
+
+</html>
